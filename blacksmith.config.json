@@ -1,0 +1,8 @@
+{
+  "name": "blacksmith-studio-web",
+  "version": "0.1.0",
+  "type": "frontend",
+  "frontend": {
+    "port": 5173
+  }
+}
