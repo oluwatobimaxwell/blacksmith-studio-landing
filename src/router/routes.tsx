@@ -13,17 +13,11 @@ import { MainLayout } from '@/router/layouts/main-layout'
 import { AuthLayoutWrapper } from '@/router/layouts/auth-layout'
 import { RouteErrorBoundary } from '@/router/error-boundary'
 import NotFoundPage from '@/shared/components/not-found-page'
-import { homeRoutes } from '@/pages/home'
+import { LandingLayout } from '@/router/layouts/landing-layout'
+import { landingRoutes } from '@/pages/landing'
 import { dashboardRoutes } from '@/pages/dashboard'
 import { authRoutes } from '@/features/auth'
 // blacksmith:import
-
-/**
- * Public routes — accessible without authentication.
- */
-const publicRoutes: RouteObject[] = [
-  ...homeRoutes,
-]
 
 /**
  * Private routes — wrapped in AuthGuard, requires authentication.
@@ -35,6 +29,13 @@ const privateRoutes: RouteObject[] = [
 ]
 
 export const routes: RouteObject[] = [
+  // Landing — full-bleed, own nav/footer
+  {
+    element: <LandingLayout />,
+    errorElement: <RouteErrorBoundary />,
+    children: landingRoutes,
+  },
+
   // Auth pages (login, register, etc.)
   {
     element: <AuthLayoutWrapper />,
@@ -42,12 +43,11 @@ export const routes: RouteObject[] = [
     children: authRoutes,
   },
 
-  // App pages
+  // App pages (authenticated shell)
   {
     element: <MainLayout />,
     errorElement: <RouteErrorBoundary />,
     children: [
-      ...publicRoutes,
       {
         element: (
           <AuthGuard>
