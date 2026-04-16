@@ -1,6 +1,7 @@
 import { Box, VStack, Heading, Text, Button, HStack, Flex } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { Download, Github, ArrowRight } from 'lucide-react'
+import { agents } from '../data/agents'
 
 const MotionBox = motion.create(Box)
 const MotionVStack = motion.create(VStack)
@@ -24,6 +25,53 @@ const stats = [
   { value: 'Open', label: 'source' },
 ]
 
+const marqueeItems = [...agents, ...agents]
+
+function AgentMarquee() {
+  return (
+    <Box
+      w="full"
+      maxW="700px"
+      overflow="hidden"
+      sx={{
+        maskImage: 'linear-gradient(90deg, transparent, black 15%, black 85%, transparent)',
+        WebkitMaskImage: 'linear-gradient(90deg, transparent, black 15%, black 85%, transparent)',
+      }}
+    >
+      <Flex
+        gap={3}
+        sx={{ animation: 'marquee 30s linear infinite', width: 'max-content' }}
+      >
+        {marqueeItems.map((agent, i) => (
+          <Flex
+            key={`${agent.role}-${i}`}
+            align="center"
+            gap="6px"
+            px="14px"
+            py="6px"
+            borderRadius="full"
+            bg="var(--studio-landing-surface)"
+            borderWidth="1px"
+            borderColor="var(--studio-landing-border)"
+            flexShrink={0}
+          >
+            <Box
+              w="6px"
+              h="6px"
+              borderRadius="full"
+              bg="var(--studio-landing-text-accent)"
+              opacity={0.6}
+            />
+            <Text fontSize="12px" color="var(--studio-landing-text-muted)" fontWeight={500} whiteSpace="nowrap">
+              {agent.role}
+            </Text>
+          </Flex>
+        ))}
+      </Flex>
+    </Box>
+  )
+}
+
 export function HeroSection() {
   return (
     <Box
@@ -39,19 +87,44 @@ export function HeroSection() {
       pt={{ base: '100px', md: '80px' }}
       pb={{ base: '80px', md: '60px' }}
     >
-      {/* Very subtle radial glow — centered, tight */}
+      {/* Dot grid */}
       <Box
         position="absolute"
-        top="30%"
-        left="50%"
-        transform="translate(-50%, -50%)"
-        w={{ base: '600px', md: '900px' }}
-        h={{ base: '400px', md: '600px' }}
-        background="radial-gradient(ellipse, rgba(45,212,168,0.06) 0%, transparent 65%)"
+        inset={0}
+        backgroundImage="radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)"
+        backgroundSize="32px 32px"
+        sx={{
+          maskImage: 'radial-gradient(ellipse 60% 50% at 50% 40%, black 20%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 40%, black 20%, transparent 70%)',
+        }}
         pointerEvents="none"
       />
 
-      {/* Subtle noise grain texture overlay */}
+      {/* Primary radial glow */}
+      <Box
+        position="absolute"
+        top="25%"
+        left="50%"
+        transform="translate(-50%, -50%)"
+        w={{ base: '600px', md: '1100px' }}
+        h={{ base: '400px', md: '700px' }}
+        background="radial-gradient(ellipse, rgba(45,212,168,0.08) 0%, transparent 60%)"
+        pointerEvents="none"
+      />
+
+      {/* Secondary glow */}
+      <Box
+        position="absolute"
+        top="60%"
+        left="50%"
+        transform="translate(-50%, -50%)"
+        w="800px"
+        h="400px"
+        background="radial-gradient(ellipse, rgba(255,255,255,0.02) 0%, transparent 70%)"
+        pointerEvents="none"
+      />
+
+      {/* Noise grain */}
       <Box
         position="absolute"
         inset={0}
@@ -67,6 +140,7 @@ export function HeroSection() {
         align="center"
         position="relative"
         maxW="900px"
+        w="full"
         mx="auto"
         px={{ base: 6, md: 8 }}
         variants={containerVariants}
@@ -90,13 +164,13 @@ export function HeroSection() {
             borderColor="var(--studio-landing-border)"
             display="inline-flex"
             cursor="pointer"
-            transition="border-color 0.2s, background 0.2s"
+            transition="border-color 0.15s ease, background 0.15s ease"
             _hover={{ borderColor: 'var(--studio-landing-border-hover)', bg: 'var(--studio-landing-surface-hover)' }}
             textDecoration="none"
           >
             <Box w="7px" h="7px" borderRadius="full" bg="var(--studio-landing-text-accent)" flexShrink={0} />
             <Text fontSize="13px" color="rgba(255,255,255,0.6)" letterSpacing="0.01em">
-              Free & Open Source · Now on macOS
+              Free &amp; Open Source · Now on macOS
             </Text>
             <ArrowRight size={13} color="rgba(255,255,255,0.4)" />
           </Flex>
@@ -155,9 +229,9 @@ export function HeroSection() {
               borderRadius="full"
               _hover={{ bg: 'var(--studio-landing-cta-bg-hover)', transform: 'translateY(-1px)' }}
               _active={{ transform: 'translateY(0)' }}
-              transition="all 0.2s"
+              transition="all 0.15s ease"
             >
-              Download for macOS
+              Get Started Free
             </Button>
             <Button
               as="a"
@@ -176,7 +250,7 @@ export function HeroSection() {
               borderWidth="1px"
               borderColor="var(--studio-landing-border)"
               _hover={{ bg: 'var(--studio-landing-surface)', borderColor: 'var(--studio-landing-border-hover)', color: 'white' }}
-              transition="all 0.2s"
+              transition="all 0.15s ease"
             >
               View on GitHub
             </Button>
@@ -184,7 +258,7 @@ export function HeroSection() {
         </MotionBox>
 
         {/* Stats row */}
-        <MotionBox variants={itemVariants} w="full">
+        <MotionBox variants={itemVariants} w="full" maxW="700px">
           <Flex
             justify="center"
             align="center"
@@ -216,6 +290,11 @@ export function HeroSection() {
               </Flex>
             ))}
           </Flex>
+        </MotionBox>
+
+        {/* Agent marquee */}
+        <MotionBox variants={itemVariants} mt={10} w="full" display="flex" justifyContent="center">
+          <AgentMarquee />
         </MotionBox>
 
         {/* Scroll hint */}

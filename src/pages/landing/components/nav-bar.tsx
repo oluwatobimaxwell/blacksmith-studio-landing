@@ -14,15 +14,14 @@ import {
   DrawerBody,
   VStack,
 } from '@chakra-ui/react'
-import { Anvil, Menu } from 'lucide-react'
+import { Hammer, Menu } from 'lucide-react'
 import { Path } from '@/router/paths'
 import { useLandingScroll } from '../hooks/use-landing-scroll'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
-  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'Agents', href: '#agents' },
   { label: 'Community', href: '#community' },
-  { label: 'Pricing', href: '#pricing' },
 ]
 
 export function NavBar() {
@@ -37,7 +36,7 @@ export function NavBar() {
       top={0}
       left={0}
       right={0}
-      zIndex="sticky"
+      zIndex={100}
       transition="background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease"
       bg={isScrolled ? 'rgba(0,0,0,0.82)' : 'transparent'}
       backdropFilter={isScrolled ? 'blur(20px)' : 'none'}
@@ -62,7 +61,7 @@ export function NavBar() {
           flexShrink={0}
         >
           <Box color="var(--studio-landing-text-accent)">
-            <Anvil size={18} />
+            <Hammer size={18} />
           </Box>
           <Text fontSize="15px" fontWeight={600} color="var(--studio-landing-text-primary)" letterSpacing="-0.02em">
             Blacksmith
@@ -114,10 +113,10 @@ export function NavBar() {
             borderRadius="full"
             bg="var(--studio-landing-cta-bg)"
             color="var(--studio-landing-cta-text)"
-            _hover={{ bg: 'var(--studio-landing-cta-bg-hover)' }}
-            transition="background 0.2s"
+            _hover={{ bg: 'var(--studio-landing-cta-bg-hover)', transform: 'translateY(-1px)' }}
+            transition="background 0.15s ease, transform 0.15s ease"
           >
-            Download
+            Get Started Free
           </Button>
         </HStack>
 
@@ -191,7 +190,7 @@ export function NavBar() {
                 onClick={onClose}
                 mt={2}
               >
-                Download
+                Get Started Free
               </Button>
             </VStack>
           </DrawerBody>

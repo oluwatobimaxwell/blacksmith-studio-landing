@@ -1,14 +1,12 @@
 import { Box, Flex, HStack, VStack, Text, SimpleGrid } from '@chakra-ui/react'
-import { Anvil } from 'lucide-react'
+import { Hammer } from 'lucide-react'
 
 const footerSections = [
   {
     title: 'Product',
     links: [
       { label: 'Features', href: '#features' },
-      { label: 'How It Works', href: '#how-it-works' },
-      { label: 'Pricing', href: '#pricing' },
-      { label: 'Download', href: '#pricing' },
+      { label: 'Agents', href: '#agents' },
     ],
   },
   {
@@ -65,7 +63,7 @@ export function LandingFooter() {
           <VStack align="start" spacing={4} maxW="260px" flexShrink={0}>
             <HStack spacing={2}>
               <Box color="var(--studio-landing-text-accent)">
-                <Anvil size={17} />
+                <Hammer size={17} />
               </Box>
               <Text fontSize="15px" fontWeight={600} color="var(--studio-landing-text-primary)" letterSpacing="-0.02em">
                 Blacksmith
@@ -112,7 +110,7 @@ export function LandingFooter() {
 
         <Flex direction={{ base: 'column', md: 'row' }} align="center" justify="space-between" gap={3}>
           <Text fontSize="13px" color="var(--studio-landing-text-muted)">
-            &copy; {new Date().getFullYear()} Blacksmith Studio. All rights reserved.
+            &copy; 2026 Blacksmith Software Community · Free &amp; Open Source · Founded by Tobi Sholanke
           </Text>
           <HStack spacing={4}>
             <Text fontSize="13px" color="var(--studio-landing-text-muted)">
@@ -128,3 +126,5 @@ export function LandingFooter() {
     </Box>
   )
 }
+
+export default LandingFooter

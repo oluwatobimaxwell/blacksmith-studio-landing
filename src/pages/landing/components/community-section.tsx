@@ -5,6 +5,13 @@ import { useScrollReveal } from '../hooks/use-scroll-reveal'
 
 const MotionBox = motion.create(Box)
 
+const socialProofStats = [
+  { value: '4.9', label: 'Star rating' },
+  { value: '10k+', label: 'Downloads' },
+  { value: '2k+', label: 'Active developers' },
+  { value: '50+', label: 'Countries' },
+]
+
 const sectionVariants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.07 } },
@@ -115,9 +122,52 @@ export function CommunitySection() {
             </MotionBox>
           </VStack>
 
+          {/* Social proof stats */}
+          <MotionBox variants={itemVariants} mb={16}>
+            <Flex
+              justify="center"
+              gap={{ base: 8, md: 16 }}
+              flexWrap="wrap"
+              py={10}
+              px={8}
+              borderRadius="2xl"
+              background="linear-gradient(135deg, rgba(45,212,168,0.04) 0%, rgba(45,212,168,0.01) 100%)"
+              borderWidth="1px"
+              borderColor="rgba(45,212,168,0.08)"
+              position="relative"
+              overflow="hidden"
+              _before={{
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                h: '1px',
+                background: 'linear-gradient(90deg, transparent, rgba(45,212,168,0.3), transparent)',
+              }}
+            >
+              {socialProofStats.map((stat) => (
+                <VStack key={stat.label} spacing={1} textAlign="center">
+                  <Text
+                    fontSize={{ base: '32px', md: '40px' }}
+                    fontWeight={700}
+                    color="var(--studio-landing-text-primary)"
+                    letterSpacing="-0.04em"
+                    lineHeight={1}
+                  >
+                    {stat.value}
+                  </Text>
+                  <Text fontSize="13px" color="var(--studio-landing-text-muted)">
+                    {stat.label}
+                  </Text>
+                </VStack>
+              ))}
+            </Flex>
+          </MotionBox>
+
           {/* Audience grid */}
           <MotionBox variants={itemVariants}>
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={3} mb={14}>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={3} mb={12}>
               {audiences.map((audience) => {
                 const Icon = audience.icon
                 return (

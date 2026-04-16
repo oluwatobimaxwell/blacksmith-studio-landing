@@ -4,7 +4,6 @@ import { HeroSection } from './components/hero-section'
 import { FeatureWalkthroughSection } from './components/feature-walkthrough-section'
 import { AgentTeamSection } from './components/agent-team-section'
 import { CommunitySection } from './components/community-section'
-import { PricingSection } from './components/pricing-section'
 import { CtaSection } from './components/cta-section'
 import { LandingFooter } from './components/landing-footer'
 
@@ -17,7 +16,6 @@ export default function LandingPage() {
         <FeatureWalkthroughSection />
         <AgentTeamSection />
         <CommunitySection />
-        <PricingSection />
         <CtaSection />
       </main>
       <LandingFooter />

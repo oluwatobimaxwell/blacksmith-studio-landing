@@ -1,4 +1,4 @@
-import { Box, VStack, Heading, Text, HStack, Flex, Badge, Divider } from '@chakra-ui/react'
+import { Box, VStack, Heading, Text, HStack, Flex, Badge, Divider, SimpleGrid } from '@chakra-ui/react'
 import { motion } from 'framer-motion'
 import { agents } from '../data/agents'
 import { AgentCard } from './agent-card'
@@ -75,15 +75,11 @@ export function AgentTeamSection() {
 
           {/* Agent grid */}
           <MotionBox variants={itemVariants}>
-            <Box
-              display="grid"
-              gridTemplateColumns={{ base: '1fr 1fr', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)', xl: 'repeat(6, 1fr)' }}
-              gap={3}
-            >
+            <SimpleGrid columns={{ base: 2, md: 3, lg: 4 }} spacing={3}>
               {agents.map((agent) => (
                 <AgentCard key={agent.role} agent={agent} />
               ))}
-            </Box>
+            </SimpleGrid>
           </MotionBox>
 
           {/* Orchestrator label */}

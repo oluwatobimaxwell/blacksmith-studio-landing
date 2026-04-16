@@ -20,13 +20,14 @@ export function AgentCard({ agent }: AgentCardProps) {
     <MotionBox
       role="group"
       variants={cardVariants}
+      whileHover={{ y: -4 }}
       p={5}
       borderRadius="xl"
       bg="var(--studio-landing-surface)"
       borderWidth="1px"
       borderColor="var(--studio-landing-border)"
-      transition="border-color 0.25s ease, background 0.25s ease"
-      _hover={{ borderColor: 'rgba(45,212,168,0.25)', bg: 'var(--studio-landing-surface-hover)' }}
+      transition="border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease"
+      _hover={{ borderColor: 'rgba(45,212,168,0.25)', bg: 'var(--studio-landing-surface-hover)', boxShadow: '0 8px 24px rgba(0,0,0,0.3)' }}
       position="relative"
       overflow="hidden"
     >

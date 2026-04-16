@@ -42,6 +42,12 @@
   --studio-gradient-glow: radial-gradient(ellipse at center, rgba(26, 26, 26, 0.06), transparent 70%);
   --studio-gradient-border: linear-gradient(135deg, rgba(16, 163, 127, 0.3), rgba(16, 163, 127, 0.05) 50%, rgba(16, 163, 127, 0.3));
 
+  /* Animation — cinematic easing */
+  --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --duration-slide: 600ms;
+  --duration-fade: 500ms;
+  --duration-fast: 250ms;
+
   /* Code editor */
   --studio-code-bg: #1a1a1a;
   --studio-code-text: #e0e0e0;
@@ -110,6 +116,26 @@
   --studio-landing-cta-bg: #ffffff;
   --studio-landing-cta-text: #000000;
   --studio-landing-cta-bg-hover: rgba(255, 255, 255, 0.92);
+
+  /* Walkthrough window chrome */
+  --walkthrough-window-bg: #0d0d0d;
+  --walkthrough-window-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+  --walkthrough-titlebar-bg: rgba(255,255,255,0.02);
+  --walkthrough-titlebar-border: rgba(255,255,255,0.06);
+  --walkthrough-dot-red: #ef5350;
+  --walkthrough-dot-yellow: #ffa726;
+  --walkthrough-dot-green: #2dd4a8;
+
+  /* Ambient glow behind the active screenshot window */
+  --walkthrough-glow-color: rgba(45, 212, 168, 0.06);
+  --walkthrough-glow-color-hover: rgba(45, 212, 168, 0.10);
+  --walkthrough-window-glow-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04), 0 32px 80px rgba(0, 0, 0, 0.70), 0 0 80px rgba(45, 212, 168, 0.04);
+  --walkthrough-window-glow-shadow-hover: 0 0 0 1px rgba(45, 212, 168, 0.08), 0 40px 100px rgba(0, 0, 0, 0.75), 0 0 120px rgba(45, 212, 168, 0.08);
+
+  /* Extended landing tokens */
+  --studio-landing-surface-elevated: rgba(255, 255, 255, 0.08);
+  --studio-landing-glow-green: rgba(45, 212, 168, 0.06);
+  --studio-landing-glow-green-strong: rgba(45, 212, 168, 0.12);
 }
 
 /* Smooth scroll for anchor navigation */
@@ -127,6 +153,12 @@ html {
 @keyframes scrollHint {
   0%, 100% { opacity: 0.3; transform: scaleY(1); }
   50% { opacity: 0.8; transform: scaleY(1.15); }
+}
+
+/* Agent marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 /* Reduce motion for accessibility */
