@@ -97,13 +97,19 @@
   --studio-code-function: #bdbdbd;
   --studio-code-accent: #ef5350;
 
-  /* Landing page specific */
-  --studio-landing-bg: #0a0a0a;
-  --studio-landing-surface: #111111;
-  --studio-landing-border: rgba(255, 255, 255, 0.06);
-  --studio-landing-text-primary: #f0f0f0;
-  --studio-landing-text-secondary: #a0a0a0;
-  --studio-landing-text-muted: #555555;
+  /* Landing page — OpenAI aesthetic */
+  --studio-landing-bg: #000000;
+  --studio-landing-surface: rgba(255, 255, 255, 0.04);
+  --studio-landing-surface-hover: rgba(255, 255, 255, 0.06);
+  --studio-landing-border: rgba(255, 255, 255, 0.07);
+  --studio-landing-border-hover: rgba(255, 255, 255, 0.14);
+  --studio-landing-text-primary: #ffffff;
+  --studio-landing-text-secondary: rgba(255, 255, 255, 0.5);
+  --studio-landing-text-muted: rgba(255, 255, 255, 0.28);
+  --studio-landing-text-accent: #2dd4a8;
+  --studio-landing-cta-bg: #ffffff;
+  --studio-landing-cta-text: #000000;
+  --studio-landing-cta-bg-hover: rgba(255, 255, 255, 0.92);
 }
 
 /* Smooth scroll for anchor navigation */
@@ -115,6 +121,12 @@ html {
 @keyframes cursor-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* Scroll hint animation */
+@keyframes scrollHint {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 0.8; transform: scaleY(1.15); }
 }
 
 /* Reduce motion for accessibility */

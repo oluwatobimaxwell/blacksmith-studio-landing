@@ -12,13 +12,13 @@ export const heroFeatures: FeatureItem[] = [
     icon: MessageSquare,
     title: 'AI Chat',
     description:
-      'Have a conversation with Claude about your codebase. Stream responses, execute tool calls, render rich markdown — with full context of your project.',
+      'Talk to Claude about your codebase directly. Stream responses, execute tool calls, render rich markdown — with full project context loaded automatically.',
   },
   {
     icon: Users,
-    title: 'Multi-Agent Team',
+    title: 'Multi-Agent Canvas',
     description:
-      'Assemble a team of specialized AI agents — PM, architect, engineers, QA, designer — and watch them collaborate on a shared canvas to deliver complete features.',
+      'Coordinate a full team of specialized agents — PM, architect, frontend, backend, QA, security, and more — collaborating on a shared canvas to deliver complete, production-ready features.',
   },
 ]
 

@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Feature Walkthrough Section — Scroll-Driven</title>
+
+  <!--
+    FONT CHOICE:
+    Display/Body: Outfit — matches project's theme.ts (heading + body font)
+    Mono: SF Mono / Fira Code — matches project's theme.ts mono font
+    Reason: Exact project fonts. No deviation.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* —— TOKENS (from project's globals.css [data-theme='dark'] + landing tokens) —— */
+    :root {
+      /* Landing page — from globals.css */
+      --studio-landing-bg: #000000;
+      --studio-landing-surface: rgba(255, 255, 255, 0.04);
+      --studio-landing-surface-hover: rgba(255, 255, 255, 0.06);
+      --studio-landing-border: rgba(255, 255, 255, 0.07);
+      --studio-landing-border-hover: rgba(255, 255, 255, 0.14);
+      --studio-landing-text-primary: #ffffff;
+      --studio-landing-text-secondary: rgba(255, 255, 255, 0.5);
+      --studio-landing-text-muted: rgba(255, 255, 255, 0.28);
+      --studio-landing-text-accent: #2dd4a8;
+      --studio-landing-cta-bg: #ffffff;
+      --studio-landing-cta-text: #000000;
+
+      /* Brand green — from globals.css */
+      --studio-brand-green: #2dd4a8;
+      --studio-brand-green-subtle: rgba(45, 212, 168, 0.12);
+      --studio-brand-green-border: rgba(45, 212, 168, 0.3);
+
+      /* Spacing — from theme.ts */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 24px;
+      --space-2xl: 32px;
+      --space-3xl: 40px;
+      --space-4xl: 48px;
+      --space-5xl: 56px;
+      --space-6xl: 64px;
+
+      /* Radii — from theme.ts */
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 10px;
+      --radius-xl: 12px;
+      --radius-2xl: 14px;
+      --radius-3xl: 16px;
+      --radius-full: 9999px;
+
+      /* Shadows — from theme.ts */
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.5);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
+      --shadow-focus: 0 0 0 2px rgba(45, 212, 168, 0.4);
+
+      /* NEW tokens — extending the system for this section */
+      --walkthrough-window-bg: #0d0d0d;
+      --walkthrough-window-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+      --walkthrough-titlebar-bg: rgba(255,255,255,0.02);
+      --walkthrough-titlebar-border: rgba(255,255,255,0.06);
+      --walkthrough-dot-red: #ef5350;
+      --walkthrough-dot-yellow: #ffa726;
+      --walkthrough-dot-green: #2dd4a8;
+
+      /* Transition tokens */
+      --duration-fast: 0.2s;
+      --duration-normal: 0.3s;
+      --duration-slow: 0.5s;
+      --duration-slower: 0.7s;
+      --ease-default: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+      /* Layout */
+      --max-width: 1200px;
+      --nav-left-width: 42%;
+    }
+
+    /* —— RESET —— */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* —— BASE —— */
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--studio-landing-bg);
+      color: var(--studio-landing-text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* —— SECTION: FeatureWalkthroughSection —— */
+
+    /* The outer tall container that drives scroll */
+    .walkthrough-section {
+      position: relative;
+      /* height = (featureCount + 1) * 100vh — set via JS or inline style */
+      /* For design demo, we show the sticky viewport statically */
+    }
+
+    /* The sticky viewport that stays pinned */
+    .walkthrough-viewport {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Top edge line — subtle separator from hero */
+    .walkthrough-viewport::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--studio-landing-border), transparent);
+      z-index: 1;
+    }
+
+    /* Inner layout container */
+    .walkthrough-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-6xl);
+      width: 100%;
+      height: 100%;
+    }
+
+    /* —— COMPONENT: LeftPanel —— */
+    .walkthrough-left {
+      width: var(--nav-left-width);
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Section label */
+    .walkthrough-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--studio-landing-text-accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-2xl);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* —— COMPONENT: FeatureNav —— */
+    .feature-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: var(--space-3xl);
+      width: 100%;
+    }
+
+    /* —— COMPONENT: FeatureNavItem —— */
+    .feature-nav-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      cursor: pointer;
+      transition: opacity var(--duration-normal) ease;
+      opacity: 0.35;
+      border: none;
+      background: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .feature-nav-item:hover {
+      opacity: 0.65;
+    }
+
+    .feature-nav-item:focus-visible {
+      outline: none;
+      opacity: 0.65;
+    }
+
+    .feature-nav-item:focus-visible .step-indicator {
+      box-shadow: var(--shadow-focus);
+    }
+
+    /* —— STATE: Active nav item —— */
+    .feature-nav-item.is-active {
+      opacity: 1;
+    }
+    .feature-nav-item.is-active:hover {
+      opacity: 1;
+    }
+
+    /* Step indicator circle */
+    .step-indicator {
+      width: 22px;
+      height: 22px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid var(--studio-landing-border);
+      transition: all var(--duration-normal) ease;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--studio-landing-text-muted);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .feature-nav-item.is-active .step-indicator {
+      border-color: var(--studio-landing-text-accent);
+      color: var(--studio-landing-text-accent);
+    }
+
+    /* Past/completed step */
+    .feature-nav-item.is-past .step-indicator {
+      border-color: var(--studio-landing-text-accent);
+      background: var(--studio-landing-text-accent);
+      color: #000;
+    }
+
+    .step-indicator .check-icon {
+      display: none;
+    }
+    .feature-nav-item.is-past .step-indicator .step-number {
+      display: none;
+    }
+    .feature-nav-item.is-past .step-indicator .check-icon {
+      display: block;
+    }
+
+    /* Nav label text */
+    .nav-label {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--studio-landing-text-muted);
+      transition: all var(--duration-normal) ease;
+      line-height: 1;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .feature-nav-item.is-active .nav-label {
+      font-weight: 600;
+      color: var(--studio-landing-text-primary);
+    }
+
+    .feature-nav-item.is-past .nav-label {
+      color: var(--studio-landing-text-muted);
+    }
+
+    /* —— COMPONENT: FeatureContent (animated text block) —— */
+    .feature-content {
+      overflow: hidden;
+    }
+
+    .feature-content-inner {
+      animation: fadeUp var(--duration-slow) var(--ease-default) forwards;
+    }
+
+    .feature-headline {
+      font-size: 34px;
+      font-weight: 600;
+      color: var(--studio-landing-text-primary);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: var(--space-lg);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .feature-description {
+      font-size: 15px;
+      color: var(--studio-landing-text-secondary);
+      line-height: 1.75;
+      margin-bottom: var(--space-xl);
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Bullet list */
+    .feature-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .bullet-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: var(--radius-full);
+      background: var(--studio-brand-green-subtle);
+      border: 1px solid var(--studio-brand-green-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .bullet-icon svg {
+      width: 9px;
+      height: 9px;
+    }
+
+    .bullet-text {
+      font-size: 13px;
+      color: var(--studio-landing-text-secondary);
+      line-height: 1.5;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* —— COMPONENT: FeatureScreenshot (right panel) —— */
+    .walkthrough-right {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* —— COMPONENT: WindowChrome —— */
+    .window-chrome {
+      border-radius: var(--radius-3xl);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: var(--walkthrough-window-bg);
+      box-shadow: var(--walkthrough-window-shadow);
+      animation: screenshotEnter var(--duration-slow) var(--ease-default) forwards;
+    }
+
+    .window-titlebar {
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-lg);
+      height: 40px;
+      border-bottom: 1px solid var(--walkthrough-titlebar-border);
+      background: var(--walkthrough-titlebar-bg);
+      gap: var(--space-md);
+    }
+
+    .traffic-lights {
+      display: flex;
+      gap: 6px;
+    }
+
+    .traffic-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: var(--radius-full);
+      opacity: 0.8;
+    }
+    .traffic-dot.red { background: var(--walkthrough-dot-red); }
+    .traffic-dot.yellow { background: var(--walkthrough-dot-yellow); }
+    .traffic-dot.green { background: var(--walkthrough-dot-green); }
+
+    .window-title {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      font-family: 'Fira Code', monospace;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .window-title-spacer {
+      width: 48px;
+    }
+
+    /* Screenshot placeholder */
+    .screenshot-body {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot-body img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 420px;
+      object-fit: cover;
+    }
+
+    /* —— ANIMATIONS —— */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes screenshotEnter {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes progressGrow {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+
+    /* —— RESPONSIVE —— */
+    @media (max-width: 768px) {
+      .walkthrough-inner {
+        flex-direction: column;
+        padding: 0 20px;
+        padding-top: 80px;
+        gap: var(--space-2xl);
+        align-items: stretch;
+      }
+
+      .walkthrough-left {
+        width: 100%;
+      }
+
+      .walkthrough-right {
+        width: 100%;
+      }
+
+      .feature-headline {
+        font-size: 24px;
+      }
+
+      .feature-description {
+        font-size: 14px;
+      }
+
+      .nav-label {
+        font-size: 14px;
+      }
+
+      .walkthrough-label {
+        margin-bottom: var(--space-xl);
+      }
+
+      .feature-nav {
+        margin-bottom: var(--space-xl);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .walkthrough-inner {
+        padding: 0 var(--space-lg);
+        padding-top: 72px;
+      }
+
+      .feature-headline {
+        font-size: 22px;
+      }
+
+      .feature-nav {
+        gap: var(--space-lg);
+      }
+    }
+
+    /* —— REDUCE MOTION —— */
+    @media (prefers-reduced-motion: reduce) {
+      .feature-content-inner,
+      .window-chrome {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       DEMO LAYOUT — shows two states side-by-side
+       (not part of the actual component)
+       ═══════════════════════════════════════════════════ */
+    .demo-wrapper {
+      padding: 40px;
+    }
+
+    .demo-state-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--studio-landing-text-accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--studio-landing-border);
+      font-family: 'Fira Code', monospace;
+    }
+
+    .demo-state-block {
+      border: 1px solid var(--studio-landing-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin-bottom: 60px;
+    }
+
+    .demo-mobile-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--studio-landing-text-accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 40px 0 16px;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .demo-mobile-frame {
+      width: 375px;
+      border: 1px solid var(--studio-landing-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-wrapper">
+
+  <!-- ═══════════════════════════════════════════════════════
+       STATE 1: Feature 1 (Multi-Agent Canvas) Active
+       ═══════════════════════════════════════════════════════ -->
+  <div class="demo-state-block">
+    <div class="demo-state-label">State: Feature 1 Active — Multi-Agent Canvas</div>
+
+    <!-- FeatureWalkthroughSection -->
+    <section class="walkthrough-section" aria-label="Features" id="features-demo-1">
+
+      <!-- Sticky Viewport -->
+      <div class="walkthrough-viewport" style="position: relative; height: auto; min-height: 100vh;">
+        <div class="walkthrough-inner">
+
+          <!-- LeftPanel -->
+          <div class="walkthrough-left">
+
+            <!-- Section label -->
+            <span class="walkthrough-label">Features</span>
+
+            <!-- FeatureNav -->
+            <nav class="feature-nav" aria-label="Feature navigation">
+
+              <!-- FeatureNavItem — Active -->
+              <button class="feature-nav-item is-active" aria-pressed="true">
+                <span class="step-indicator">
+                  <span class="step-number">01</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Multi-Agent Canvas</span>
+              </button>
+
+              <!-- FeatureNavItem — Inactive (future) -->
+              <button class="feature-nav-item" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">02</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">AI Chat</span>
+              </button>
+
+              <button class="feature-nav-item" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">03</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Code Editor</span>
+              </button>
+
+              <button class="feature-nav-item" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">04</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Terminal & Dev Services</span>
+              </button>
+
+              <button class="feature-nav-item" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">05</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Git Integration</span>
+              </button>
+
+            </nav>
+
+            <!-- FeatureContent — animated text for active feature -->
+            <div class="feature-content">
+              <div class="feature-content-inner">
+                <h3 class="feature-headline">Your entire engineering team. In one window.</h3>
+                <p class="feature-description">
+                  Coordinate 11 specialized AI agents — PM, Architect, Frontend, Backend, QA, Security, and more — all collaborating on a shared canvas. Each does their specific job, in the right order, following real engineering principles.
+                </p>
+                <div class="feature-bullets">
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">PM scopes the feature first</span>
+                  </div>
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">Architect designs before anyone codes</span>
+                  </div>
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">Engineers build in parallel</span>
+                  </div>
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">QA validates before it ships</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /LeftPanel -->
+
+          <!-- RightPanel — FeatureScreenshot -->
+          <div class="walkthrough-right">
+
+            <!-- WindowChrome -->
+            <div class="window-chrome">
+              <div class="window-titlebar">
+                <div class="traffic-lights">
+                  <span class="traffic-dot red"></span>
+                  <span class="traffic-dot yellow"></span>
+                  <span class="traffic-dot green"></span>
+                </div>
+                <span class="window-title">Blacksmith Studio — Multi-Agent Canvas</span>
+                <span class="window-title-spacer"></span>
+              </div>
+              <!-- Screenshot body — placeholder for Canvas -->
+              <div class="screenshot-body">
+                <img
+                  src="https://placehold.co/800x500/111111/333333?text=Canvas+Screenshot"
+                  alt="Multi-Agent Canvas interface showing 11 AI agents collaborating on a shared canvas"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+          </div>
+          <!-- /RightPanel -->
+
+        </div>
+      </div>
+      <!-- /Sticky Viewport -->
+
+    </section>
+    <!-- /FeatureWalkthroughSection -->
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       STATE 2: Feature 3 (Code Editor) Active — shows past states
+       ═══════════════════════════════════════════════════════ -->
+  <div class="demo-state-block">
+    <div class="demo-state-label">State: Feature 3 Active — Code Editor (features 1 & 2 completed)</div>
+
+    <section class="walkthrough-section" aria-label="Features" id="features-demo-2">
+      <div class="walkthrough-viewport" style="position: relative; height: auto; min-height: 100vh;">
+        <div class="walkthrough-inner">
+
+          <!-- LeftPanel -->
+          <div class="walkthrough-left">
+            <span class="walkthrough-label">Features</span>
+
+            <nav class="feature-nav" aria-label="Feature navigation">
+
+              <!-- Past (completed) -->
+              <button class="feature-nav-item is-past" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">01</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Multi-Agent Canvas</span>
+              </button>
+
+              <!-- Past (completed) -->
+              <button class="feature-nav-item is-past" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">02</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">AI Chat</span>
+              </button>
+
+              <!-- Active -->
+              <button class="feature-nav-item is-active" aria-pressed="true">
+                <span class="step-indicator">
+                  <span class="step-number">03</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Code Editor</span>
+              </button>
+
+              <!-- Future -->
+              <button class="feature-nav-item" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">04</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Terminal & Dev Services</span>
+              </button>
+
+              <button class="feature-nav-item" aria-pressed="false">
+                <span class="step-indicator">
+                  <span class="step-number">05</span>
+                  <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                </span>
+                <span class="nav-label">Git Integration</span>
+              </button>
+
+            </nav>
+
+            <!-- FeatureContent for Code Editor -->
+            <div class="feature-content">
+              <div class="feature-content-inner">
+                <h3 class="feature-headline">Monaco-powered. Built for AI workflows.</h3>
+                <p class="feature-description">
+                  A professional-grade editor that understands AI-generated code. Syntax highlighting across every language, intelligent completions, and a custom Blacksmith theme designed for long sessions.
+                </p>
+                <div class="feature-bullets">
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">Monaco editor core (VS Code engine)</span>
+                  </div>
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">AI-aware completions</span>
+                  </div>
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">Custom Blacksmith dark theme</span>
+                  </div>
+                  <div class="feature-bullet">
+                    <span class="bullet-icon">
+                      <svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+                    </span>
+                    <span class="bullet-text">Multi-file editing with split panes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <!-- /LeftPanel -->
+
+          <!-- RightPanel — Code Editor screenshot -->
+          <div class="walkthrough-right">
+            <div class="window-chrome">
+              <div class="window-titlebar">
+                <div class="traffic-lights">
+                  <span class="traffic-dot red"></span>
+                  <span class="traffic-dot yellow"></span>
+                  <span class="traffic-dot green"></span>
+                </div>
+                <span class="window-title">Blacksmith Studio — Code Editor</span>
+                <span class="window-title-spacer"></span>
+              </div>
+              <div class="screenshot-body">
+                <img
+                  src="https://placehold.co/800x500/111111/333333?text=Editor+Screenshot"
+                  alt="Monaco code editor with syntax highlighting and AI completions"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MOBILE LAYOUT — Feature 1 Active (stacked)
+       ═══════════════════════════════════════════════════════ -->
+  <div class="demo-mobile-label">Mobile Layout (375px) — Feature 1 Active</div>
+  <div class="demo-mobile-frame">
+    <div class="demo-state-label">Mobile: Stacked Layout</div>
+
+    <section style="background: var(--studio-landing-bg); padding: 72px 16px 40px;">
+
+      <span class="walkthrough-label">Features</span>
+
+      <!-- Compact nav for mobile -->
+      <nav class="feature-nav" style="gap: 16px; margin-bottom: 24px;">
+        <button class="feature-nav-item is-active" aria-pressed="true">
+          <span class="step-indicator">
+            <span class="step-number">01</span>
+            <svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>
+          </span>
+          <span class="nav-label" style="font-size: 14px;">Multi-Agent Canvas</span>
+        </button>
+        <button class="feature-nav-item">
+          <span class="step-indicator"><span class="step-number">02</span><svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+          <span class="nav-label" style="font-size: 14px;">AI Chat</span>
+        </button>
+        <button class="feature-nav-item">
+          <span class="step-indicator"><span class="step-number">03</span><svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+          <span class="nav-label" style="font-size: 14px;">Code Editor</span>
+        </button>
+        <button class="feature-nav-item">
+          <span class="step-indicator"><span class="step-number">04</span><svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+          <span class="nav-label" style="font-size: 14px;">Terminal & Dev Services</span>
+        </button>
+        <button class="feature-nav-item">
+          <span class="step-indicator"><span class="step-number">05</span><svg class="check-icon" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+          <span class="nav-label" style="font-size: 14px;">Git Integration</span>
+        </button>
+      </nav>
+
+      <!-- Content -->
+      <div class="feature-content" style="margin-bottom: 24px;">
+        <div class="feature-content-inner" style="animation: none; opacity: 1;">
+          <h3 class="feature-headline" style="font-size: 22px;">Your entire engineering team. In one window.</h3>
+          <p class="feature-description" style="font-size: 14px;">
+            Coordinate 11 specialized AI agents — PM, Architect, Frontend, Backend, QA, Security, and more — all collaborating on a shared canvas.
+          </p>
+          <div class="feature-bullets">
+            <div class="feature-bullet">
+              <span class="bullet-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+              <span class="bullet-text">PM scopes the feature first</span>
+            </div>
+            <div class="feature-bullet">
+              <span class="bullet-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+              <span class="bullet-text">Architect designs before anyone codes</span>
+            </div>
+            <div class="feature-bullet">
+              <span class="bullet-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+              <span class="bullet-text">Engineers build in parallel</span>
+            </div>
+            <div class="feature-bullet">
+              <span class="bullet-icon"><svg viewBox="0 0 12 12" fill="none" stroke="#2dd4a8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg></span>
+              <span class="bullet-text">QA validates before it ships</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screenshot below on mobile -->
+      <div class="window-chrome" style="animation: none; opacity: 1;">
+        <div class="window-titlebar">
+          <div class="traffic-lights">
+            <span class="traffic-dot red"></span>
+            <span class="traffic-dot yellow"></span>
+            <span class="traffic-dot green"></span>
+          </div>
+          <span class="window-title" style="font-size: 10px;">Blacksmith Studio — Canvas</span>
+          <span class="window-title-spacer" style="width: 36px;"></span>
+        </div>
+        <div class="screenshot-body">
+          <img
+            src="https://placehold.co/375x240/111111/333333?text=Canvas+Screenshot"
+            alt="Multi-Agent Canvas — mobile view"
+            loading="lazy"
+            style="min-height: 240px;"
+          />
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+</div>
+<!-- /demo-wrapper -->
+
+
+<!--
+  FRONTEND ENGINEER HANDOFF NOTES
+
+  COMPONENT: FeatureWalkthroughSection
+
+  COMPONENT BOUNDARIES:
+  - <section class="walkthrough-section">      → FeatureWalkthroughSection (main export)
+  - <div class="walkthrough-viewport">          → Sticky viewport wrapper (inside FeatureWalkthroughSection)
+  - <div class="walkthrough-left">              → Left panel (inline in FeatureWalkthroughSection)
+  - <span class="walkthrough-label">            → Section label (inline)
+  - <nav class="feature-nav">                   → FeatureNav area (inline or extract to FeatureNav)
+  - <button class="feature-nav-item">           → FeatureItem component (already exists)
+  - <span class="step-indicator">               → Part of FeatureItem
+  - <div class="feature-content">               → FeatureContent animated block (uses framer-motion MotionBox)
+  - <div class="feature-bullets">               → Bullet list (inline in FeatureContent)
+  - <div class="walkthrough-right">             → Right panel
+  - <div class="window-chrome">                 → WindowChrome component (already exists in feature-screenshot.tsx)
+  - <div class="screenshot-body">               → Screenshot content area (inside WindowChrome)
+
+  CSS VARIABLES TO MAP:
+  All variables are from the existing project tokens in globals.css and theme.ts:
+  - --studio-landing-bg, --studio-landing-surface, --studio-landing-border, etc.
+  - --studio-landing-text-primary, --studio-landing-text-secondary, --studio-landing-text-muted, --studio-landing-text-accent
+  - --studio-brand-green, --studio-brand-green-subtle, --studio-brand-green-border
+
+  NEW tokens to add to globals.css (or keep inline):
+  - --walkthrough-window-bg: #0d0d0d (already used as literal in feature-screenshot.tsx)
+  - --walkthrough-window-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04) (same)
+  - --walkthrough-titlebar-bg: rgba(255,255,255,0.02)
+  - --walkthrough-titlebar-border: rgba(255,255,255,0.06)
+
+  PROPS THIS COMPONENT NEEDS:
+  - FeatureWalkthroughSection: none (reads walkthroughFeatures from data file, uses useScrollProgress hook)
+  - FeatureItem: { label: string; index: number; activeIndex: number; onClick: (i: number) => void }
+  - FeatureScreenshot: { feature: WalkthroughFeature } (already exists)
+  - WindowChrome: { title: string; children: ReactNode } (already exists)
+
+  INTERACTIONS TO WIRE UP:
+  1. SCROLL BEHAVIOR (critical):
+     - Section height = (featureCount + 1) * 100vh (already implemented)
+     - Viewport is position: sticky; top: 0; height: 100vh
+     - useScrollProgress hook tracks scroll position and returns activeIndex + segmentProgress
+     - As user scrolls, activeIndex changes → triggers re-render of FeatureItem states + FeatureContent + FeatureScreenshot
+
+  2. FEATURE TRANSITIONS:
+     - Text block (FeatureContent): framer-motion AnimatePresence with key={feature.id}
+       - Enter: opacity 0→1, y 20→0, duration 0.5s, ease [0.25, 0.46, 0.45, 0.94]
+     - Screenshot (FeatureScreenshot): framer-motion AnimatePresence mode="wait"
+       - Enter: opacity 0→1, y 16→0, scale 0.99→1, duration 0.45s
+       - Exit: opacity 1→0, y 0→-16, scale 1→0.99, duration 0.45s
+     - Nav items: CSS transition on opacity, color, border-color (0.3s ease)
+
+  3. CLICK-TO-NAVIGATE:
+     - Clicking a FeatureItem scrolls to the corresponding position in the tall section
+     - scrollToFeature(index) calculates: sectionTop + (totalScrollable * index / count)
+     - Uses window.scrollTo({ behavior: 'smooth' })
+
+  4. NAV ITEM STATES:
+     - Active (index === activeIndex): opacity 1, accent border on indicator, white text, weight 600
+     - Past (index < activeIndex): opacity 0.35, green filled indicator with check icon, muted text
+     - Future (index > activeIndex): opacity 0.35, numbered indicator with border, muted text
+     - Hover on inactive: opacity 0.65
+
+  STATES INCLUDED:
+  - Default (Feature 1 active — all others future)
+  - Mid-scroll (Feature 3 active — features 1 & 2 past/completed, 4 & 5 future)
+  - Mobile stacked layout (Feature 1 active)
+  - Hover states on nav items (CSS :hover)
+  - Focus-visible states on nav items (CSS :focus-visible with green ring)
+
+  STATES NOT INCLUDED & WHY:
+  - Loading: Section is static HTML with no data fetching — renders instantly from static data array
+  - Error: No error state — data is hardcoded in walkthrough-features.ts, not fetched
+  - Disabled: No disabled state — all nav items are always interactive
+  - Empty: Not applicable — feature list is a fixed constant
+  - Success: Not applicable — this is a display-only section
+
+  RESPONSIVE NOTES:
+  - Desktop (>768px): Side-by-side layout — left 42%, right flex: 1, gap 64px
+  - Mobile (<768px): Stacked — column direction, text on top, screenshot below
+  - Mobile (<768px): The sticky scroll behavior should be SIMPLIFIED or removed
+    (standard vertical scroll with IntersectionObserver-based activation instead)
+    because sticky scroll on mobile with touch is unreliable and frustrating
+  - The FeatureScreenshot component uses display: none on base, block on md for desktop-only
+    (currently in the existing code). For mobile, the screenshot should show below the text
+    instead of being hidden — this design shows that layout.
+  - Touch targets: nav items have sufficient height (22px indicator + text line = ~30px row),
+    but consider adding padding: 8px 0 to each nav item on mobile for 44px touch targets.
+
+  ACCESSIBILITY NOTES:
+  - Nav items use <button> with aria-pressed for toggle semantics
+  - Feature nav has role="navigation" via <nav> with aria-label="Feature navigation"
+  - Section has aria-label="Features" on the <section> element
+  - Focus-visible ring uses --shadow-focus (green outline) matching project focus ring
+  - prefers-reduced-motion: all animations are disabled, elements show at full opacity
+  - Screenshot images have descriptive alt text
+  - Keyboard navigation: Tab through nav items, Enter to activate (scroll to feature)
+  - The existing FeatureItem component already has onKeyDown for Enter — keep that
+-->
+
+</body>
+</html>

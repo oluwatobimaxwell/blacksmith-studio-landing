@@ -79,3 +79,17 @@ Detailed skills and conventions are in `.claude/skills/`:
 - `.claude/skills/ai-guidelines/SKILL.md` — AI Development Guidelines
 
 These files are auto-loaded by Claude Code. Run `blacksmith setup:ai` to regenerate.
+
+<!-- blacksmith:graphify:start -->
+## Knowledge Graph (Graphify)
+
+This project has a pre-built knowledge graph at `.blacksmith/graphify/`.
+
+Rules:
+- Before exploring the codebase with Glob/Grep/Read, read `.blacksmith/graphify/GRAPH_REPORT.md`
+  for the structural overview — god nodes, communities, and file relationships.
+- Use the graph to navigate directly to relevant files instead of scanning broadly.
+- Only Read files you need to modify or understand in detail — the graph already maps the structure.
+
+Stats: 111 nodes · 59 edges · Built 2026-04-16
+<!-- blacksmith:graphify:end -->
