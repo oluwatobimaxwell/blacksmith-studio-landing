@@ -11,73 +11,56 @@ describe('LandingFooter', () => {
   })
 
   describe('brand block', () => {
-    it('renders the "Blacksmith" brand name', () => {
+    it('renders the "Blacksmith Studio" brand name', () => {
       renderWithProviders(<LandingFooter />)
-      expect(screen.getByText('Blacksmith')).toBeInTheDocument()
+      expect(screen.getByText('Blacksmith Studio')).toBeInTheDocument()
     })
 
     it('renders the brand tagline about being free and open source', () => {
       renderWithProviders(<LandingFooter />)
       expect(
-        screen.getByText(/The free, open source AI-native IDE for building production-ready software/i),
-      ).toBeInTheDocument()
-    })
-
-    it('renders the founder name', () => {
-      renderWithProviders(<LandingFooter />)
-      expect(screen.getByText('Tobi Sholanke')).toBeInTheDocument()
-    })
-
-    it('renders the "Built in Nigeria" origin line', () => {
-      renderWithProviders(<LandingFooter />)
-      expect(
-        screen.getByText(/Built in Nigeria · Free, Open Source & Global/i),
+        screen.getByText(/A free, open source desktop IDE with a team of AI agents/i),
       ).toBeInTheDocument()
     })
   })
 
-  describe('product column', () => {
-    it('renders the "Product" section title', () => {
+  describe('Studio column', () => {
+    it('renders the "Studio" section title', () => {
       renderWithProviders(<LandingFooter />)
-      expect(screen.getByText('Product')).toBeInTheDocument()
+      expect(screen.getByText('Studio')).toBeInTheDocument()
     })
 
-    it('renders the internal Features link pointing to #features', () => {
+    it('renders the Product link pointing to #features', () => {
       renderWithProviders(<LandingFooter />)
-      const link = screen.getByRole('link', { name: 'Features' })
+      const link = screen.getByRole('link', { name: 'Product' })
       expect(link).toHaveAttribute('href', '#features')
     })
 
-    it('renders the internal Agents link pointing to #agents', () => {
+    it('renders the Hub link pointing to #graphify', () => {
       renderWithProviders(<LandingFooter />)
-      const link = screen.getByRole('link', { name: 'Agents' })
-      expect(link).toHaveAttribute('href', '#agents')
+      const link = screen.getByRole('link', { name: 'Hub' })
+      expect(link).toHaveAttribute('href', '#graphify')
     })
 
-    it('marks internal links as non-external (no target="_blank")', () => {
+    it('renders the Showcase link pointing to #showcase', () => {
       renderWithProviders(<LandingFooter />)
-      const link = screen.getByRole('link', { name: 'Features' })
-      expect(link).not.toHaveAttribute('target')
+      const link = screen.getByRole('link', { name: 'Showcase' })
+      expect(link).toHaveAttribute('href', '#showcase')
     })
   })
 
-  describe('community column', () => {
+  describe('Community column', () => {
     it('renders the "Community" section title', () => {
       renderWithProviders(<LandingFooter />)
-      const communityTitles = screen.getAllByText('Community')
-      expect(communityTitles.length).toBeGreaterThan(0)
+      expect(screen.getByText('Community')).toBeInTheDocument()
     })
 
-    it('renders the Discord link pointing to discord.gg/blacksmithstudio', () => {
+    it('renders the Discord external link', () => {
       renderWithProviders(<LandingFooter />)
       const link = screen.getByRole('link', { name: 'Discord' })
       expect(link).toHaveAttribute('href', 'https://discord.gg/blacksmithstudio')
-    })
-
-    it('renders the Twitter / X external link', () => {
-      renderWithProviders(<LandingFooter />)
-      const link = screen.getByRole('link', { name: 'Twitter / X' })
-      expect(link).toHaveAttribute('href', 'https://twitter.com/blacksmithstudio')
+      expect(link).toHaveAttribute('target', '_blank')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
 
     it('renders the GitHub external link to the project repo', () => {
@@ -89,25 +72,17 @@ describe('LandingFooter', () => {
       )
     })
 
-    it('marks external links with target="_blank" and rel="noopener noreferrer"', () => {
+    it('renders the Principles internal link pointing to #principles', () => {
       renderWithProviders(<LandingFooter />)
-      const discord = screen.getByRole('link', { name: 'Discord' })
-      expect(discord).toHaveAttribute('target', '_blank')
-      expect(discord).toHaveAttribute('rel', 'noopener noreferrer')
+      const link = screen.getByRole('link', { name: 'Principles' })
+      expect(link).toHaveAttribute('href', '#principles')
     })
   })
 
-  describe('resources column', () => {
-    it('renders the "Resources" section title', () => {
+  describe('Legal column', () => {
+    it('renders the "Legal" section title', () => {
       renderWithProviders(<LandingFooter />)
-      expect(screen.getByText('Resources')).toBeInTheDocument()
-    })
-
-    it('renders the Documentation external link', () => {
-      renderWithProviders(<LandingFooter />)
-      const link = screen.getByRole('link', { name: 'Documentation' })
-      expect(link).toHaveAttribute('href', 'https://docs.blacksmith.studio')
-      expect(link).toHaveAttribute('target', '_blank')
+      expect(screen.getByText('Legal')).toBeInTheDocument()
     })
 
     it('renders Privacy and Terms links', () => {
@@ -115,34 +90,38 @@ describe('LandingFooter', () => {
       expect(screen.getByRole('link', { name: 'Privacy' })).toBeInTheDocument()
       expect(screen.getByRole('link', { name: 'Terms' })).toBeInTheDocument()
     })
+
+    it('renders an "Acceptable Use" link', () => {
+      renderWithProviders(<LandingFooter />)
+      expect(
+        screen.getByRole('link', { name: 'Acceptable Use' }),
+      ).toBeInTheDocument()
+    })
   })
 
   describe('footer bottom row', () => {
-    it('renders the copyright line mentioning 2026 and the founder', () => {
+    it('renders the copyright line for 2026 Blacksmith Studio', () => {
       renderWithProviders(<LandingFooter />)
-      expect(
-        screen.getByText(/© 2026 Blacksmith Software Community/i),
-      ).toBeInTheDocument()
+      expect(screen.getByText(/© 2026 Blacksmith Studio/i)).toBeInTheDocument()
     })
 
-    it('renders the "Built with Claude AI" attribution', () => {
+    it('renders the "Built in Helsinki" origin line', () => {
       renderWithProviders(<LandingFooter />)
-      expect(screen.getByText('Built with Claude AI')).toBeInTheDocument()
+      expect(screen.getByText('Built in Helsinki')).toBeInTheDocument()
     })
 
-    it('renders the "Free forever" accent text', () => {
+    it('renders the "Open source" accent text', () => {
       renderWithProviders(<LandingFooter />)
-      expect(screen.getByText('Free forever')).toBeInTheDocument()
+      expect(screen.getByText('Open source')).toBeInTheDocument()
     })
   })
 
-  describe('link counts per column', () => {
-    it('renders the expected number of links total across all columns', () => {
+  describe('link counts', () => {
+    it('renders at least 15 links across the three columns', () => {
       const { container } = renderWithProviders(<LandingFooter />)
       const footer = container.querySelector('footer')!
       const links = within(footer).getAllByRole('link')
-      // 2 product + 4 community + 3 resources = 9 links minimum
-      expect(links.length).toBeGreaterThanOrEqual(9)
+      expect(links.length).toBeGreaterThanOrEqual(15)
     })
   })
 

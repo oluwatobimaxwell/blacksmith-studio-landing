@@ -39,13 +39,18 @@ import { NavBar } from '../nav-bar'
 import { useLandingScroll } from '../../hooks/use-landing-scroll'
 
 const NAV_LINKS = [
-  { label: 'Features', href: '#features' },
-  { label: 'Agents', href: '#agents' },
-  { label: 'Community', href: '#community' },
+  { label: 'Product', href: '#features' },
+  { label: 'Hub', href: '#graphify' },
+  { label: 'Showcase', href: '#showcase' },
+  { label: 'Docs', href: 'https://docs.blacksmith.studio' },
+  { label: 'Community', href: '#principles' },
 ] as const
 
 beforeEach(() => {
-  vi.mocked(useLandingScroll).mockReturnValue({ isScrolled: false })
+  // Default to the scrolled state — the nav is only interactive (non
+  // pointer-events:none) once the user scrolls past the hero. Tests that
+  // specifically assert the pre-scroll behaviour override this.
+  vi.mocked(useLandingScroll).mockReturnValue({ isScrolled: true })
 })
 
 afterEach(() => {
@@ -59,28 +64,22 @@ describe('NavBar', () => {
       expect(screen.getByRole('banner')).toBeInTheDocument()
     })
 
-    it('renders the Blacksmith brand text', () => {
+    it('renders the Blacksmith Studio brand text', () => {
       renderWithProviders(<NavBar />)
-      expect(screen.getByText('Blacksmith')).toBeInTheDocument()
+      expect(screen.getByText('Blacksmith Studio')).toBeInTheDocument()
     })
 
     it('renders a logo link pointing to the home path', () => {
       renderWithProviders(<NavBar />)
-      const logoText = screen.getByText('Blacksmith')
+      const logoText = screen.getByText('Blacksmith Studio')
       const link = logoText.closest('a')
       expect(link).toHaveAttribute('href', '/')
     })
   })
 
   describe('navigation links', () => {
-    // Chakra's responsive display props produce CSS media queries. In jsdom
-    // the matchMedia mock returns matches:false so desktop elements are
-    // visually hidden. We pass { hidden: true } to query them anyway.
     it('renders a nav element labelled "Main"', () => {
       const { container } = renderWithProviders(<NavBar />)
-      // Query the <nav> element directly: in jsdom it may have display:none
-      // applied by Chakra's responsive props, which causes getByRole to
-      // exclude it even with hidden:true in some configurations.
       const navs = container.querySelectorAll('nav[aria-label="Main"]')
       expect(navs.length).toBeGreaterThanOrEqual(1)
     })
@@ -95,27 +94,16 @@ describe('NavBar', () => {
       },
     )
 
-    it('renders a "Log in" link pointing to /login', () => {
+    it('renders a Download CTA link in the header', () => {
       renderWithProviders(<NavBar />)
-      const loginLinks = screen.getAllByRole('link', { name: 'Log in', hidden: true })
-      expect(loginLinks.length).toBeGreaterThan(0)
-      expect(loginLinks[0]).toHaveAttribute('href', '/login')
-    })
-
-    it('renders a "Get Started Free" button', () => {
-      renderWithProviders(<NavBar />)
-      const buttons = screen.getAllByRole('button', {
-        name: 'Get Started Free',
-        hidden: true,
-      })
-      expect(buttons.length).toBeGreaterThan(0)
+      const downloads = screen.getAllByRole('link', { name: /Download/, hidden: true })
+      expect(downloads.length).toBeGreaterThan(0)
+      expect(downloads[0]).toHaveAttribute('href', '#download')
     })
   })
 
   describe('scrolled-state re-render', () => {
-    // We verify behaviour by asserting that the rendered class list changes
-    // between scrolled/not-scrolled — without coupling to specific CSS.
-    it('updates the banner className when isScrolled changes from false to true', () => {
+    it('hides the banner from pointer events before scroll and shows it after', () => {
       vi.mocked(useLandingScroll).mockReturnValue({ isScrolled: false })
       const { rerender } = renderWithProviders(<NavBar />)
       const initialClass = screen.getByRole('banner').className
@@ -127,8 +115,8 @@ describe('NavBar', () => {
       expect(scrolledClass).not.toBe(initialClass)
     })
 
-    it('renders without throwing when isScrolled is true', () => {
-      vi.mocked(useLandingScroll).mockReturnValue({ isScrolled: true })
+    it('renders without throwing when isScrolled is false', () => {
+      vi.mocked(useLandingScroll).mockReturnValue({ isScrolled: false })
       expect(() => renderWithProviders(<NavBar />)).not.toThrow()
     })
   })
@@ -150,7 +138,6 @@ describe('NavBar', () => {
     it('opens the drawer when the mobile menu button is clicked', async () => {
       const { user } = renderWithProviders(<NavBar />)
       await user.click(screen.getByRole('button', { name: 'Open menu', hidden: true }))
-      // The Chakra Drawer renders a role="dialog" when open
       await waitFor(() => {
         expect(screen.getByRole('dialog')).toBeInTheDocument()
       })
@@ -180,11 +167,9 @@ describe('NavBar', () => {
       await user.click(screen.getByRole('button', { name: 'Open menu', hidden: true }))
       const dialog = await screen.findByRole('dialog')
 
-      const featuresInDrawer = within(dialog).getByRole('link', { name: 'Features' })
+      const featuresInDrawer = within(dialog).getByRole('link', { name: 'Product' })
       await user.click(featuresInDrawer)
 
-      // After clicking the link, the drawer is no longer open — wait for the
-      // dialog to disappear from the tree.
       await waitFor(() => {
         expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
       })

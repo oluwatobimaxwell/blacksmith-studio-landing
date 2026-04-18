@@ -34,58 +34,55 @@ import { renderWithProviders } from '@/__tests__/test-utils'
 import { CtaSection } from '../cta-section'
 
 describe('CtaSection', () => {
-  describe('heading and copy', () => {
-    it('renders the "Get Started" eyebrow label', () => {
+  describe('section landmark', () => {
+    it('renders a section element with id="download"', () => {
       renderWithProviders(<CtaSection />)
-      expect(screen.getByText('Get Started')).toBeInTheDocument()
+      expect(document.getElementById('download')).toBeInTheDocument()
     })
+  })
 
+  describe('heading and copy', () => {
     it('renders the main headline as an h2', () => {
       renderWithProviders(<CtaSection />)
       const h2 = screen.getByRole('heading', { level: 2 })
-      expect(h2.textContent).toMatch(/Start building/)
-      expect(h2.textContent).toMatch(/The right way/)
+      expect(h2.textContent).toMatch(/Free\. Forever\./)
+      expect(h2.textContent).toMatch(/Installed in seconds\./)
     })
 
-    it('renders the supporting description text', () => {
+    it('renders each supported OS label', () => {
       renderWithProviders(<CtaSection />)
-      expect(
-        screen.getByText(/Download Blacksmith Studio and join a global community of builders/i),
-      ).toBeInTheDocument()
-    })
-
-    it('renders the commitment/requirements tagline', () => {
-      renderWithProviders(<CtaSection />)
-      expect(
-        screen.getByText(/Free forever · No credit card required · macOS 13\+/i),
-      ).toBeInTheDocument()
+      expect(screen.getByText('macOS 12+')).toBeInTheDocument()
+      expect(screen.getByText('Windows 10+')).toBeInTheDocument()
+      expect(screen.getByText('Linux')).toBeInTheDocument()
     })
   })
 
   describe('primary download CTA', () => {
-    it('renders the "Download for macOS" button', () => {
+    it('renders the "Download for macOS" link to #download', () => {
       renderWithProviders(<CtaSection />)
-      expect(
-        screen.getByRole('button', { name: /Download for macOS/i }),
-      ).toBeInTheDocument()
+      const link = screen.getByRole('link', { name: /Download for macOS/i })
+      expect(link).toHaveAttribute('href', '#download')
     })
   })
 
-  describe('secondary GitHub CTA', () => {
-    it('renders the "View on GitHub" link pointing to the repo', () => {
+  describe('secondary links', () => {
+    it('renders the "See the changelog" link', () => {
       renderWithProviders(<CtaSection />)
-      const link = screen.getByRole('link', { name: /View on GitHub/i })
-      expect(link).toHaveAttribute(
-        'href',
-        'https://github.com/nicholasgriffintn/blacksmith-studio',
-      )
+      expect(
+        screen.getByRole('link', { name: /See the changelog/i }),
+      ).toBeInTheDocument()
     })
 
-    it('opens the GitHub link in a new tab with noopener', () => {
+    it('renders the "Browse the Hub" link pointing to #graphify', () => {
       renderWithProviders(<CtaSection />)
-      const link = screen.getByRole('link', { name: /View on GitHub/i })
-      expect(link).toHaveAttribute('target', '_blank')
-      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+      const link = screen.getByRole('link', { name: /Browse the Hub/i })
+      expect(link).toHaveAttribute('href', '#graphify')
+    })
+
+    it('renders the "Read the docs" link to the docs site', () => {
+      renderWithProviders(<CtaSection />)
+      const link = screen.getByRole('link', { name: /Read the docs/i })
+      expect(link).toHaveAttribute('href', 'https://docs.blacksmith.studio')
     })
   })
 

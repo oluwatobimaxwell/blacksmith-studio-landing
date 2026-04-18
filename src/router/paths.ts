@@ -14,6 +14,10 @@ export enum Path {
   ForgotPassword = '/forgot-password',
   ResetPassword = '/reset-password/:token',
   Dashboard = '/dashboard',
+  Privacy = '/legal/privacy',
+  Terms = '/legal/terms',
+  AcceptableUse = '/legal/acceptable-use',
+  Licence = '/legal/licence',
   // blacksmith:path
 }
 

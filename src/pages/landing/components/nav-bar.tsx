@@ -14,14 +14,16 @@ import {
   DrawerBody,
   VStack,
 } from '@chakra-ui/react'
-import { Hammer, Menu } from 'lucide-react'
+import { Download, Menu } from 'lucide-react'
 import { Path } from '@/router/paths'
 import { useLandingScroll } from '../hooks/use-landing-scroll'
 
 const navLinks = [
-  { label: 'Features', href: '#features' },
-  { label: 'Agents', href: '#agents' },
-  { label: 'Community', href: '#community' },
+  { label: 'Product', href: '#features' },
+  { label: 'Hub', href: '#graphify' },
+  { label: 'Showcase', href: '#showcase' },
+  { label: 'Docs', href: 'https://docs.blacksmith.studio', external: true },
+  { label: 'Community', href: '#principles' },
 ]
 
 export function NavBar() {
@@ -37,20 +39,21 @@ export function NavBar() {
       left={0}
       right={0}
       zIndex={100}
-      transition="background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease"
-      bg={isScrolled ? 'rgba(0,0,0,0.82)' : 'transparent'}
-      backdropFilter={isScrolled ? 'blur(20px)' : 'none'}
-      borderBottom={isScrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent'}
+      transition="background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease, opacity 0.25s ease"
+      opacity={isScrolled ? 1 : 0}
+      pointerEvents={isScrolled ? 'auto' : 'none'}
+      bg="rgba(0,0,0,0.82)"
+      backdropFilter="blur(20px)"
+      borderBottom="1px solid rgba(255,255,255,0.06)"
     >
       <Flex
         maxW="1200px"
         mx="auto"
         px={{ base: 5, md: 8 }}
-        h={{ base: '60px', md: '68px' }}
+        h={{ base: '60px', md: '64px' }}
         align="center"
         justify="space-between"
       >
-        {/* Logo */}
         <HStack
           spacing={2}
           as={Link}
@@ -60,27 +63,31 @@ export function NavBar() {
           textDecoration="none"
           flexShrink={0}
         >
-          <Box color="var(--studio-landing-text-accent)">
-            <Hammer size={18} />
-          </Box>
-          <Text fontSize="15px" fontWeight={600} color="var(--studio-landing-text-primary)" letterSpacing="-0.02em">
-            Blacksmith
+          <Text
+            fontSize="14px"
+            fontWeight={600}
+            color="var(--studio-landing-text-primary)"
+            letterSpacing="-0.01em"
+            fontFamily="mono"
+          >
+            Blacksmith Studio
           </Text>
         </HStack>
 
-        {/* Desktop nav */}
-        <HStack as="nav" aria-label="Main" spacing={8} display={{ base: 'none', md: 'flex' }}>
+        <HStack as="nav" aria-label="Main" spacing={7} display={{ base: 'none', md: 'flex' }}>
           {navLinks.map((link) => (
             <Text
               key={link.label}
               as="a"
               href={link.href}
-              fontSize="14px"
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
+              fontSize="13px"
               fontWeight={400}
-              color="rgba(255,255,255,0.5)"
+              color="rgba(255,255,255,0.55)"
               transition="color 0.15s ease"
               cursor="pointer"
-              letterSpacing="-0.01em"
+              letterSpacing="-0.005em"
               _hover={{ color: 'var(--studio-landing-text-primary)', textDecoration: 'none' }}
             >
               {link.label}
@@ -88,39 +95,25 @@ export function NavBar() {
           ))}
         </HStack>
 
-        {/* Desktop CTAs */}
         <HStack spacing={2} display={{ base: 'none', md: 'flex' }}>
           <Button
-            as={Link}
-            to={Path.Login}
-            variant="ghost"
-            size="sm"
+            as="a"
+            href="#download"
             h="36px"
             px={4}
-            fontSize="14px"
-            fontWeight={400}
-            color="rgba(255,255,255,0.5)"
-            borderRadius="full"
-            _hover={{ color: 'var(--studio-landing-text-primary)', bg: 'var(--studio-landing-surface)' }}
-          >
-            Log in
-          </Button>
-          <Button
-            h="36px"
-            px={5}
             fontSize="13px"
             fontWeight={600}
             borderRadius="full"
             bg="var(--studio-landing-cta-bg)"
             color="var(--studio-landing-cta-text)"
+            leftIcon={<Download size={13} />}
             _hover={{ bg: 'var(--studio-landing-cta-bg-hover)', transform: 'translateY(-1px)' }}
             transition="background 0.15s ease, transform 0.15s ease"
           >
-            Get Started Free
+            Download
           </Button>
         </HStack>
 
-        {/* Mobile menu button */}
         <IconButton
           aria-label="Open menu"
           aria-expanded={isOpen}
@@ -134,7 +127,6 @@ export function NavBar() {
         />
       </Flex>
 
-      {/* Mobile drawer */}
       <Drawer isOpen={isOpen} onClose={onClose} placement="right">
         <DrawerOverlay bg="rgba(0,0,0,0.75)" backdropFilter="blur(12px)" />
         <DrawerContent bg="#000" borderLeft="1px solid rgba(255,255,255,0.07)" maxW="280px">
@@ -148,6 +140,8 @@ export function NavBar() {
                       key={link.label}
                       as="a"
                       href={link.href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
                       fontSize="16px"
                       fontWeight={400}
                       color="rgba(255,255,255,0.6)"
@@ -167,30 +161,19 @@ export function NavBar() {
               <Box h="1px" bg="var(--studio-landing-border)" my={4} />
 
               <Button
-                as={Link}
-                to={Path.Login}
-                variant="ghost"
-                borderRadius="lg"
-                fontSize="14px"
-                fontWeight={400}
-                color="rgba(255,255,255,0.5)"
-                justifyContent="flex-start"
-                onClick={onClose}
-                _hover={{ color: 'white', bg: 'rgba(255,255,255,0.04)' }}
-              >
-                Log in
-              </Button>
-              <Button
+                as="a"
+                href="#download"
                 borderRadius="full"
                 fontSize="14px"
                 fontWeight={600}
                 bg="var(--studio-landing-cta-bg)"
                 color="var(--studio-landing-cta-text)"
+                leftIcon={<Download size={14} />}
                 _hover={{ bg: 'var(--studio-landing-cta-bg-hover)' }}
                 onClick={onClose}
                 mt={2}
               >
-                Get Started Free
+                Download
               </Button>
             </VStack>
           </DrawerBody>

@@ -17,6 +17,7 @@ import { LandingLayout } from '@/router/layouts/landing-layout'
 import { landingRoutes } from '@/pages/landing'
 import { dashboardRoutes } from '@/pages/dashboard'
 import { authRoutes } from '@/features/auth'
+import { legalRoutes } from '@/pages/legal'
 // blacksmith:import
 
 /**
@@ -58,6 +59,9 @@ export const routes: RouteObject[] = [
       },
     ],
   },
+
+  // Legal pages — own full-page layout
+  ...legalRoutes.map((route) => ({ ...route, errorElement: <RouteErrorBoundary /> })),
 
   // Catch-all 404
   { path: '*', element: <NotFoundPage /> },

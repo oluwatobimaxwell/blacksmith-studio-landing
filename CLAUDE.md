@@ -91,5 +91,5 @@ Rules:
 - Use the graph to navigate directly to relevant files instead of scanning broadly.
 - Only Read files you need to modify or understand in detail — the graph already maps the structure.
 
-Stats: 136 nodes · 65 edges · Built 2026-04-17
+Stats: 178 nodes · 84 edges · Built 2026-04-18
 <!-- blacksmith:graphify:end -->

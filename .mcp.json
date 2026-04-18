@@ -51,6 +51,12 @@
       "env": {
         "FIGMA_API_KEY": ""
       }
+    },
+    "blacksmith_context": {
+      "command": "/Users/oluwatobisholanke/.nvm/versions/node/v20.10.0/bin/node",
+      "args": [
+        "/Users/oluwatobisholanke/Projects/blacksmith-studio/dist/server/context-mcp/run.js"
+      ]
     }
   }
 }

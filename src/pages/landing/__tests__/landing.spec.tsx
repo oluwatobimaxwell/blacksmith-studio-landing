@@ -6,14 +6,23 @@ vi.mock('../components/nav-bar', () => ({
 vi.mock('../components/hero-section', () => ({
   HeroSection: () => <div data-testid="hero-section" />,
 }))
-vi.mock('../components/feature-walkthrough-section', () => ({
-  FeatureWalkthroughSection: () => <div data-testid="feature-walkthrough-section" />,
+vi.mock('../components/two-ways-section', () => ({
+  TwoWaysSection: () => <div data-testid="two-ways-section" />,
 }))
-vi.mock('../components/agent-team-section', () => ({
-  AgentTeamSection: () => <div data-testid="agent-team-section" />,
+vi.mock('../components/dispatch-section', () => ({
+  DispatchSection: () => <div data-testid="dispatch-section" />,
 }))
-vi.mock('../components/community-section', () => ({
-  CommunitySection: () => <div data-testid="community-section" />,
+vi.mock('../components/feature-bento-section', () => ({
+  FeatureBentoSection: () => <div data-testid="feature-bento-section" />,
+}))
+vi.mock('../components/graphify-section', () => ({
+  GraphifySection: () => <div data-testid="graphify-section" />,
+}))
+vi.mock('../components/principles-section', () => ({
+  PrinciplesSection: () => <div data-testid="principles-section" />,
+}))
+vi.mock('../components/showcase-section', () => ({
+  ShowcaseSection: () => <div data-testid="showcase-section" />,
 }))
 vi.mock('../components/cta-section', () => ({
   CtaSection: () => <div data-testid="cta-section" />,
@@ -29,18 +38,24 @@ import LandingPage from '../landing'
 const RENDERED_SECTIONS = [
   'nav-bar',
   'hero-section',
-  'feature-walkthrough-section',
-  'agent-team-section',
-  'community-section',
+  'two-ways-section',
+  'dispatch-section',
+  'feature-bento-section',
+  'graphify-section',
+  'principles-section',
+  'showcase-section',
   'cta-section',
   'landing-footer',
 ] as const
 
 const MAIN_SECTIONS = [
   'hero-section',
-  'feature-walkthrough-section',
-  'agent-team-section',
-  'community-section',
+  'two-ways-section',
+  'dispatch-section',
+  'feature-bento-section',
+  'graphify-section',
+  'principles-section',
+  'showcase-section',
   'cta-section',
 ] as const
 
@@ -91,8 +106,8 @@ describe('LandingPage (orchestrator)', () => {
       rendered.forEach((el) => expect(el).not.toBeNull())
 
       for (let i = 0; i < rendered.length - 1; i++) {
-        const current = rendered[i]
-        const next = rendered[i + 1]
+        const current = rendered[i]!
+        const next = rendered[i + 1]!
         const relation = current.compareDocumentPosition(next)
         // Node.DOCUMENT_POSITION_FOLLOWING === 4
         expect(relation & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()

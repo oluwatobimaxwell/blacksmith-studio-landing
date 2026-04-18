@@ -1,12 +1,25 @@
-import { Box, VStack, Heading, Text, Button, HStack, Flex } from '@chakra-ui/react'
+import {
+  Box,
+  VStack,
+  Heading,
+  Text,
+  Button,
+  HStack,
+  Flex,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  useDisclosure,
+  AspectRatio,
+} from '@chakra-ui/react'
 import { motion } from 'framer-motion'
-import { Download, Github, ArrowRight } from 'lucide-react'
-import { agents } from '../data/agents'
+import { Download, Play } from 'lucide-react'
+import { HeroMeshBg } from './hero-mesh-bg'
 
 const MotionBox = motion.create(Box)
 const MotionVStack = motion.create(VStack)
-
-const noiseSvg = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`
 
 const containerVariants = {
   hidden: {},
@@ -18,61 +31,9 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
 }
 
-const stats = [
-  { value: '11', label: 'AI agents' },
-  { value: '80%', label: 'less tech debt' },
-  { value: '100%', label: 'free' },
-  { value: 'Open', label: 'source' },
-]
-
-const marqueeItems = [...agents, ...agents]
-
-function AgentMarquee() {
-  return (
-    <Box
-      w="full"
-      maxW="700px"
-      overflow="hidden"
-      sx={{
-        maskImage: 'linear-gradient(90deg, transparent, black 15%, black 85%, transparent)',
-        WebkitMaskImage: 'linear-gradient(90deg, transparent, black 15%, black 85%, transparent)',
-      }}
-    >
-      <Flex
-        gap={3}
-        sx={{ animation: 'marquee 30s linear infinite', width: 'max-content' }}
-      >
-        {marqueeItems.map((agent, i) => (
-          <Flex
-            key={`${agent.role}-${i}`}
-            align="center"
-            gap="6px"
-            px="14px"
-            py="6px"
-            borderRadius="full"
-            bg="var(--studio-landing-surface)"
-            borderWidth="1px"
-            borderColor="var(--studio-landing-border)"
-            flexShrink={0}
-          >
-            <Box
-              w="6px"
-              h="6px"
-              borderRadius="full"
-              bg="var(--studio-landing-text-accent)"
-              opacity={0.6}
-            />
-            <Text fontSize="12px" color="var(--studio-landing-text-muted)" fontWeight={500} whiteSpace="nowrap">
-              {agent.role}
-            </Text>
-          </Flex>
-        ))}
-      </Flex>
-    </Box>
-  )
-}
-
 export function HeroSection() {
+  const { isOpen, onOpen, onClose } = useDisclosure()
+
   return (
     <Box
       as="section"
@@ -80,114 +41,50 @@ export function HeroSection() {
       minH="100vh"
       display="flex"
       alignItems="center"
-      justifyContent="center"
+      justifyContent="flex-start"
       position="relative"
       overflow="hidden"
       bg="var(--studio-landing-bg)"
-      pt={{ base: '100px', md: '80px' }}
+      pt={{ base: '120px', md: '100px' }}
       pb={{ base: '80px', md: '60px' }}
     >
-      {/* Dot grid */}
-      <Box
-        position="absolute"
-        inset={0}
-        backgroundImage="radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px)"
-        backgroundSize="32px 32px"
-        sx={{
-          maskImage: 'radial-gradient(ellipse 60% 50% at 50% 40%, black 20%, transparent 70%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 40%, black 20%, transparent 70%)',
-        }}
-        pointerEvents="none"
-      />
+      <HeroMeshBg />
 
-      {/* Primary radial glow */}
       <Box
         position="absolute"
-        top="25%"
+        top="30%"
         left="50%"
         transform="translate(-50%, -50%)"
         w={{ base: '600px', md: '1100px' }}
         h={{ base: '400px', md: '700px' }}
-        background="radial-gradient(ellipse, rgba(45,212,168,0.08) 0%, transparent 60%)"
+        background="radial-gradient(ellipse, rgba(45,212,168,0.07) 0%, transparent 60%)"
         pointerEvents="none"
-      />
-
-      {/* Secondary glow */}
-      <Box
-        position="absolute"
-        top="60%"
-        left="50%"
-        transform="translate(-50%, -50%)"
-        w="800px"
-        h="400px"
-        background="radial-gradient(ellipse, rgba(255,255,255,0.02) 0%, transparent 70%)"
-        pointerEvents="none"
-      />
-
-      {/* Noise grain */}
-      <Box
-        position="absolute"
-        inset={0}
-        opacity={0.03}
-        backgroundImage={noiseSvg}
-        backgroundRepeat="repeat"
-        backgroundSize="128px"
-        pointerEvents="none"
+        aria-hidden
       />
 
       <MotionVStack
         spacing={0}
-        align="center"
+        align={{ base: 'center', md: 'flex-start' }}
         position="relative"
-        maxW="900px"
+        maxW="1200px"
         w="full"
         mx="auto"
-        px={{ base: 6, md: 8 }}
+        px={{ base: 6, md: 10 }}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Badge */}
-        <MotionBox variants={itemVariants} mb={8}>
-          <Flex
-            as="a"
-            href="https://github.com/nicholasgriffintn/blacksmith-studio"
-            target="_blank"
-            rel="noopener noreferrer"
-            align="center"
-            gap={2}
-            px={4}
-            py={2}
-            borderRadius="full"
-            bg="var(--studio-landing-surface)"
-            borderWidth="1px"
-            borderColor="var(--studio-landing-border)"
-            display="inline-flex"
-            cursor="pointer"
-            transition="border-color 0.15s ease, background 0.15s ease"
-            _hover={{ borderColor: 'var(--studio-landing-border-hover)', bg: 'var(--studio-landing-surface-hover)' }}
-            textDecoration="none"
-          >
-            <Box w="7px" h="7px" borderRadius="full" bg="var(--studio-landing-text-accent)" flexShrink={0} />
-            <Text fontSize="13px" color="rgba(255,255,255,0.6)" letterSpacing="0.01em">
-              Free &amp; Open Source · Now on macOS
-            </Text>
-            <ArrowRight size={13} color="rgba(255,255,255,0.4)" />
-          </Flex>
-        </MotionBox>
-
-        {/* Headline */}
-        <MotionBox variants={itemVariants} mb={6}>
+        <MotionBox variants={itemVariants} mb={8} maxW="880px">
           <Heading
             as="h1"
-            fontSize={{ base: '52px', sm: '68px', md: '88px', lg: '104px' }}
-            fontWeight={600}
-            textAlign="center"
-            lineHeight={0.95}
+            fontSize={{ base: '44px', sm: '58px', md: '78px', lg: '92px' }}
+            fontWeight={500}
+            textAlign={{ base: 'center', md: 'left' }}
+            lineHeight={1.0}
             letterSpacing="-0.045em"
             color="var(--studio-landing-text-primary)"
           >
-            Build real software.
+            A team of AI agents,
             <br />
             <Text
               as="span"
@@ -195,34 +92,32 @@ export function HeroSection() {
               bgClip="text"
               sx={{ WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
             >
-              The right way.
+              in one IDE.
             </Text>
           </Heading>
         </MotionBox>
 
-        {/* Subtext */}
         <MotionBox variants={itemVariants} mb={10} maxW="560px">
           <Text
             fontSize={{ base: '16px', md: '18px' }}
-            textAlign="center"
+            textAlign={{ base: 'center', md: 'left' }}
             color="var(--studio-landing-text-secondary)"
-            lineHeight={1.7}
+            lineHeight={1.65}
           >
-            A free, open source desktop IDE where 11 specialized AI agents coordinate to
-            build production-ready software — structured like a senior engineering team,
-            not just a chatbot.
+            Prompt once. A product manager plans it, specialists build it, a reviewer checks it. Yours runs on your machine. Free, forever.
           </Text>
         </MotionBox>
 
-        {/* CTAs */}
-        <MotionBox variants={itemVariants} mb={12}>
-          <HStack spacing={3} flexWrap="wrap" justify="center">
+        <MotionBox variants={itemVariants} mb={5}>
+          <HStack spacing={3} flexWrap="wrap" justify={{ base: 'center', md: 'flex-start' }}>
             <Button
+              as="a"
+              href="#download"
               bg="var(--studio-landing-cta-bg)"
               color="var(--studio-landing-cta-text)"
               size="lg"
               leftIcon={<Download size={16} />}
-              px={8}
+              px={7}
               h="52px"
               fontSize="15px"
               fontWeight={600}
@@ -231,92 +126,94 @@ export function HeroSection() {
               _active={{ transform: 'translateY(0)' }}
               transition="all 0.15s ease"
             >
-              Get Started Free
+              Download for macOS
             </Button>
             <Button
-              as="a"
-              href="https://github.com/nicholasgriffintn/blacksmith-studio"
-              target="_blank"
-              rel="noopener noreferrer"
+              onClick={onOpen}
               variant="ghost"
               size="lg"
-              leftIcon={<Github size={16} />}
-              px={8}
+              leftIcon={<Play size={14} />}
+              px={7}
               h="52px"
               fontSize="15px"
               fontWeight={500}
               borderRadius="full"
-              color="rgba(255,255,255,0.7)"
+              color="rgba(255,255,255,0.85)"
               borderWidth="1px"
               borderColor="var(--studio-landing-border)"
-              _hover={{ bg: 'var(--studio-landing-surface)', borderColor: 'var(--studio-landing-border-hover)', color: 'white' }}
+              _hover={{
+                bg: 'var(--studio-landing-surface)',
+                borderColor: 'var(--studio-landing-border-hover)',
+                color: 'white',
+              }}
               transition="all 0.15s ease"
             >
-              View on GitHub
+              See it build &mdash; 90s
             </Button>
           </HStack>
         </MotionBox>
 
-        {/* Stats row */}
-        <MotionBox variants={itemVariants} w="full" maxW="700px">
+        <MotionBox variants={itemVariants}>
           <Flex
-            justify="center"
             align="center"
-            gap={0}
+            gap={2}
+            justify={{ base: 'center', md: 'flex-start' }}
             flexWrap="wrap"
-            borderTop="1px solid var(--studio-landing-border)"
-            borderBottom="1px solid var(--studio-landing-border)"
-            py={5}
           >
-            {stats.map((stat, i) => (
-              <Flex key={stat.label} align="center">
-                <VStack spacing={0} px={{ base: 5, md: 8 }}>
-                  <Text
-                    fontSize={{ base: '24px', md: '28px' }}
-                    fontWeight={700}
-                    color="var(--studio-landing-text-primary)"
-                    letterSpacing="-0.03em"
-                    lineHeight={1}
-                  >
-                    {stat.value}
-                  </Text>
-                  <Text fontSize="12px" color="var(--studio-landing-text-muted)" letterSpacing="0.02em">
-                    {stat.label}
-                  </Text>
-                </VStack>
-                {i < stats.length - 1 && (
-                  <Box w="1px" h="28px" bg="var(--studio-landing-border)" flexShrink={0} />
-                )}
-              </Flex>
-            ))}
+            <Text fontSize="13px" color="var(--studio-landing-text-muted)">
+              Also for
+            </Text>
+            <Text as="a" href="#download" fontSize="13px" color="var(--studio-landing-text-secondary)" _hover={{ color: 'white' }} cursor="pointer">
+              Windows
+            </Text>
+            <Box w="3px" h="3px" borderRadius="full" bg="var(--studio-landing-text-muted)" />
+            <Text as="a" href="#download" fontSize="13px" color="var(--studio-landing-text-secondary)" _hover={{ color: 'white' }} cursor="pointer">
+              Linux
+            </Text>
           </Flex>
         </MotionBox>
-
-        {/* Agent marquee */}
-        <MotionBox variants={itemVariants} mt={10} w="full" display="flex" justifyContent="center">
-          <AgentMarquee />
-        </MotionBox>
-
-        {/* Scroll hint */}
-        <MotionBox
-          variants={itemVariants}
-          mt={10}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          gap={2}
-        >
-          <Text fontSize="12px" color="var(--studio-landing-text-muted)" letterSpacing="0.04em">
-            Scroll to explore
-          </Text>
-          <Box
-            w="1px"
-            h="32px"
-            bg="linear-gradient(to bottom, var(--studio-landing-border), transparent)"
-            sx={{ animation: 'scrollHint 2s ease-in-out infinite' }}
-          />
-        </MotionBox>
       </MotionVStack>
+
+      <Modal isOpen={isOpen} onClose={onClose} size="4xl" isCentered>
+        <ModalOverlay bg="rgba(0,0,0,0.85)" backdropFilter="blur(12px)" />
+        <ModalContent
+          bg="#0a0a0a"
+          borderWidth="1px"
+          borderColor="var(--studio-landing-border)"
+          mx={4}
+        >
+          <ModalCloseButton color="rgba(255,255,255,0.6)" size="lg" />
+          <ModalBody p={0}>
+            <AspectRatio ratio={16 / 9}>
+              <Flex
+                align="center"
+                justify="center"
+                bg="#000"
+                direction="column"
+                gap={3}
+                aria-label="90-second product demo placeholder"
+              >
+                <Box
+                  w="64px"
+                  h="64px"
+                  borderRadius="full"
+                  bg="rgba(45,212,168,0.15)"
+                  borderWidth="1px"
+                  borderColor="rgba(45,212,168,0.35)"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Play size={24} color="#2dd4a8" />
+                </Box>
+                <Text fontSize="14px" color="rgba(255,255,255,0.6)">
+                  90-second build demo &mdash; coming with the next release.
+                </Text>
+              </Flex>
+            </AspectRatio>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   )
 }

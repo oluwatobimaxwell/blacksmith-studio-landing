@@ -3,73 +3,45 @@ export interface WalkthroughFeature {
   label: string
   headline: string
   description: string
-  bullets: string[]
+  accent?: boolean
 }
 
 export const walkthroughFeatures: WalkthroughFeature[] = [
   {
-    id: 'canvas',
-    label: 'Multi-Agent Canvas',
-    headline: 'Your entire engineering team. In one window.',
-    description:
-      'Coordinate 11 specialized AI agents — PM, Architect, Frontend, Backend, QA, Security, and more — all collaborating on a shared canvas. Each does their specific job, in the right order, following real engineering principles.',
-    bullets: [
-      'PM scopes the feature first',
-      'Architect designs before anyone codes',
-      'Engineers build in parallel',
-      'QA validates before it ships',
-    ],
+    id: 'graphify',
+    label: 'Graphify',
+    headline: 'Your codebase as a graph',
+    description: 'Agents navigate by structure, not grep.',
   },
   {
-    id: 'chat',
-    label: 'AI Chat',
-    headline: 'Talk to your codebase. Get real answers.',
-    description:
-      'Have a deep conversation with Claude about your project. Ask about architecture decisions, debug complex issues, understand unfamiliar code — with your entire codebase loaded as context.',
-    bullets: [
-      'Full project context loaded automatically',
-      'Streaming responses with tool execution',
-      'Rich markdown with code blocks',
-      'File reads, edits, and creation inline',
-    ],
+    id: 'project-builder',
+    label: 'Project Builder',
+    headline: 'From idea to running app',
+    description: 'Scaffold a whole project from one prompt.',
   },
   {
-    id: 'editor',
-    label: 'Code Editor',
-    headline: 'Monaco-powered. Built for AI workflows.',
-    description:
-      'A professional-grade editor that understands AI-generated code. Syntax highlighting across every language, intelligent completions, and a custom Blacksmith theme designed for long sessions.',
-    bullets: [
-      'Monaco editor core (VS Code engine)',
-      'AI-aware completions',
-      'Custom Blacksmith dark theme',
-      'Multi-file editing with split panes',
-    ],
+    id: 'mcp',
+    label: 'MCP',
+    headline: 'Tools your agents can use',
+    description: 'Plug in any MCP server, your agents pick them up.',
   },
   {
-    id: 'terminal',
-    label: 'Terminal & Dev Services',
-    headline: 'From code to running server. One workspace.',
-    description:
-      'A full PTY terminal with WebGL rendering, live dev server management with log streaming, and AI-powered diagnostics when something breaks. Stop switching between tools.',
-    bullets: [
-      'Full PTY terminal (xterm.js + WebGL)',
-      'Live log streaming with search',
-      'AI diagnostics on errors',
-      'Multiple service management',
-    ],
+    id: 'runner',
+    label: 'Runner',
+    headline: 'Dev server, right there',
+    description: 'Starts your project, captures logs, diagnoses crashes.',
   },
   {
-    id: 'git',
-    label: 'Git Integration',
-    headline: 'Version control with AI understanding.',
-    description:
-      'Stage changes, review diffs, and write commit messages — with AI that understands what changed and why. Full git integration built into the workspace. No terminal required.',
-    bullets: [
-      'Visual diff viewer with syntax highlighting',
-      'AI-generated commit messages',
-      'Branch management and history',
-      'Conflict resolution assistance',
-    ],
+    id: 'skills',
+    label: 'Skills',
+    headline: 'Your workflows, reusable',
+    description: 'Publish a recurring flow once, invoke it with /.',
+  },
+  {
+    id: 'templates',
+    label: 'Templates',
+    headline: "Starting isn't a project",
+    description: 'Launch from a community template in two clicks.',
+    accent: true,
   },
 ]
