@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" aria-label="Blacksmith Studio monogram">
+  
+  <path d="&#xA;    M 6 6&#xA;    L 46 6&#xA;    L 58 18&#xA;    L 58 58&#xA;    L 6 58&#xA;    Z&#xA;  " fill="#0A0A0A"></path>
+  
+  <path d="&#xA;    M 20 20&#xA;    L 20 44&#xA;    L 34 44&#xA;    C 39 44 42 41 42 37&#xA;    C 42 34 40 32 37 31&#xA;    C 39 30 41 28 41 25&#xA;    C 41 22 38 20 34 20&#xA;    Z&#xA;    M 26 24&#xA;    L 33 24&#xA;    C 35 24 36 25 36 27&#xA;    C 36 29 35 30 33 30&#xA;    L 26 30&#xA;    Z&#xA;    M 26 34&#xA;    L 34 34&#xA;    C 36 34 37 35 37 37&#xA;    C 37 39 36 40 34 40&#xA;    L 26 40&#xA;    Z&#xA;  " fill="#FFFFFF" fill-rule="evenodd"></path>
+</svg>

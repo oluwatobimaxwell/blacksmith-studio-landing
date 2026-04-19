@@ -1,184 +1,170 @@
-import { Link } from 'react-router-dom'
-import {
-  Box,
-  Flex,
-  HStack,
-  Text,
-  Button,
-  IconButton,
-  useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerBody,
-  VStack,
-} from '@chakra-ui/react'
-import { Download, Menu } from 'lucide-react'
+import { Box, Flex, HStack, Button, IconButton, Image, Text } from '@chakra-ui/react'
+import { Sun, Moon, Github, Download } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { Path } from '@/router/paths'
-import { useLandingScroll } from '../hooks/use-landing-scroll'
+import { navLinks, type NavLink } from '../data/nav-links'
+import { useScrolled } from '../hooks/use-scrolled'
+import { scrollToSection } from '../utils/scroll-to-section'
+import type { LandingTheme } from '../hooks/use-landing-theme'
 
-const navLinks = [
-  { label: 'Product', href: '#features' },
-  { label: 'Hub', href: '#graphify' },
-  { label: 'Showcase', href: '#showcase' },
-  { label: 'Docs', href: 'https://docs.blacksmith.studio', external: true },
-  { label: 'Community', href: '#principles' },
-]
+type CurrentPage = 'landing' | 'agents'
 
-export function NavBar() {
-  const { isScrolled } = useLandingScroll()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+interface NavBarProps {
+  theme: LandingTheme
+  onToggleTheme: () => void
+  active: string
+  currentPage?: CurrentPage
+}
+
+export function NavBar({ theme, onToggleTheme, active, currentPage = 'landing' }: NavBarProps) {
+  const scrolled = useScrolled(40)
+  const navigate = useNavigate()
+  const logoFilter = theme === 'dark' ? 'invert(1)' : 'none'
+
+  const goHome = (hash?: string) => {
+    navigate(hash ? `${Path.Home}#${hash}` : Path.Home)
+  }
+
+  const handleBrandClick = () => {
+    if (currentPage === 'landing') scrollToSection('top')
+    else goHome()
+  }
+
+  const handleLinkClick = (link: NavLink) => {
+    if (link.kind === 'route') {
+      navigate(link.to)
+      return
+    }
+    if (currentPage === 'landing') scrollToSection(link.id)
+    else goHome(link.id)
+  }
+
+  const handleDownloadClick = () => {
+    if (currentPage === 'landing') scrollToSection('download')
+    else goHome('download')
+  }
 
   return (
     <Box
-      as="header"
-      role="banner"
+      as="nav"
+      aria-label="Primary"
       position="fixed"
       top={0}
       left={0}
       right={0}
-      zIndex={100}
-      transition="background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease, opacity 0.25s ease"
-      opacity={isScrolled ? 1 : 0}
-      pointerEvents={isScrolled ? 'auto' : 'none'}
-      bg="rgba(0,0,0,0.82)"
-      backdropFilter="blur(20px)"
-      borderBottom="1px solid rgba(255,255,255,0.06)"
+      zIndex={50}
+      h="56px"
+      px="32px"
+      display="flex"
+      alignItems="center"
+      gap="32px"
+      transition="background 160ms var(--ease), border-color 160ms var(--ease), backdrop-filter 160ms var(--ease)"
+      bg={scrolled ? 'var(--scrim)' : 'transparent'}
+      backdropFilter={scrolled ? 'blur(20px)' : undefined}
+      borderBottom="1px solid"
+      borderBottomColor={scrolled ? 'var(--hairline)' : 'transparent'}
     >
       <Flex
-        maxW="1200px"
-        mx="auto"
-        px={{ base: 5, md: 8 }}
-        h={{ base: '60px', md: '64px' }}
+        as="button"
+        type="button"
+        onClick={handleBrandClick}
         align="center"
-        justify="space-between"
+        gap="10px"
+        color="var(--fg-1)"
+        bg="transparent"
+        border="none"
+        p={0}
+        cursor="pointer"
+        aria-label="Blacksmith Community home"
       >
-        <HStack
-          spacing={2}
-          as={Link}
-          to={Path.Home}
-          _hover={{ opacity: 0.75 }}
-          transition="opacity 0.15s ease"
-          textDecoration="none"
-          flexShrink={0}
-        >
-          <Text
-            fontSize="14px"
-            fontWeight={600}
-            color="var(--studio-landing-text-primary)"
-            letterSpacing="-0.01em"
-            fontFamily="mono"
-          >
-            Blacksmith Studio
+        <Image src="/assets/community/logo-mark.svg" alt="" w="22px" h="22px" style={{ filter: logoFilter }} />
+        <Text as="span" fontSize="14px" fontWeight={600} letterSpacing="-0.01em" lineHeight="18px">
+          Blacksmith{' '}
+          <Text as="span" color="var(--fg-3)" fontWeight={300}>
+            Community
           </Text>
-        </HStack>
-
-        <HStack as="nav" aria-label="Main" spacing={7} display={{ base: 'none', md: 'flex' }}>
-          {navLinks.map((link) => (
-            <Text
-              key={link.label}
-              as="a"
-              href={link.href}
-              target={link.external ? '_blank' : undefined}
-              rel={link.external ? 'noopener noreferrer' : undefined}
-              fontSize="13px"
-              fontWeight={400}
-              color="rgba(255,255,255,0.55)"
-              transition="color 0.15s ease"
-              cursor="pointer"
-              letterSpacing="-0.005em"
-              _hover={{ color: 'var(--studio-landing-text-primary)', textDecoration: 'none' }}
-            >
-              {link.label}
-            </Text>
-          ))}
-        </HStack>
-
-        <HStack spacing={2} display={{ base: 'none', md: 'flex' }}>
-          <Button
-            as="a"
-            href="#download"
-            h="36px"
-            px={4}
-            fontSize="13px"
-            fontWeight={600}
-            borderRadius="full"
-            bg="var(--studio-landing-cta-bg)"
-            color="var(--studio-landing-cta-text)"
-            leftIcon={<Download size={13} />}
-            _hover={{ bg: 'var(--studio-landing-cta-bg-hover)', transform: 'translateY(-1px)' }}
-            transition="background 0.15s ease, transform 0.15s ease"
-          >
-            Download
-          </Button>
-        </HStack>
-
-        <IconButton
-          aria-label="Open menu"
-          aria-expanded={isOpen}
-          variant="ghost"
-          size="sm"
-          display={{ base: 'flex', md: 'none' }}
-          color="var(--studio-landing-text-primary)"
-          _hover={{ bg: 'var(--studio-landing-surface)' }}
-          onClick={onOpen}
-          icon={<Menu size={20} />}
-        />
+        </Text>
       </Flex>
 
-      <Drawer isOpen={isOpen} onClose={onClose} placement="right">
-        <DrawerOverlay bg="rgba(0,0,0,0.75)" backdropFilter="blur(12px)" />
-        <DrawerContent bg="#000" borderLeft="1px solid rgba(255,255,255,0.07)" maxW="280px">
-          <DrawerCloseButton color="rgba(255,255,255,0.4)" />
-          <DrawerBody pt={16} px={6}>
-            <VStack spacing={1} align="stretch">
-              <Box as="nav" aria-label="Main">
-                <VStack spacing={0} align="stretch">
-                  {navLinks.map((link) => (
-                    <Text
-                      key={link.label}
-                      as="a"
-                      href={link.href}
-                      target={link.external ? '_blank' : undefined}
-                      rel={link.external ? 'noopener noreferrer' : undefined}
-                      fontSize="16px"
-                      fontWeight={400}
-                      color="rgba(255,255,255,0.6)"
-                      py={3}
-                      px={2}
-                      borderRadius="lg"
-                      _hover={{ color: 'white', textDecoration: 'none', bg: 'rgba(255,255,255,0.04)' }}
-                      onClick={onClose}
-                      cursor="pointer"
-                    >
-                      {link.label}
-                    </Text>
-                  ))}
-                </VStack>
-              </Box>
+      <HStack spacing="4px" ml="8px" display={{ base: 'none', lg: 'flex' }}>
+        {navLinks.map((link) => (
+          <Button
+            key={link.id}
+            variant="unstyled"
+            h="32px"
+            px="12px"
+            fontSize="13px"
+            fontWeight={500}
+            lineHeight="16px"
+            borderRadius="var(--r-md)"
+            color={active === link.id ? 'var(--fg-1)' : 'var(--fg-3)'}
+            _hover={{ color: 'var(--fg-1)', bg: 'var(--paper-3)' }}
+            transition="color 120ms var(--ease), background 120ms var(--ease)"
+            onClick={() => handleLinkClick(link)}
+          >
+            {link.label}
+          </Button>
+        ))}
+      </HStack>
 
-              <Box h="1px" bg="var(--studio-landing-border)" my={4} />
+      <Box flex="1" />
 
-              <Button
-                as="a"
-                href="#download"
-                borderRadius="full"
-                fontSize="14px"
-                fontWeight={600}
-                bg="var(--studio-landing-cta-bg)"
-                color="var(--studio-landing-cta-text)"
-                leftIcon={<Download size={14} />}
-                _hover={{ bg: 'var(--studio-landing-cta-bg-hover)' }}
-                onClick={onClose}
-                mt={2}
-              >
-                Download
-              </Button>
-            </VStack>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <HStack spacing="8px">
+        <IconButton
+          aria-label="Toggle theme"
+          variant="unstyled"
+          minW="36px"
+          w="36px"
+          h="36px"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius="var(--r-lg)"
+          color="var(--fg-1)"
+          _hover={{ bg: 'var(--paper-3)' }}
+          onClick={onToggleTheme}
+          icon={theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+        />
+        <Button
+          as="a"
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          variant="unstyled"
+          h="30px"
+          px="12px"
+          fontSize="12px"
+          fontWeight={500}
+          borderRadius="var(--r-md)"
+          border="1px solid var(--hairline)"
+          color="var(--fg-1)"
+          display={{ base: 'none', md: 'inline-flex' }}
+          alignItems="center"
+          gap="8px"
+          _hover={{ bg: 'var(--paper-3)', borderColor: 'var(--hairline-strong)' }}
+          leftIcon={<Github size={14} />}
+        >
+          GitHub
+        </Button>
+        <Button
+          variant="unstyled"
+          h="30px"
+          px="12px"
+          fontSize="12px"
+          fontWeight={500}
+          borderRadius="var(--r-md)"
+          bg="var(--btn-primary-bg)"
+          color="var(--btn-primary-fg)"
+          display="inline-flex"
+          alignItems="center"
+          gap="8px"
+          _hover={{ bg: 'var(--btn-primary-bg-hover)' }}
+          leftIcon={<Download size={14} />}
+          onClick={handleDownloadClick}
+        >
+          Download
+        </Button>
+      </HStack>
     </Box>
   )
 }

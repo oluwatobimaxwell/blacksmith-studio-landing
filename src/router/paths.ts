@@ -9,6 +9,7 @@
 
 export enum Path {
   Home = '/',
+  Agents = '/agents',
   Login = '/login',
   Register = '/register',
   ForgotPassword = '/forgot-password',

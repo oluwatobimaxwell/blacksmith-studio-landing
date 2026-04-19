@@ -15,6 +15,7 @@ import { RouteErrorBoundary } from '@/router/error-boundary'
 import NotFoundPage from '@/shared/components/not-found-page'
 import { LandingLayout } from '@/router/layouts/landing-layout'
 import { landingRoutes } from '@/pages/landing'
+import { agentsRoutes } from '@/pages/agents'
 import { dashboardRoutes } from '@/pages/dashboard'
 import { authRoutes } from '@/features/auth'
 import { legalRoutes } from '@/pages/legal'
@@ -30,11 +31,11 @@ const privateRoutes: RouteObject[] = [
 ]
 
 export const routes: RouteObject[] = [
-  // Landing — full-bleed, own nav/footer
+  // Landing & marketing pages — full-bleed, own nav/footer
   {
     element: <LandingLayout />,
     errorElement: <RouteErrorBoundary />,
-    children: landingRoutes,
+    children: [...landingRoutes, ...agentsRoutes],
   },
 
   // Auth pages (login, register, etc.)

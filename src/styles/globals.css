@@ -1,3 +1,6 @@
+@import './community-landing.css';
+@import './agents.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,17 +1,17 @@
 import { useEffect } from 'react'
-import { useAnimation, useInView } from 'framer-motion'
-import { useRef } from 'react'
 
-export function useScrollReveal(threshold = 0.2) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, amount: threshold })
-  const controls = useAnimation()
-
+export function useScrollReveal() {
   useEffect(() => {
-    if (isInView) {
-      controls.start('visible')
-    }
-  }, [isInView, controls])
-
-  return { ref, controls }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) entry.target.classList.add('in')
+        }
+      },
+      { threshold: 0.08 },
+    )
+    const nodes = document.querySelectorAll('.cl-reveal')
+    nodes.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
 }

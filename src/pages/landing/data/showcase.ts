@@ -1,73 +1,68 @@
-export interface ShowcaseProject {
-  id: string
+export type ShowcaseMock = 'home' | 'agents' | 'chat' | 'settings'
+
+export interface ShowcaseRow {
+  number: string
+  eyebrow: string
   title: string
-  author: string
-  stack: string[]
-  tasks: number
-  duration: string
-  cost: string
-  image: string
+  body: string
+  bullets: string[]
+  mock: ShowcaseMock
+  reverse?: boolean
 }
 
-export const showcaseProjects: ShowcaseProject[] = [
+export const showcaseRows: ShowcaseRow[] = [
   {
-    id: 'blog-comments',
-    title: 'Comment system for a blog',
-    author: '@marta.dev',
-    stack: ['Next.js', 'Django', 'Postgres'],
-    tasks: 6,
-    duration: '47 min',
-    cost: '$0.83',
-    image: '/assets/screenshots/canvas.svg',
+    number: '01',
+    eyebrow: '01 · Home',
+    title: 'Start where you left off.',
+    body:
+      "Every project you've opened, one keystroke away. A composer that doesn't get in the way when you're drafting — and quick actions for the moves you make every day.",
+    bullets: [
+      'Recent projects with inline metadata',
+      'Quick actions — resource, page, API, auth',
+      'Forge or open — one composer, one shortcut',
+    ],
+    mock: 'home',
   },
   {
-    id: 'inventory',
-    title: 'Inventory tracker for a small shop',
-    author: '@kwame.builds',
-    stack: ['React', 'FastAPI', 'SQLite'],
-    tasks: 9,
-    duration: '1 h 12 min',
-    cost: '$1.41',
-    image: '/assets/screenshots/editor.svg',
+    number: '02',
+    eyebrow: '02 · Agent Team',
+    title: 'See the work before it happens.',
+    body:
+      "A live graph of who's doing what. Hand-offs are explicit. Dependencies are drawn. You can watch a plan unfold instead of guessing what the AI is up to.",
+    bullets: [
+      'Expand any node to read its brief and output',
+      'Re-run a single agent without re-running the rest',
+      'Chat and agent modes share one composer',
+    ],
+    mock: 'agents',
+    reverse: true,
   },
   {
-    id: 'scheduling',
-    title: 'Class scheduling portal',
-    author: '@priya.codes',
-    stack: ['Remix', 'Django', 'Postgres'],
-    tasks: 11,
-    duration: '1 h 48 min',
-    cost: '$2.07',
-    image: '/assets/screenshots/chat.svg',
+    number: '03',
+    eyebrow: '03 · Chat',
+    title: 'Every step, traceable.',
+    body:
+      'Plans, tool calls, diffs, system messages — tempered, quenched, staged. Nothing disappears into a black box.',
+    bullets: [
+      'System messages in the forge vocabulary',
+      'Inline tool cards for every edit',
+      'Chat or agent mode from the same composer',
+    ],
+    mock: 'chat',
   },
   {
-    id: 'invoices',
-    title: 'Invoicing tool for a freelancer',
-    author: '@leo.build',
-    stack: ['SvelteKit', 'Supabase'],
-    tasks: 7,
-    duration: '58 min',
-    cost: '$1.02',
-    image: '/assets/screenshots/git.svg',
-  },
-  {
-    id: 'cms',
-    title: 'Content studio for a podcast',
-    author: '@naomi.ships',
-    stack: ['Next.js', 'Convex', 'R2'],
-    tasks: 12,
-    duration: '2 h 03 min',
-    cost: '$2.34',
-    image: '/assets/screenshots/terminal.svg',
-  },
-  {
-    id: 'dashboard',
-    title: 'Ops dashboard for a logistics co.',
-    author: '@jun.iterates',
-    stack: ['Vite', 'NestJS', 'Postgres'],
-    tasks: 14,
-    duration: '2 h 41 min',
-    cost: '$3.15',
-    image: '/assets/screenshots/canvas.svg',
+    number: '04',
+    eyebrow: '04 · Settings',
+    title: 'Your models. Your keys. Your machine.',
+    body:
+      'Ships with Claude Code CLI, auto-detected. On-device models are next — so the tool still works on a bad connection or a tight budget.',
+    bullets: [
+      'Model-per-task: Sonnet, Opus, Haiku',
+      'MCP servers, skills, and workspace settings in one panel',
+      'Nothing phones home by default',
+    ],
+    mock: 'settings',
+    reverse: true,
   },
 ]

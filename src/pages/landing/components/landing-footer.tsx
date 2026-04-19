@@ -1,154 +1,116 @@
-import { Link } from 'react-router-dom'
-import { Box, Flex, HStack, VStack, Text, SimpleGrid } from '@chakra-ui/react'
-import { Path } from '@/router/paths'
+import { Box, Container, Flex, HStack, Image, Link, Text, VStack } from '@chakra-ui/react'
+import { footerColumns } from '../data/footer-links'
+import type { LandingTheme } from '../hooks/use-landing-theme'
 
-const footerSections = [
-  {
-    title: 'Studio',
-    links: [
-      { label: 'Product', href: '#features' },
-      { label: 'Hub', href: '#graphify' },
-      { label: 'Showcase', href: '#showcase' },
-      { label: 'Changelog', href: '#' },
-      { label: 'Roadmap', href: '#' },
-    ],
-  },
-  {
-    title: 'Community',
-    links: [
-      { label: 'Forum', href: '#' },
-      { label: 'Discord', href: 'https://discord.gg/blacksmithstudio', external: true },
-      { label: 'GitHub', href: 'https://github.com/nicholasgriffintn/blacksmith-studio', external: true },
-      { label: 'Contributing', href: '#' },
-      { label: 'Principles', href: '#principles' },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { label: 'Privacy', to: Path.Privacy },
-      { label: 'Terms', to: Path.Terms },
-      { label: 'Acceptable Use', to: Path.AcceptableUse },
-      { label: 'Licence', to: Path.Licence },
-      { label: 'Press kit', href: '#' },
-    ],
-  },
-]
-
-function FooterLink({
-  label,
-  href,
-  to,
-  external,
-}: {
-  label: string
-  href?: string
-  to?: string
-  external?: boolean
-}) {
-  if (to) {
-    return (
-      <Text
-        as={Link}
-        to={to}
-        fontSize="13px"
-        color="var(--studio-landing-text-muted)"
-        transition="color 0.15s ease"
-        _hover={{ color: 'var(--studio-landing-text-secondary)', textDecoration: 'none' }}
-        cursor="pointer"
-        display="block"
-      >
-        {label}
-      </Text>
-    )
-  }
-
-  return (
-    <Text
-      as="a"
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noopener noreferrer' : undefined}
-      fontSize="13px"
-      color="var(--studio-landing-text-muted)"
-      transition="color 0.15s ease"
-      _hover={{ color: 'var(--studio-landing-text-secondary)', textDecoration: 'none' }}
-      cursor="pointer"
-      display="block"
-    >
-      {label}
-    </Text>
-  )
+interface LandingFooterProps {
+  theme: LandingTheme
 }
 
-export function LandingFooter() {
+export function LandingFooter({ theme }: LandingFooterProps) {
   return (
     <Box
       as="footer"
-      borderTop="1px solid var(--studio-landing-border)"
-      pt={12}
-      pb={8}
-      px={{ base: 5, md: 8 }}
-      bg="var(--studio-landing-bg)"
+      borderTop="1px solid var(--hairline)"
+      pt={{ base: '64px', md: '96px' }}
+      pb="48px"
+      bg="var(--paper)"
     >
-      <Box maxW="1200px" mx="auto">
-        <Flex direction={{ base: 'column', md: 'row' }} gap={10} mb={12} justify="space-between">
-          <VStack align="start" spacing={3} maxW="260px" flexShrink={0}>
-            <Text
-              fontSize="14px"
-              fontWeight={600}
-              color="var(--studio-landing-text-primary)"
-              letterSpacing="-0.01em"
-              fontFamily="mono"
-            >
-              Blacksmith Studio
-            </Text>
-            <Text fontSize="12px" color="var(--studio-landing-text-muted)" lineHeight={1.7}>
-              A free, open source desktop IDE with a team of AI agents. Built in Helsinki for the world.
+      <Container maxW="1200px" px="32px">
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          gap={{ base: '48px', md: '64px' }}
+          align="flex-start"
+          justify="space-between"
+        >
+          <VStack align="stretch" spacing="16px" maxW={{ md: '320px' }}>
+            <HStack spacing="10px" align="center">
+              <Image
+                src="/assets/community/logo-mark.svg"
+                alt=""
+                width="22px"
+                height="22px"
+                filter={theme === 'dark' ? 'invert(1)' : 'none'}
+              />
+              <Text
+                as="span"
+                fontSize="14px"
+                lineHeight="18px"
+                fontWeight={600}
+                letterSpacing="-0.01em"
+                color="var(--fg-1)"
+              >
+                Blacksmith{' '}
+                <Text as="span" color="var(--fg-3)" fontWeight={300}>
+                  Community
+                </Text>
+              </Text>
+            </HStack>
+            <Text fontSize="13px" lineHeight="20px" color="var(--fg-3)" m={0}>
+              A global community for anyone who wants to build software. Free, open source, and for the long term.
             </Text>
           </VStack>
 
-          <SimpleGrid columns={3} spacing={{ base: 8, md: 12 }}>
-            {footerSections.map((section) => (
-              <VStack key={section.title} align="start" spacing={3}>
+          <Flex gap={{ base: '32px', md: '48px' }} flexWrap="wrap">
+            {footerColumns.map((column) => (
+              <VStack key={column.heading} align="stretch" spacing="14px" minW="120px">
                 <Text
+                  as="h5"
                   fontSize="11px"
-                  fontWeight={600}
-                  color="rgba(255,255,255,0.3)"
-                  letterSpacing="0.07em"
+                  lineHeight="14px"
+                  fontWeight={500}
+                  fontFamily="var(--font-mono)"
+                  color="var(--fg-4)"
+                  letterSpacing="0.08em"
                   textTransform="uppercase"
+                  m={0}
                 >
-                  {section.title}
+                  {column.heading}
                 </Text>
-                <VStack align="start" spacing={2}>
-                  {section.links.map((link) => (
-                    <FooterLink key={link.label} {...link} />
+                <VStack as="ul" align="stretch" spacing="10px" listStyleType="none" m={0} p={0}>
+                  {column.links.map((link) => (
+                    <Box as="li" key={link.label}>
+                      <Link
+                        href={link.href}
+                        fontSize="13px"
+                        lineHeight="18px"
+                        color="var(--fg-2)"
+                        transition="color 160ms var(--ease)"
+                        _hover={{ color: 'var(--fg-1)', textDecoration: 'none' }}
+                      >
+                        {link.label}
+                      </Link>
+                    </Box>
                   ))}
                 </VStack>
               </VStack>
             ))}
-          </SimpleGrid>
+          </Flex>
         </Flex>
 
-        <Box h="1px" bg="var(--studio-landing-border)" mb={6} />
-
-        <Flex direction={{ base: 'column', md: 'row' }} align="center" justify="space-between" gap={3}>
-          <Text fontSize="12px" color="var(--studio-landing-text-muted)">
-            &copy; 2026 Blacksmith Studio
-          </Text>
-          <HStack spacing={4}>
-            <Text fontSize="12px" color="var(--studio-landing-text-muted)">
-              Built in Helsinki
-            </Text>
-            <Box w="1px" h="10px" bg="var(--studio-landing-border)" />
-            <Text fontSize="12px" color="var(--studio-landing-text-accent)" fontWeight={500}>
-              Open source
-            </Text>
+        <Flex
+          mt={{ base: '48px', md: '80px' }}
+          pt="32px"
+          borderTop="1px solid var(--hairline)"
+          direction={{ base: 'column', md: 'row' }}
+          align={{ base: 'flex-start', md: 'center' }}
+          justify="space-between"
+          gap="16px"
+          fontSize="12px"
+          lineHeight="16px"
+          color="var(--fg-4)"
+          fontFamily="var(--font-mono)"
+          letterSpacing="0.04em"
+        >
+          <Text as="span">© 2026 Blacksmith Software · Helsinki · Lagos</Text>
+          <HStack spacing="10px" flexWrap="wrap">
+            <Text as="span">Free · Forever</Text>
+            <Box w="3px" h="3px" borderRadius="50%" bg="currentColor" opacity={0.5} />
+            <Text as="span">Open source (Apache-2.0)</Text>
+            <Box w="3px" h="3px" borderRadius="50%" bg="currentColor" opacity={0.5} />
+            <Text as="span">Built in the open</Text>
           </HStack>
         </Flex>
-      </Box>
+      </Container>
     </Box>
   )
 }
-
-export default LandingFooter

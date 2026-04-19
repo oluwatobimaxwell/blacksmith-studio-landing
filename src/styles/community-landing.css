@@ -1,0 +1,202 @@
+/* ============================================================
+   Blacksmith Community Landing — design tokens, typography,
+   and specialty classes. Theme is set via [data-theme] on
+   the page root (default: dark).
+   ============================================================ */
+
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/Outfit-Variable.ttf') format('truetype-variations');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  src: url('/fonts/JetBrainsMono-Variable.ttf') format('truetype-variations');
+}
+
+.cl-root {
+  --font-ui: 'Outfit', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace;
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 18px;
+  --r-2xl: 24px;
+  --r-full: 9999px;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur-base: 160ms;
+  --dur-slow: 220ms;
+}
+
+/* Light theme (default) */
+.cl-root[data-theme='light'] {
+  --paper: #FFFFFF;
+  --paper-2: #FAFAFA;
+  --paper-3: #F4F4F4;
+  --paper-4: #ECECEC;
+
+  --ink: #0A0A0A;
+  --ink-2: #2B2B2B;
+  --ink-3: #6B6B6B;
+  --ink-4: #A0A0A0;
+  --ink-5: #C9C9C9;
+
+  --hairline: rgba(0, 0, 0, 0.08);
+  --hairline-strong: rgba(0, 0, 0, 0.16);
+  --hairline-ghost: rgba(0, 0, 0, 0.04);
+
+  --scrim: rgba(255, 255, 255, 0.72);
+
+  --fg-1: var(--ink);
+  --fg-2: var(--ink-2);
+  --fg-3: var(--ink-3);
+  --fg-4: var(--ink-4);
+
+  --btn-primary-bg: var(--ink);
+  --btn-primary-fg: #FFFFFF;
+  --btn-primary-bg-hover: var(--ink-2);
+}
+
+/* Dark theme */
+.cl-root[data-theme='dark'] {
+  --paper: #0A0A0A;
+  --paper-2: #121212;
+  --paper-3: #181818;
+  --paper-4: #222222;
+
+  --ink: #FFFFFF;
+  --ink-2: #E6E6E6;
+  --ink-3: #9A9A9A;
+  --ink-4: #6B6B6B;
+  --ink-5: #3A3A3A;
+
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.16);
+  --hairline-ghost: rgba(255, 255, 255, 0.04);
+
+  --scrim: rgba(10, 10, 10, 0.72);
+
+  --fg-1: var(--ink);
+  --fg-2: var(--ink-2);
+  --fg-3: var(--ink-3);
+  --fg-4: var(--ink-4);
+
+  --btn-primary-bg: #FFFFFF;
+  --btn-primary-fg: #0A0A0A;
+  --btn-primary-bg-hover: #E6E6E6;
+}
+
+.cl-root {
+  background: var(--paper);
+  color: var(--fg-1);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scroll reveal */
+.cl-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease);
+}
+.cl-reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero grid background */
+.cl-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 10%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 10%, transparent 80%);
+  pointer-events: none;
+}
+
+/* Subtle card grid (used in hero frame body & mocks) */
+.cl-card-grid {
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.cl-card-grid-sm {
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Agent graph background */
+.cl-graph-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, var(--hairline) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--hairline) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 10%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 10%, transparent 90%);
+  pointer-events: none;
+}
+
+/* Rail marquee */
+@keyframes cl-scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.cl-rail-inner {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  animation: cl-scroll-x 40s linear infinite;
+  font: 500 13px/18px var(--font-mono);
+  color: var(--fg-3);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.cl-rail-inner > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.cl-rail-inner .cl-pip {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+/* Traffic lights */
+.cl-traffic-lights {
+  display: flex;
+  gap: 6px;
+}
+.cl-traffic-lights span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.cl-traffic-lights span:nth-child(1) { background: #FF5F57; }
+.cl-traffic-lights span:nth-child(2) { background: #FEBC2E; }
+.cl-traffic-lights span:nth-child(3) { background: #28C840; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-rail-inner { animation: none; }
+  .cl-reveal { opacity: 1; transform: none; transition: none; }
+}
