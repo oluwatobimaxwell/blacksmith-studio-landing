@@ -5,6 +5,7 @@ import {
   ModalContent,
   ModalOverlay,
 } from '@chakra-ui/react'
+import { useLandingShell } from '@/shared/components/landing-shell'
 import { AgentProfile } from './agent-profile'
 import type { AgentProfileData } from '../data/agents'
 
@@ -13,11 +14,11 @@ interface AgentModalProps {
   index: number
   total: number
   isOpen: boolean
-  theme: 'light' | 'dark'
   onClose: () => void
 }
 
-export function AgentModal({ agent, index, total, isOpen, theme, onClose }: AgentModalProps) {
+export function AgentModal({ agent, index, total, isOpen, onClose }: AgentModalProps) {
+  const { theme } = useLandingShell()
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered scrollBehavior="inside">
       <ModalOverlay bg="rgba(10, 10, 10, 0.62)" backdropFilter="blur(6px)" />

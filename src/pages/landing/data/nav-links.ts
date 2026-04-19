@@ -6,9 +6,9 @@ export type NavLink =
 
 export const navLinks: readonly NavLink[] = [
   { kind: 'section', id: 'product', label: 'Product' },
-  { kind: 'section', id: 'manifesto', label: 'Manifesto' },
+  { kind: 'route', id: 'manifesto', label: 'Manifesto', to: Path.Manifesto },
   { kind: 'route', id: 'agents', label: 'Agents', to: Path.Agents },
-  { kind: 'section', id: 'community', label: 'Community' },
+  { kind: 'route', id: 'community', label: 'Community', to: Path.Community },
   { kind: 'section', id: 'download', label: 'Download' },
   { kind: 'section', id: 'blog', label: 'Writing' },
 ] as const

@@ -16,6 +16,8 @@ import NotFoundPage from '@/shared/components/not-found-page'
 import { LandingLayout } from '@/router/layouts/landing-layout'
 import { landingRoutes } from '@/pages/landing'
 import { agentsRoutes } from '@/pages/agents'
+import { manifestoRoutes } from '@/pages/manifesto'
+import { communityRoutes } from '@/pages/community'
 import { dashboardRoutes } from '@/pages/dashboard'
 import { authRoutes } from '@/features/auth'
 import { legalRoutes } from '@/pages/legal'
@@ -35,7 +37,7 @@ export const routes: RouteObject[] = [
   {
     element: <LandingLayout />,
     errorElement: <RouteErrorBoundary />,
-    children: [...landingRoutes, ...agentsRoutes],
+    children: [...landingRoutes, ...agentsRoutes, ...manifestoRoutes, ...communityRoutes],
   },
 
   // Auth pages (login, register, etc.)

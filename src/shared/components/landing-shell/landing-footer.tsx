@@ -1,6 +1,6 @@
 import { Box, Container, Flex, HStack, Image, Link, Text, VStack } from '@chakra-ui/react'
-import { footerColumns } from '../data/footer-links'
-import type { LandingTheme } from '../hooks/use-landing-theme'
+import { footerColumns } from './footer-links'
+import type { LandingTheme } from './use-landing-theme'
 
 interface LandingFooterProps {
   theme: LandingTheme

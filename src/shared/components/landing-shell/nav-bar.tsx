@@ -2,12 +2,12 @@ import { Box, Flex, HStack, Button, IconButton, Image, Text } from '@chakra-ui/r
 import { Sun, Moon, Github, Download } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { Path } from '@/router/paths'
-import { navLinks, type NavLink } from '../data/nav-links'
-import { useScrolled } from '../hooks/use-scrolled'
-import { scrollToSection } from '../utils/scroll-to-section'
-import type { LandingTheme } from '../hooks/use-landing-theme'
+import { navLinks, type NavLink } from '@/pages/landing/data/nav-links'
+import { useScrolled } from './use-scrolled'
+import { scrollToSection } from '@/pages/landing/utils/scroll-to-section'
+import type { LandingTheme } from './use-landing-theme'
 
-type CurrentPage = 'landing' | 'agents'
+export type CurrentPage = 'landing' | 'agents' | 'manifesto' | 'community'
 
 interface NavBarProps {
   theme: LandingTheme

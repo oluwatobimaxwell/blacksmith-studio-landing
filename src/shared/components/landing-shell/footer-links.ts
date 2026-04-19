@@ -17,7 +17,7 @@ export const footerColumns: FooterColumn[] = [
   {
     heading: 'Community',
     links: [
-      { label: 'Discord', href: '#community' },
+      { label: 'Discord', href: '/community' },
       { label: 'GitHub', href: '#' },
       { label: 'Office hours', href: '#' },
       { label: 'Code of conduct', href: '#' },
@@ -30,7 +30,7 @@ export const footerColumns: FooterColumn[] = [
       { label: 'All posts', href: '#blog' },
       { label: 'Engineering', href: '#' },
       { label: 'Field notes', href: '#' },
-      { label: 'Manifesto', href: '#' },
+      { label: 'Manifesto', href: '/manifesto' },
     ],
   },
   {
