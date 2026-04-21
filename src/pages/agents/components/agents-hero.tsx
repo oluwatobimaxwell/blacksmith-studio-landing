@@ -11,7 +11,7 @@ interface AgentsHeroProps {
 const HERO_STATS = [
   { n: '11', l: 'specialists' },
   { n: '1', l: 'process' },
-  { n: 'every', l: 'project' },
+  { n: 'zero', l: 'debt' },
 ]
 
 const posById = Object.fromEntries(heroGraphNodes.map((n) => [n.id, n]))
@@ -29,19 +29,19 @@ export function AgentsHero({ onSelectAgent }: AgentsHeroProps) {
       textAlign="center"
     >
       <Box display="inline-flex">
-        <Eyebrow>The agent team</Eyebrow>
+        <Eyebrow>Meet the team</Eyebrow>
       </Box>
       <Heading as="h1" className="ag-hero-title cl-reveal in">
-        A senior team,
+        Eleven specialists.
         <br />
         <Text as="span" className="quiet">
-          inside your IDE.
+          One codebase that lasts.
         </Text>
       </Heading>
       <Text as="p" className="ag-hero-sub cl-reveal in">
-        Eleven specialised agents — PM, Architect, Designer, Engineers, DevOps, Security, Reviewer, QA, and Technical
-        Writer — coordinated through a real engineering process. Run the full team for a feature, or pick a single
-        specialist for a focused task. Tap any agent to see their profile.
+        Most AI tools give you one model and hope for the best. Blacksmith gives you a coordinated team — each
+        specialist doing their part of the job, in the right order, with explicit hand-offs. That is the difference
+        between code that ships once and code you rewrite six months later. Tap any agent to see their profile.
       </Text>
 
       <Box className="ag-hero-graph cl-reveal in">

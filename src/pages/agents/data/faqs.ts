@@ -22,7 +22,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'What AI model powers them?',
     answer:
-      'Today: Claude Sonnet, Opus, or Haiku depending on the agent and your preference. On-device Llama, Codestral, and Qwen are next.',
+      'Claude Sonnet, Opus, or Haiku depending on the agent and your preference. On-device Llama, Codestral, and Qwen are on the roadmap.',
   },
   {
     question: 'Does the team see my whole codebase?',
@@ -42,6 +42,6 @@ export const faqs: FaqItem[] = [
   {
     question: 'Is this really free?',
     answer:
-      'The IDE and all agents are free forever. You bring your model access — Claude Code CLI, API key, or local model.',
+      'The IDE and all agents are free forever. You bring your own model access — a Claude API key, Claude Code CLI, or a local model. That also means you are not stacking a separate AI subscription on top of a dev platform. One key covers both.',
   },
 ]

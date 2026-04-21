@@ -11,7 +11,7 @@ export function AgentsCompare() {
         Single agent, or the full team.
         <br />
         <Text as="span" color="var(--fg-3)" fontWeight={300}>
-          Different jobs. Both first-class.
+          Different jobs. Both ship clean.
         </Text>
       </SectionHeading>
       <Text
@@ -24,8 +24,8 @@ export function AgentsCompare() {
         lineHeight="24px"
         textAlign="left"
       >
-        Run a single specialist for a focused task. Run the full team when the work spans roles.
-        Both ship with Blacksmith — pick what fits.
+        For a quick fix or a focused task, one specialist is enough. For a feature that has to last — one you
+        will not rewrite at month six — run the full team. Both ship clean.
       </Text>
 
       <Box

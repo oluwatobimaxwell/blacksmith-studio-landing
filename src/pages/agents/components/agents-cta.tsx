@@ -4,10 +4,10 @@ import { Eyebrow } from '@/pages/landing/components/eyebrow'
 import { DISCORD_URL, GITHUB_URL } from '@/shared/constants'
 
 const META = [
-  { n: '4.2k', l: 'Members' },
-  { n: '62', l: 'Countries' },
-  { n: '118', l: 'Contributors' },
-  { n: 'Weekly', l: 'Office hours' },
+  { n: '11', l: 'specialists' },
+  { n: 'Free', l: 'forever' },
+  { n: 'Open', l: 'source' },
+  { n: '0', l: 'subscriptions to stack' },
 ]
 
 export function AgentsCta() {
@@ -18,15 +18,15 @@ export function AgentsCta() {
           <Box className="ag-cta-copy">
             <Eyebrow color="var(--on-ink-3)">Join us</Eyebrow>
             <Heading as="h2">
-              Build with eleven specialists
+              Done fixing AI code.
               <br />
               <Text as="span" className="quiet">
-                and a few thousand builders.
+                Start shipping it clean.
               </Text>
             </Heading>
             <Text as="p">
-              Share what you&apos;re making, ask for help, contribute to the agents themselves. The community is how
-              the team gets better.
+              Share what you&apos;re making, ask for help, and contribute to the agents themselves. The community
+              is how the team gets better — and how yours does too.
             </Text>
             <HStack className="ag-cta-actions" spacing="12px" flexWrap="wrap">
               <Box

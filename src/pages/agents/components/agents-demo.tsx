@@ -8,7 +8,7 @@ import { demoSteps } from '../data/demo-steps'
 export function AgentsDemo() {
   return (
     <Container as="section" id="demo" className="ag-demo" maxW="1200px" px="32px">
-      <Eyebrow>One task · the full team</Eyebrow>
+      <Eyebrow>Watch it work</Eyebrow>
       <SectionHeading>
         &ldquo;Build a booking page.&rdquo;
         <br />
@@ -16,6 +16,16 @@ export function AgentsDemo() {
           48 seconds. Eleven agents. One passing test suite.
         </Text>
       </SectionHeading>
+      <Text
+        as="p"
+        color="var(--fg-3)"
+        maxW="560px"
+        mt="16px"
+        fontSize="15px"
+        lineHeight="24px"
+      >
+        No incomplete hand-offs. No missing tests. No one going rogue.
+      </Text>
 
       <Box className="ag-timeline cl-reveal">
         <Box className="ag-timeline-rail" aria-hidden />
