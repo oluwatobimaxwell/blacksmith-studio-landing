@@ -1,11 +1,15 @@
 import { Box, Container, Flex, Heading, SimpleGrid, VStack } from '@chakra-ui/react'
 import { ArrowRight } from 'lucide-react'
+import { Link as RouterLink } from 'react-router-dom'
+import { Path } from '@/router/paths'
+import { BlogPostCard } from '@/pages/blog/components/blog-post-card'
+import { blogPosts } from '@/pages/blog/data/blog-posts'
 import { Eyebrow } from './eyebrow'
 import { ClButton } from './cl-button'
-import { BlogPostCard } from './blog-post-card'
-import { blogPosts } from '../data/blog-posts'
 
 export function BlogSection() {
+  const preview = blogPosts.slice(0, 3)
+
   return (
     <Container as="section" id="blog" maxW="1200px" px="32px" py={{ base: '96px', md: '128px' }}>
       <Flex
@@ -30,15 +34,20 @@ export function BlogSection() {
             Notes from the forge.
           </Heading>
         </VStack>
-        <ClButton clVariant="ghost" rightIcon={<ArrowRight size={14} />}>
+        <ClButton
+          as={RouterLink}
+          to={Path.Blog}
+          clVariant="ghost"
+          rightIcon={<ArrowRight size={14} />}
+        >
           All writing
         </ClButton>
       </Flex>
 
       <Box mt="56px">
         <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
-          {blogPosts.map((post) => (
-            <BlogPostCard key={post.title} post={post} />
+          {preview.map((post) => (
+            <BlogPostCard key={post.slug} post={post} />
           ))}
         </SimpleGrid>
       </Box>

@@ -27,9 +27,9 @@ export const footerColumns: FooterColumn[] = [
   {
     heading: 'Writing',
     links: [
-      { label: 'All posts', href: '#blog' },
-      { label: 'Engineering', href: '#' },
-      { label: 'Field notes', href: '#' },
+      { label: 'All posts', href: '/blog' },
+      { label: 'Engineering', href: '/blog' },
+      { label: 'Field notes', href: '/blog' },
       { label: 'Manifesto', href: '/manifesto' },
     ],
   },

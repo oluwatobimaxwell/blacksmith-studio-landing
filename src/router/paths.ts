@@ -12,6 +12,8 @@ export enum Path {
   Agents = '/agents',
   Manifesto = '/manifesto',
   Community = '/community',
+  Blog = '/blog',
+  BlogPost = '/blog/:slug',
   Login = '/login',
   Register = '/register',
   ForgotPassword = '/forgot-password',

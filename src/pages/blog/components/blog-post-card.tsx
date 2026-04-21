@@ -1,5 +1,7 @@
 import { Box, Flex, Heading, HStack, Link, Text } from '@chakra-ui/react'
 import { ArrowUpRight } from 'lucide-react'
+import { Link as RouterLink } from 'react-router-dom'
+import { buildPath, Path } from '@/router/paths'
 import type { BlogPost } from '../data/blog-posts'
 
 interface BlogPostCardProps {
@@ -9,8 +11,8 @@ interface BlogPostCardProps {
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Link
-      href="#"
-      onClick={(e) => e.preventDefault()}
+      as={RouterLink}
+      to={buildPath(Path.BlogPost, { slug: post.slug })}
       className="cl-reveal"
       display="flex"
       flexDirection="column"

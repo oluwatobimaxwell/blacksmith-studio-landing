@@ -7,7 +7,7 @@ import { useScrolled } from './use-scrolled'
 import { scrollToSection } from '@/pages/landing/utils/scroll-to-section'
 import type { LandingTheme } from './use-landing-theme'
 
-export type CurrentPage = 'landing' | 'agents' | 'manifesto' | 'community'
+export type CurrentPage = 'landing' | 'agents' | 'manifesto' | 'community' | 'blog'
 
 interface NavBarProps {
   theme: LandingTheme

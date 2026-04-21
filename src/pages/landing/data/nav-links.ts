@@ -10,7 +10,7 @@ export const navLinks: readonly NavLink[] = [
   { kind: 'route', id: 'agents', label: 'Agents', to: Path.Agents },
   { kind: 'route', id: 'community', label: 'Community', to: Path.Community },
   { kind: 'section', id: 'download', label: 'Download' },
-  { kind: 'section', id: 'blog', label: 'Writing' },
+  { kind: 'route', id: 'blog', label: 'Writing', to: Path.Blog },
 ] as const
 
 export const sectionIds = [
