@@ -5,22 +5,10 @@ export type NavLink =
   | { kind: 'route'; id: string; label: string; to: string }
 
 export const navLinks: readonly NavLink[] = [
-  { kind: 'section', id: 'product', label: 'Product' },
+  { kind: 'section', id: 'how', label: 'How it works' },
+  { kind: 'section', id: 'audience', label: 'Who it’s for' },
   { kind: 'route', id: 'manifesto', label: 'Manifesto', to: Path.Manifesto },
-  { kind: 'route', id: 'agents', label: 'Agents', to: Path.Agents },
-  { kind: 'route', id: 'community', label: 'Community', to: Path.Community },
   { kind: 'section', id: 'download', label: 'Download' },
-  { kind: 'route', id: 'blog', label: 'Writing', to: Path.Blog },
 ] as const
 
-export const sectionIds = [
-  'top',
-  'problem',
-  'product',
-  'features',
-  'agents',
-  'manifesto',
-  'community',
-  'download',
-  'blog',
-] as const
+export const sectionIds = ['top', 'problem', 'how', 'audience', 'download'] as const

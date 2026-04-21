@@ -1,6 +1,6 @@
 import { Box, chakra } from '@chakra-ui/react'
 import type { HeroGraphNode } from '../data/hero-graph'
-import type { AgentProfileData } from '../data/agents'
+import type { AgentProfileData } from '@/shared/components/agent-modal'
 
 interface AgentGraphNodeProps {
   node: HeroGraphNode

@@ -1,8 +1,9 @@
-import { Flex, HStack, Text, VStack } from '@chakra-ui/react'
+import { Flex, HStack, Text, VStack, type StackProps } from '@chakra-ui/react'
 import type { AgentNode as AgentNodeData } from '../data/agents'
 
 interface AgentNodeProps {
   node: AgentNodeData
+  onSelect?: (profileId: string) => void
 }
 
 const initials = (name: string) =>
@@ -12,8 +13,8 @@ const initials = (name: string) =>
     .slice(0, 2)
     .join('')
 
-export function AgentNode({ node }: AgentNodeProps) {
-  const { primary, tier } = node
+export function AgentNode({ node, onSelect }: AgentNodeProps) {
+  const { primary, tier, ref } = node
   const padY = tier === 1 ? '10px' : tier === 2 ? '8px' : '6px'
   const padX = tier === 1 ? '14px' : tier === 2 ? '12px' : '10px'
   const avatarSize = tier === 1 ? 24 : tier === 2 ? 20 : 18
@@ -24,24 +25,36 @@ export function AgentNode({ node }: AgentNodeProps) {
   const roleSize = tier === 1 ? '10px' : '9px'
   const roleLine = tier === 1 ? '12px' : '11px'
 
-  return (
-    <HStack
-      position="absolute"
-      left={`${node.x}%`}
-      top={`${node.y}%`}
-      transform="translate(-50%, -50%)"
-      bg={primary ? 'var(--ink)' : 'var(--paper)'}
-      color={primary ? 'var(--paper)' : 'var(--fg-1)'}
-      border="1px solid"
-      borderColor={primary ? 'var(--ink)' : 'var(--hairline)'}
-      borderRadius="var(--r-md)"
-      py={padY}
-      px={padX}
-      spacing="8px"
-      whiteSpace="nowrap"
-      transition="border-color 160ms var(--ease), transform 160ms var(--ease)"
-      _hover={{ borderColor: primary ? 'var(--ink)' : 'var(--hairline-strong)', transform: 'translate(-50%, -50%) translateY(-1px)' }}
-    >
+  const clickable = Boolean(ref && onSelect)
+
+  const shellProps: StackProps = {
+    position: 'absolute',
+    left: `${node.x}%`,
+    top: `${node.y}%`,
+    transform: 'translate(-50%, -50%)',
+    bg: primary ? 'var(--ink)' : 'var(--paper)',
+    color: primary ? 'var(--paper)' : 'var(--fg-1)',
+    border: '1px solid',
+    borderColor: primary ? 'var(--ink)' : 'var(--hairline)',
+    borderRadius: 'var(--r-md)',
+    py: padY,
+    px: padX,
+    spacing: '8px',
+    whiteSpace: 'nowrap',
+    cursor: clickable ? 'pointer' : 'default',
+    transition: 'border-color 160ms var(--ease), transform 160ms var(--ease), background 160ms var(--ease)',
+    _hover: clickable
+      ? {
+          borderColor: primary ? 'var(--ink)' : 'var(--hairline-strong)',
+          transform: 'translate(-50%, -50%) translateY(-1px)',
+          bg: primary ? 'var(--ink)' : 'var(--paper-2)',
+        }
+      : undefined,
+    _focusVisible: clickable ? { outline: 'none', boxShadow: '0 0 0 2px var(--fg-1)' } : undefined,
+  }
+
+  const inner = (
+    <>
       <Flex
         w={`${avatarSize}px`}
         h={`${avatarSize}px`}
@@ -77,6 +90,22 @@ export function AgentNode({ node }: AgentNodeProps) {
           </Text>
         )}
       </VStack>
-    </HStack>
+    </>
   )
+
+  if (clickable) {
+    return (
+      <HStack
+        as="button"
+        type="button"
+        onClick={() => onSelect?.(ref as string)}
+        aria-label={`Open ${node.name} profile`}
+        {...shellProps}
+      >
+        {inner}
+      </HStack>
+    )
+  }
+
+  return <HStack {...shellProps}>{inner}</HStack>
 }

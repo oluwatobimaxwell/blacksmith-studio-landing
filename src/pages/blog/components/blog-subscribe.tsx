@@ -1,13 +1,14 @@
 import { Box, Container, Flex, Heading, HStack, Link, Text, VStack } from '@chakra-ui/react'
 import { Github, MessageCircle, Rss } from 'lucide-react'
 import { Eyebrow } from '@/pages/landing/components/eyebrow'
+import { GITHUB_URL } from '@/shared/constants'
 
 const channels = [
   {
     icon: Github,
     label: 'GitHub',
     description: 'Commits, RFCs, and the agent graph in code.',
-    href: 'https://github.com',
+    href: GITHUB_URL,
   },
   {
     icon: MessageCircle,

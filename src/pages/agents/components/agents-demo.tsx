@@ -2,7 +2,7 @@ import { Box, Container, Text } from '@chakra-ui/react'
 import { Check } from 'lucide-react'
 import { Eyebrow } from '@/pages/landing/components/eyebrow'
 import { SectionHeading } from '@/pages/landing/components/section-heading'
-import { agentsById } from '../data/agents'
+import { agentsById } from '@/shared/components/agent-modal'
 import { demoSteps } from '../data/demo-steps'
 
 export function AgentsDemo() {

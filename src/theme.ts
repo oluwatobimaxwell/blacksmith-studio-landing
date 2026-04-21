@@ -9,9 +9,9 @@ const theme = extendTheme({
   config,
 
   fonts: {
-    heading: 'Outfit, sans-serif',
-    body: 'Outfit, sans-serif',
-    mono: '"SF Mono", "Fira Code", monospace',
+    heading: "'Outfit', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif",
+    body: "'Outfit', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif",
+    mono: "'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace",
   },
 
   textStyles: {
@@ -40,7 +40,7 @@ const theme = extendTheme({
       fontSize: '13px',
       fontWeight: 400,
       lineHeight: 1.6,
-      fontFamily: '"SF Mono", "Fira Code", monospace',
+      fontFamily: "'SF Mono', 'JetBrains Mono', ui-monospace, 'Menlo', monospace",
     },
     landingHero: {
       fontSize: { base: '48px', md: '72px', lg: '88px' },
@@ -98,53 +98,64 @@ const theme = extendTheme({
   radii: {
     xs: '4px',
     sm: '6px',
-    md: '8px',
-    lg: '10px',
-    xl: '12px',
-    '2xl': '14px',
-    '3xl': '16px',
+    md: '10px',
+    lg: '14px',
+    xl: '18px',
+    '2xl': '24px',
     full: '9999px',
   },
 
   shadows: {
-    sm: '0 1px 2px rgba(0,0,0,0.5)',
-    md: '0 4px 12px rgba(0,0,0,0.4)',
-    lg: '0 8px 30px rgba(0,0,0,0.5)',
-    focusRing: '0 0 0 2px rgba(45, 212, 168, 0.4)',
+    sm: '0 1px 2px rgba(0, 0, 0, 0.08)',
+    md: '0 8px 24px rgba(0, 0, 0, 0.12)',
+    lg: '0 32px 80px rgba(0, 0, 0, 0.32)',
+    focusRing: '0 0 0 2px var(--fg-1)',
   },
 
   semanticTokens: {
     colors: {
+      // Community-landing tokens (primary surface system)
+      paper: { default: 'var(--paper)' },
+      'paper.2': { default: 'var(--paper-2)' },
+      'paper.3': { default: 'var(--paper-3)' },
+      'paper.4': { default: 'var(--paper-4)' },
+      ink: { default: 'var(--ink)' },
+      'fg.1': { default: 'var(--fg-1)' },
+      'fg.2': { default: 'var(--fg-2)' },
+      'fg.3': { default: 'var(--fg-3)' },
+      'fg.4': { default: 'var(--fg-4)' },
+      hairline: { default: 'var(--hairline)' },
+      'hairline.strong': { default: 'var(--hairline-strong)' },
+      'hairline.ghost': { default: 'var(--hairline-ghost)' },
+      scrim: { default: 'var(--scrim)' },
+      'btn.primary.bg': { default: 'var(--btn-primary-bg)' },
+      'btn.primary.fg': { default: 'var(--btn-primary-fg)' },
+      'btn.primary.bgHover': { default: 'var(--btn-primary-bg-hover)' },
+
+      // Studio tokens — retained for legal pages that still consume them
       'studio.bg': { default: 'var(--studio-bg)' },
-      'studio.bgSidebar': { default: 'var(--studio-bg-sidebar)' },
       'studio.surface': { default: 'var(--studio-surface)' },
-      'studio.surfaceRaised': { default: 'var(--studio-surface-raised)' },
       'studio.border': { default: 'var(--studio-border)' },
-      'studio.borderHover': { default: 'var(--studio-border-hover)' },
       'studio.primary': { default: 'var(--studio-primary)' },
-      'studio.primaryOn': { default: 'var(--studio-primary-on)' },
-      'studio.secondary': { default: 'var(--studio-secondary)' },
-      'studio.tertiary': { default: 'var(--studio-tertiary)' },
       'studio.error': { default: 'var(--studio-error)' },
-      'studio.success': { default: 'var(--studio-success)' },
-      'studio.warning': { default: 'var(--studio-warning)' },
-      'studio.link': { default: 'var(--studio-link)' },
       'studio.text.primary': { default: 'var(--studio-text-primary)' },
       'studio.text.secondary': { default: 'var(--studio-text-secondary)' },
-      'studio.text.tertiary': { default: 'var(--studio-text-tertiary)' },
       'studio.text.muted': { default: 'var(--studio-text-muted)' },
-      'studio.brandGreen': { default: 'var(--studio-brand-green)' },
-      'studio.brandGreenSubtle': { default: 'var(--studio-brand-green-subtle)' },
-      'studio.brandGreenBorder': { default: 'var(--studio-brand-green-border)' },
     },
   },
 
   layerStyles: {
     landingCard: {
-      bg: 'var(--studio-landing-surface)',
+      bg: 'var(--paper)',
       borderWidth: '1px',
-      borderColor: 'var(--studio-landing-border)',
+      borderColor: 'var(--hairline)',
       borderRadius: 'xl',
+    },
+    landingCardRaised: {
+      bg: 'var(--paper-2)',
+      borderWidth: '1px',
+      borderColor: 'var(--hairline)',
+      borderRadius: '2xl',
     },
   },
 
@@ -152,38 +163,34 @@ const theme = extendTheme({
     Button: {
       variants: {
         primary: {
-          bg: 'var(--studio-primary)',
-          color: 'var(--studio-primary-on)',
+          bg: 'var(--btn-primary-bg)',
+          color: 'var(--btn-primary-fg)',
           borderRadius: 'lg',
           fontSize: '14px',
           fontWeight: 500,
-          _hover: { opacity: 0.9 },
-          _active: { opacity: 0.8 },
-        },
-        brand: {
-          bg: 'var(--studio-brand-green)',
-          color: '#121212',
-          borderRadius: 'lg',
-          fontSize: '14px',
-          fontWeight: 600,
-          _hover: { opacity: 0.9, transform: 'translateY(-1px)' },
-          _active: { opacity: 0.8 },
+          _hover: { bg: 'var(--btn-primary-bg-hover)' },
+          _active: { transform: 'scale(0.98)' },
         },
         secondary: {
           bg: 'transparent',
           borderWidth: '1px',
-          borderColor: 'var(--studio-border)',
-          color: 'var(--studio-text-primary)',
-          _hover: { bg: 'var(--studio-surface-raised)' },
+          borderColor: 'var(--hairline)',
+          color: 'var(--fg-1)',
+          borderRadius: 'lg',
+          fontSize: '14px',
+          fontWeight: 500,
+          _hover: { bg: 'var(--paper-3)', borderColor: 'var(--hairline-strong)' },
         },
         ghost: {
           bg: 'transparent',
-          color: 'var(--studio-text-primary)',
-          _hover: { bg: 'var(--studio-surface-raised)' },
+          color: 'var(--fg-1)',
+          borderRadius: 'lg',
+          _hover: { bg: 'var(--paper-3)' },
         },
         danger: {
           bg: 'var(--studio-error)',
-          color: 'white',
+          color: '#FFFFFF',
+          borderRadius: 'lg',
           _hover: { opacity: 0.9 },
           _active: { opacity: 0.8 },
         },
@@ -193,9 +200,9 @@ const theme = extendTheme({
     Card: {
       baseStyle: {
         container: {
-          bg: 'var(--studio-surface)',
+          bg: 'var(--paper)',
           borderWidth: '1px',
-          borderColor: 'var(--studio-border)',
+          borderColor: 'var(--hairline)',
           borderRadius: 'xl',
           shadow: 'sm',
         },
@@ -206,10 +213,12 @@ const theme = extendTheme({
       variants: {
         outline: {
           field: {
-            bg: 'var(--studio-surface)',
-            borderColor: 'var(--studio-border)',
+            bg: 'var(--paper-2)',
+            borderColor: 'var(--hairline)',
+            color: 'var(--fg-1)',
+            _hover: { borderColor: 'var(--hairline-strong)' },
             _focus: {
-              borderColor: 'var(--studio-brand-green-border)',
+              borderColor: 'var(--fg-1)',
               boxShadow: 'focusRing',
             },
           },
@@ -230,14 +239,16 @@ const theme = extendTheme({
     Modal: {
       baseStyle: {
         overlay: {
-          bg: 'blackAlpha.600',
+          bg: 'rgba(10, 10, 10, 0.62)',
+          backdropFilter: 'blur(6px)',
         },
         dialog: {
-          bg: 'var(--studio-glass-bg)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          bg: 'var(--paper)',
+          color: 'var(--fg-1)',
           borderWidth: '1px',
-          borderColor: 'var(--studio-glass-border)',
+          borderColor: 'var(--hairline)',
+          borderRadius: '2xl',
+          boxShadow: 'lg',
         },
       },
     },

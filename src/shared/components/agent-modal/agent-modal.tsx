@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 import { useLandingShell } from '@/shared/components/landing-shell'
 import { AgentProfile } from './agent-profile'
-import type { AgentProfileData } from '../data/agents'
+import type { AgentProfileData } from './agents-data'
 
 interface AgentModalProps {
   agent: AgentProfileData | null

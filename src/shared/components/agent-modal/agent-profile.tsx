@@ -1,6 +1,6 @@
 import { Box, Grid, Heading, Text } from '@chakra-ui/react'
 import { Check } from 'lucide-react'
-import type { AgentProfileData } from '../data/agents'
+import type { AgentProfileData } from './agents-data'
 
 interface AgentProfileProps {
   agent: AgentProfileData

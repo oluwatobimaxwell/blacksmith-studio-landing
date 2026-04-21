@@ -2,6 +2,7 @@ import { Box, Flex, HStack, Button, IconButton, Image, Text } from '@chakra-ui/r
 import { Sun, Moon, Github, Download } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { Path } from '@/router/paths'
+import { GITHUB_URL } from '@/shared/constants'
 import { navLinks, type NavLink } from '@/pages/landing/data/nav-links'
 import { useScrolled } from './use-scrolled'
 import { scrollToSection } from '@/pages/landing/utils/scroll-to-section'
@@ -127,7 +128,7 @@ export function NavBar({ theme, onToggleTheme, active, currentPage = 'landing' }
         />
         <Button
           as="a"
-          href="https://github.com"
+          href={GITHUB_URL}
           target="_blank"
           rel="noopener noreferrer"
           variant="unstyled"

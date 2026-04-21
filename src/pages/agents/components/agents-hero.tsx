@@ -2,7 +2,7 @@ import { Box, Container, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import { Eyebrow } from '@/pages/landing/components/eyebrow'
 import { AgentGraphNode } from './agent-graph-node'
 import { heroGraphEdges, heroGraphNodes } from '../data/hero-graph'
-import { agentsById } from '../data/agents'
+import { agentsById } from '@/shared/components/agent-modal'
 
 interface AgentsHeroProps {
   onSelectAgent: (id: string) => void

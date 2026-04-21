@@ -28,21 +28,19 @@ export function HeroSection() {
           <Heading
             as="h1"
             className="cl-reveal"
-            fontSize={{ base: '44px', sm: '56px', md: '72px', lg: '88px' }}
+            fontSize={{ base: '44px', sm: '56px', md: '72px', lg: '84px' }}
             lineHeight="0.98"
             fontWeight={600}
             letterSpacing="-0.035em"
             m={0}
             mx="auto"
-            maxW="14ch"
+            maxW="16ch"
             sx={{ textWrap: 'balance' }}
           >
-            Build software <br />
-            the way a{' '}
+            A free AI IDE that ships{' '}
             <Text as="span" color="var(--fg-3)" fontWeight={300}>
-              senior team
-            </Text>{' '}
-            would.
+              production-ready software.
+            </Text>
           </Heading>
 
           <Text
@@ -55,8 +53,8 @@ export function HeroSection() {
             color="var(--fg-3)"
             sx={{ textWrap: 'pretty' }}
           >
-            A global community for anyone who wants to build software — and the AI-native IDE that gets the job done
-            right the first time.
+            Blacksmith Studio runs a team of senior-level AI agents — PM, Architect, Engineer, Reviewer, QA — so the
+            code you ship is structured the way a senior team would structure it.
           </Text>
 
           <HStack className="cl-reveal" spacing="12px" mt="36px" flexWrap="wrap" justify="center">
@@ -67,7 +65,7 @@ export function HeroSection() {
               clVariant="ghost"
               clSize="lg"
               leftIcon={<Users size={16} />}
-              onClick={() => scrollToSection('community')}
+              onClick={() => scrollToSection('download')}
             >
               Join the community
             </ClButton>

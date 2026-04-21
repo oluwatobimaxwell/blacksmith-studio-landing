@@ -1,3 +1,5 @@
+import { DISCORD_URL, GITHUB_URL } from '@/shared/constants'
+
 export interface Room {
   id: string
   eyebrow: string
@@ -15,7 +17,7 @@ export const rooms: Room[] = [
     title: 'The room is always open.',
     body: 'Ask, share, critique, celebrate. Twelve timezones, three thousand-plus builders. The conversation does not stop when your local clock does.',
     ctaLabel: 'Join on Discord',
-    ctaHref: 'https://discord.gg',
+    ctaHref: DISCORD_URL,
     ctaVariant: 'primary',
   },
   {
@@ -24,7 +26,7 @@ export const rooms: Room[] = [
     title: 'The code is in the open.',
     body: 'The studio, the SDK, the templates — public. File issues, send PRs, read the commits. We ship in public because we want you to see how it is made, and help make it.',
     ctaLabel: 'Contribute on GitHub',
-    ctaHref: 'https://github.com',
+    ctaHref: GITHUB_URL,
     ctaVariant: 'ghost',
   },
   {

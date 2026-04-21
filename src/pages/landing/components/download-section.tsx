@@ -1,10 +1,12 @@
 import { Box, Container, Flex, Grid, HStack, Heading, Text, VStack } from '@chakra-ui/react'
-import { CheckCircle2, GitBranch } from 'lucide-react'
+import { CheckCircle2, GitBranch, MessageCircle, Github } from 'lucide-react'
 import { Eyebrow } from './eyebrow'
 import { SectionHeading } from './section-heading'
 import { DownloadPlatform } from './download-platform'
 import { CliBlock } from './cli-block'
+import { ClButton } from './cl-button'
 import { platforms } from '../data/platforms'
+import { DISCORD_URL, GITHUB_URL } from '@/shared/constants'
 
 export function DownloadSection() {
   return (
@@ -76,6 +78,59 @@ export function DownloadSection() {
             ))}
           </VStack>
         </Grid>
+
+        <Flex
+          className="cl-reveal"
+          mt={{ base: '32px', md: '40px' }}
+          p={{ base: '28px', md: '32px 40px' }}
+          border="1px solid var(--hairline)"
+          bg="var(--paper)"
+          borderRadius="var(--r-2xl)"
+          direction={{ base: 'column', md: 'row' }}
+          align={{ base: 'flex-start', md: 'center' }}
+          justify="space-between"
+          gap={{ base: '20px', md: '24px' }}
+        >
+          <VStack align="flex-start" spacing="6px">
+            <Heading
+              as="h3"
+              fontSize={{ base: '22px', md: '24px' }}
+              lineHeight={{ base: '28px', md: '30px' }}
+              fontWeight={600}
+              letterSpacing="-0.015em"
+              m={0}
+              color="var(--fg-1)"
+            >
+              Build in the open, with builders worldwide.
+            </Heading>
+            <Text fontSize="14px" lineHeight="22px" color="var(--fg-3)" m={0}>
+              Ask questions, share what you're making, ship faster with help from real people.
+            </Text>
+          </VStack>
+          <HStack spacing="10px" flexWrap="wrap">
+            <ClButton
+              as="a"
+              href={DISCORD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              clSize="md"
+              leftIcon={<MessageCircle size={14} />}
+            >
+              Join on Discord
+            </ClButton>
+            <ClButton
+              as="a"
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              clVariant="ghost"
+              clSize="md"
+              leftIcon={<Github size={14} />}
+            >
+              GitHub
+            </ClButton>
+          </HStack>
+        </Flex>
       </Container>
     </Box>
   )

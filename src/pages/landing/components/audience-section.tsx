@@ -1,4 +1,4 @@
-import { Container, SimpleGrid, Flex, Text, VStack, Heading } from '@chakra-ui/react'
+import { Box, Container, SimpleGrid, Flex, Text, VStack, Heading } from '@chakra-ui/react'
 import { Eyebrow } from './eyebrow'
 import { SectionHeading } from './section-heading'
 import { audienceRows } from '../data/audience'
@@ -6,7 +6,7 @@ import { audienceRows } from '../data/audience'
 export function AudienceSection() {
   return (
     <Container as="section" id="audience" maxW="1200px" px="32px" py={{ base: '72px', md: '96px' }}>
-      <Eyebrow>Who this is for</Eyebrow>
+      <Eyebrow>Who it's for</Eyebrow>
       <SectionHeading>
         Anyone, anywhere,
         <br />
@@ -65,6 +65,34 @@ export function AudienceSection() {
           </Flex>
         ))}
       </SimpleGrid>
+
+      <Box
+        className="cl-reveal"
+        mt={{ base: '48px', md: '72px' }}
+        py={{ base: '40px', md: '56px' }}
+        px={{ base: '24px', md: '48px' }}
+        borderTop="1px solid var(--hairline)"
+        borderBottom="1px solid var(--hairline)"
+        textAlign="center"
+      >
+        <Heading
+          as="p"
+          fontSize={{ base: '24px', md: '32px' }}
+          lineHeight={{ base: '30px', md: '40px' }}
+          fontWeight={500}
+          letterSpacing="-0.02em"
+          m={0}
+          maxW="760px"
+          mx="auto"
+          color="var(--fg-1)"
+          sx={{ textWrap: 'balance' }}
+        >
+          Free forever.{' '}
+          <Text as="span" color="var(--fg-3)" fontWeight={300}>
+            Open source. For everyone, everywhere.
+          </Text>
+        </Heading>
+      </Box>
     </Container>
   )
 }

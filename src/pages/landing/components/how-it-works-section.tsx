@@ -1,33 +1,52 @@
-import { Box, Container, Text } from '@chakra-ui/react'
+import { Box, Container, SimpleGrid, Text } from '@chakra-ui/react'
+import { AgentModal, useAgentModal } from '@/shared/components/agent-modal'
 import { Eyebrow } from './eyebrow'
 import { SectionHeading } from './section-heading'
 import { SectionSub } from './section-sub'
 import { AgentNode } from './agent-node'
+import { HowStepCard } from './how-step-card'
 import { agentNodes, agentEdges } from '../data/agents'
+import { howSteps } from '../data/how-it-works'
 
 const byId = Object.fromEntries(agentNodes.map((n) => [n.id, n]))
 
-export function AgentGraphSection() {
+export function HowItWorksSection() {
+  const { agent, index, total, isOpen, open, close } = useAgentModal()
+
   return (
-    <Container as="section" id="agents" maxW="1200px" px="32px" py={{ base: '72px', md: '96px' }}>
-      <Eyebrow>The agent team</Eyebrow>
+    <Container as="section" id="how" maxW="1200px" px="32px" py={{ base: '72px', md: '96px' }}>
+      <Eyebrow>How it works</Eyebrow>
       <SectionHeading>
-        Eleven specialists.
+        You describe it.
         <br />
         <Text as="span" color="var(--fg-3)" fontWeight={300}>
-          One process. Every project.
+          A team of AI agents builds it.
         </Text>
       </SectionHeading>
       <SectionSub>
-        You bring the idea. Blacksmith brings the expertise. Every agent works at the level of a senior professional
-        in their role — PM, Architect, Reviewer, QA — each doing their specific job, in the right order. You don't need
-        to know how to code to ship a codebase that's structured the way a senior team would structure it.
+        Every agent works at the level of a senior professional in their role — each doing their specific job, in the
+        right order. Tap any agent to see their profile.
       </SectionSub>
+
+      <SimpleGrid
+        className="cl-reveal"
+        mt="56px"
+        columns={{ base: 1, md: 3 }}
+        gap="1px"
+        bg="var(--hairline)"
+        border="1px solid var(--hairline)"
+        borderRadius="var(--r-xl)"
+        overflow="hidden"
+      >
+        {howSteps.map((step) => (
+          <HowStepCard key={step.step} step={step.step} title={step.title} body={step.body} />
+        ))}
+      </SimpleGrid>
 
       <Box
         className="cl-reveal"
         position="relative"
-        mt="56px"
+        mt="32px"
         py={{ base: '40px', md: '48px' }}
         px={{ base: '20px', md: '32px' }}
         border="1px solid var(--hairline)"
@@ -65,10 +84,12 @@ export function AgentGraphSection() {
             })}
           </Box>
           {agentNodes.map((n) => (
-            <AgentNode key={n.id} node={n} />
+            <AgentNode key={n.id} node={n} onSelect={open} />
           ))}
         </Box>
       </Box>
+
+      <AgentModal agent={agent} index={index} total={total} isOpen={isOpen} onClose={close} />
     </Container>
   )
 }

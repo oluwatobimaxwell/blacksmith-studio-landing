@@ -71,36 +71,49 @@ describe('theme', () => {
   })
 
   describe('radii', () => {
-    it('defines border radius tokens', () => {
-      expect(theme.radii.xs).toBe('4px')
+    it('defines border radius tokens matching community-landing --r-* scale', () => {
+      expect(theme.radii.sm).toBe('6px')
+      expect(theme.radii.md).toBe('10px')
+      expect(theme.radii.lg).toBe('14px')
+      expect(theme.radii.xl).toBe('18px')
+      expect(theme.radii['2xl']).toBe('24px')
       expect(theme.radii.full).toBe('9999px')
     })
   })
 
   describe('shadows', () => {
-    it('defines shadow tokens including focus ring', () => {
+    it('defines shadow tokens', () => {
       expect(theme.shadows.sm).toBeDefined()
       expect(theme.shadows.lg).toBeDefined()
-      expect(theme.shadows.focusRing).toContain('rgba(45, 212, 168, 0.4)')
+    })
+
+    it('focus ring uses the foreground token', () => {
+      expect(theme.shadows.focusRing).toContain('var(--fg-1)')
     })
   })
 
   describe('semantic tokens', () => {
-    it('defines studio color tokens', () => {
+    it('defines community-landing surface tokens', () => {
+      const colors = theme.semanticTokens.colors
+      expect(colors.paper).toBeDefined()
+      expect(colors.ink).toBeDefined()
+      expect(colors['fg.1']).toBeDefined()
+      expect(colors.hairline).toBeDefined()
+      expect(colors['btn.primary.bg']).toBeDefined()
+    })
+
+    it('retains studio tokens consumed by legal pages', () => {
       const colors = theme.semanticTokens.colors
       expect(colors['studio.bg']).toBeDefined()
-      expect(colors['studio.surface']).toBeDefined()
-      expect(colors['studio.primary']).toBeDefined()
-      expect(colors['studio.error']).toBeDefined()
       expect(colors['studio.text.primary']).toBeDefined()
     })
   })
 
   describe('layer styles', () => {
-    it('defines landingCard layer style', () => {
+    it('landingCard uses the paper surface and hairline border', () => {
       const landingCard = theme.layerStyles.landingCard
-      expect(landingCard.bg).toContain('--studio-landing-surface')
-      expect(landingCard.borderWidth).toBe('1px')
+      expect(landingCard.bg).toContain('--paper')
+      expect(landingCard.borderColor).toContain('--hairline')
       expect(landingCard.borderRadius).toBe('xl')
     })
   })
@@ -114,8 +127,15 @@ describe('theme', () => {
       expect(buttonVariants).toHaveProperty('danger')
     })
 
+    it('primary button uses --btn-primary-* tokens', () => {
+      const primary = theme.components.Button.variants.primary
+      expect(primary.bg).toContain('--btn-primary-bg')
+      expect(primary.color).toContain('--btn-primary-fg')
+    })
+
     it('defines Card base style', () => {
       expect(theme.components.Card.baseStyle.container.borderRadius).toBe('xl')
+      expect(theme.components.Card.baseStyle.container.bg).toContain('--paper')
     })
 
     it('defines Input outline variant', () => {
@@ -126,10 +146,11 @@ describe('theme', () => {
       expect(theme.components.Badge.baseStyle.borderRadius).toBe('full')
     })
 
-    it('defines Modal base style with glass effect', () => {
+    it('Modal overlay matches landing scrim', () => {
       const baseStyle = theme.components.Modal.baseStyle
       const resolved = typeof baseStyle === 'function' ? baseStyle({}) : baseStyle
-      expect(resolved.dialog.backdropFilter).toContain('blur')
+      expect(resolved.overlay.backdropFilter).toContain('blur')
+      expect(resolved.dialog.bg).toContain('--paper')
     })
   })
 })

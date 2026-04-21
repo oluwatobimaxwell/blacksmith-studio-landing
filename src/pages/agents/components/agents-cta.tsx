@@ -1,6 +1,7 @@
 import { Box, Container, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import { Github, MessageCircle } from 'lucide-react'
 import { Eyebrow } from '@/pages/landing/components/eyebrow'
+import { DISCORD_URL, GITHUB_URL } from '@/shared/constants'
 
 const META = [
   { n: '4.2k', l: 'Members' },
@@ -30,7 +31,7 @@ export function AgentsCta() {
             <HStack className="ag-cta-actions" spacing="12px" flexWrap="wrap">
               <Box
                 as="a"
-                href="https://discord.gg"
+                href={DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ag-cta-btn-primary"
@@ -40,7 +41,7 @@ export function AgentsCta() {
               </Box>
               <Box
                 as="a"
-                href="https://github.com"
+                href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ag-cta-btn-ghost"

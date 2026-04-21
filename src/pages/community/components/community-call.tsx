@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Eyebrow } from '@/pages/landing/components/eyebrow'
 import { ClButton } from '@/pages/landing/components/cl-button'
 import { Path } from '@/router/paths'
+import { DISCORD_URL, GITHUB_URL } from '@/shared/constants'
 
 export function CommunityCall() {
   const navigate = useNavigate()
@@ -52,7 +53,7 @@ export function CommunityCall() {
             <HStack spacing="12px" flexWrap="wrap">
               <ClButton
                 as="a"
-                href="https://discord.gg"
+                href={DISCORD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 clSize="lg"
@@ -62,7 +63,7 @@ export function CommunityCall() {
               </ClButton>
               <ClButton
                 as="a"
-                href="https://github.com"
+                href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 clVariant="ghost"
