@@ -37,9 +37,9 @@ export function HeroSection() {
             maxW="16ch"
             sx={{ textWrap: 'balance' }}
           >
-            A free AI IDE that ships{' '}
+            AI writes code in seconds.{' '}
             <Text as="span" color="var(--fg-3)" fontWeight={300}>
-              production-ready software.
+              Someone still has to maintain it.
             </Text>
           </Heading>
 
@@ -53,8 +53,9 @@ export function HeroSection() {
             color="var(--fg-3)"
             sx={{ textWrap: 'pretty' }}
           >
-            Blacksmith Studio runs a team of senior-level AI agents — PM, Architect, Engineer, Reviewer, QA — so the
-            code you ship is structured the way a senior team would structure it.
+            Blacksmith Studio runs a team of specialist AI agents — Architect, Engineer, Reviewer, QA — each doing
+            their job the way a senior engineer would. The code you get isn't just fast. It's structured, tested,
+            and clean from line one.
           </Text>
 
           <HStack className="cl-reveal" spacing="12px" mt="36px" flexWrap="wrap" justify="center">

@@ -6,18 +6,18 @@ export interface AudienceRow {
 export const audienceRows: AudienceRow[] = [
   {
     name: 'Developers',
-    body: 'Build faster without sacrificing quality. An AI engineering team that thinks at a senior level — not autocomplete on steroids.',
+    body: 'Ship faster without the debt. An AI team that codes the way you\'d want your team to — structured, consistent, testable.',
   },
   {
     name: 'Non-technical founders',
-    body: 'Turn an idea into a working, scalable product without writing a line of code — or hiring an engineering team to start.',
+    body: 'Go from idea to working product without hiring a team. Then keep it maintained without one either.',
   },
   {
     name: 'Students & learners',
-    body: 'Learn by building real things. AI that works alongside you as a mentor and partner, teaching practice as it builds.',
+    body: 'Build real things the right way from the start. Absorb senior-engineer thinking by watching it work.',
   },
   {
     name: 'Teams & small businesses',
-    body: 'Booking systems, dashboards, portals, internal tools. Custom software without custom development costs.',
+    body: 'Custom software — dashboards, portals, internal tools — without the overhead of a custom dev agency.',
   },
 ]

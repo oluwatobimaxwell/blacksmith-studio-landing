@@ -8,10 +8,10 @@ export function AudienceSection() {
     <Container as="section" id="audience" maxW="1200px" px="32px" py={{ base: '72px', md: '96px' }}>
       <Eyebrow>Who it's for</Eyebrow>
       <SectionHeading>
-        Anyone, anywhere,
+        Built for anyone tired of
         <br />
         <Text as="span" color="var(--fg-3)" fontWeight={300}>
-          with an idea.
+          cleaning up after AI.
         </Text>
       </SectionHeading>
 
@@ -89,7 +89,7 @@ export function AudienceSection() {
         >
           Free forever.{' '}
           <Text as="span" color="var(--fg-3)" fontWeight={300}>
-            Open source. For everyone, everywhere.
+            Open source. No $20/month barrier to building.
           </Text>
         </Heading>
       </Box>

@@ -21,10 +21,10 @@ export function DownloadSection() {
       <Container maxW="1200px" px="32px">
         <Eyebrow>Get started</Eyebrow>
         <SectionHeading>
-          Ship today.
+          Ship fast. Ship clean.
           <br />
           <Text as="span" color="var(--fg-3)" fontWeight={300}>
-            One command, any platform.
+            Ship once.
           </Text>
         </SectionHeading>
 
@@ -101,10 +101,10 @@ export function DownloadSection() {
               m={0}
               color="var(--fg-1)"
             >
-              Build in the open, with builders worldwide.
+              Stop fixing AI code. Start shipping it.
             </Heading>
             <Text fontSize="14px" lineHeight="22px" color="var(--fg-3)" m={0}>
-              Ask questions, share what you're making, ship faster with help from real people.
+              Ask questions, share what you're making, and build with people who've already been through it.
             </Text>
           </VStack>
           <HStack spacing="10px" flexWrap="wrap">

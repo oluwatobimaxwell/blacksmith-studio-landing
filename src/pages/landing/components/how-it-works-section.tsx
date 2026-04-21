@@ -20,12 +20,13 @@ export function HowItWorksSection() {
         You describe it.
         <br />
         <Text as="span" color="var(--fg-3)" fontWeight={300}>
-          A team of AI agents builds it.
+          A senior AI team builds it.
         </Text>
       </SectionHeading>
       <SectionSub>
-        Every agent works at the level of a senior professional in their role — each doing their specific job, in the
-        right order. Tap any agent to see their profile.
+        Not a single autocomplete model. A coordinated team of agents, each with a defined role — architecture,
+        code, review, QA. Each one does what a human specialist would do, in the right order. Tap any agent to
+        see their profile.
       </SectionSub>
 
       <SimpleGrid

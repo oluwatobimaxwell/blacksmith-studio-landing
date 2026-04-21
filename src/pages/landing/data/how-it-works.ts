@@ -7,17 +7,17 @@ export interface HowStep {
 export const howSteps: HowStep[] = [
   {
     step: '01',
-    title: 'You describe it',
-    body: 'Tell Blacksmith what you want to build, in plain language. No code required.',
+    title: 'Describe what you want',
+    body: 'Plain language. No boilerplate, no scaffolding. Just what you want to build.',
   },
   {
     step: '02',
-    title: 'Agents build it',
-    body: 'A team of senior-level AI agents — PM, Architect, Engineer, Reviewer, QA — each do their job, in order.',
+    title: 'Agents do their jobs',
+    body: 'PM defines scope. Architect designs the system. Engineer writes it. Reviewer checks it. QA tests it.',
   },
   {
     step: '03',
-    title: 'You ship it',
-    body: 'You get a professionally architected, production-ready codebase. Structured to maintain, extend, and scale.',
+    title: 'You get clean code',
+    body: 'Production-ready. Structured to maintain, extend, and scale — not just to demo.',
   },
 ]

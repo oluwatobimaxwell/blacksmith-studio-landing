@@ -6,17 +6,18 @@ import { SectionSub } from './section-sub'
 export function ProblemSection() {
   return (
     <Container as="section" id="problem" maxW="1200px" px="32px" py={{ base: '72px', md: '96px' }}>
-      <Eyebrow>The problem</Eyebrow>
+      <Eyebrow>The real cost of AI coding</Eyebrow>
       <SectionHeading>
-        AI writes code fast.
+        Fast became a new kind of slow.
         <br />
         <Text as="span" color="var(--fg-3)" fontWeight={300}>
-          Most of it breaks at scale.
+          AI debt is the next technical debt.
         </Text>
       </SectionHeading>
       <SectionSub>
-        AI-generated code looks good in a demo and falls apart in production — fragile structure, inconsistent
-        patterns, endless rework. Blacksmith fixes that at the source.
+        Developers now spend more time reviewing, fixing, and rewriting AI-generated code than they saved generating
+        it. Inconsistent architecture, missing tests, brittle patterns — shipped at speed. Blacksmith eliminates
+        that at the source, not after the fact.
       </SectionSub>
 
       <Grid
@@ -60,12 +61,12 @@ export function ProblemSection() {
             color="var(--fg-3)"
             m={0}
           >
-            Less AI coding tech debt
+            Reduction in AI coding debt
           </Text>
         </VStack>
         <Text fontSize="17px" lineHeight="26px" color="var(--fg-2)" m={0} sx={{ textWrap: 'pretty' }}>
-          Measured across structure, patterns, and testability — Blacksmith reduces AI coding tech debt by over 80%
-          compared to standard AI tools. Code you can maintain, extend, and scale, not just demo.
+          Measured across structure, consistency, and testability — Blacksmith reduces AI coding debt by over 80%
+          compared to standard AI tools. Code you can maintain, extend, and trust in production.
         </Text>
       </Grid>
     </Container>
