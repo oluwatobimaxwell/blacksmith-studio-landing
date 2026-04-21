@@ -18,22 +18,12 @@ export function ManifestoHero() {
           m={0}
           sx={{ textWrap: 'balance' }}
         >
-          This time,
+          Everyone is building with AI.
           <br />
-          Africa builds too.
+          <Text as="span" color="var(--fg-3)" fontWeight={300}>
+            Not everyone is building well.
+          </Text>
         </Heading>
-        <Text
-          as="p"
-          fontSize={{ base: '19px', md: '22px' }}
-          lineHeight={{ base: '30px', md: '34px' }}
-          color="var(--fg-3)"
-          fontWeight={300}
-          letterSpacing="-0.01em"
-          m={0}
-          sx={{ textWrap: 'balance' }}
-        >
-          A continent of builders, in the era of building.
-        </Text>
         <Box w="64px" h="1px" bg="var(--hairline-strong)" mt="8px" aria-hidden />
         <Text
           as="p"
@@ -46,9 +36,9 @@ export function ManifestoHero() {
           sx={{ textWrap: 'pretty' }}
         >
           The AI era is the largest shift in how software gets made since software got made.
-          It will happen with us, or it will happen to us. Blacksmith Studio exists to make
-          sure it happens with us — the builders of Lagos, Nairobi, Accra, Abidjan, Cairo, and
-          everywhere the old tools were not priced for.
+          We can ride it and ship code that lasts — or move fast and leave a mess for the
+          next engineer. Which is usually us, three months later. Blacksmith Studio exists
+          to make sure it does not have to be.
         </Text>
       </VStack>
     </Container>

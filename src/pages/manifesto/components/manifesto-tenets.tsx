@@ -18,10 +18,10 @@ export function ManifestoTenets() {
         <VStack align="flex-start" spacing="24px" mb={{ base: '48px', md: '72px' }}>
           <Eyebrow>What we stand for</Eyebrow>
           <SectionHeading>
-            Five things
+            Five principles.
             <br />
             <Text as="span" color="var(--fg-3)" fontWeight={300}>
-              we hold to be true.
+              No exceptions.
             </Text>
           </SectionHeading>
         </VStack>

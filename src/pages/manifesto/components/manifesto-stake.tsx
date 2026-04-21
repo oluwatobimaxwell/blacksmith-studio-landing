@@ -14,10 +14,10 @@ export function ManifestoStake() {
         <VStack align="flex-start" spacing="24px" mb={{ base: '48px', md: '64px' }}>
           <Eyebrow>The stake</Eyebrow>
           <SectionHeading>
-            Two gates.
+            The problem is not speed.
             <br />
             <Text as="span" color="var(--fg-3)" fontWeight={300}>
-              One answer.
+              It is what speed leaves behind.
             </Text>
           </SectionHeading>
         </VStack>
@@ -32,8 +32,11 @@ export function ManifestoStake() {
               m={0}
               sx={{ textWrap: 'pretty' }}
             >
-              In Lagos, twenty dollars a month is not a rounding error. It is a week of
-              groceries. It is the difference between trying and staying on the sidelines.
+              AI writes code fast — and most of it becomes someone else's problem.
+              Inconsistent patterns. Missing tests. Architecture that made sense at 2 a.m.
+              and collapses at scale. AI-generated tech debt is still tech debt. It
+              compounds. It stops the next engineer — usually you, three months later —
+              from building on top of what the AI left behind.
             </Text>
             <Text
               fontSize={{ base: '17px', md: '18px' }}
@@ -42,21 +45,10 @@ export function ManifestoStake() {
               m={0}
               sx={{ textWrap: 'pretty' }}
             >
-              When the tools that will shape the next generation of software are priced in
-              dollars, the builders with the most to build are the ones locked out. That is
-              not a pricing tier. It is a gate.
-            </Text>
-            <Text
-              fontSize={{ base: '17px', md: '18px' }}
-              lineHeight={{ base: '28px', md: '30px' }}
-              color="var(--fg-2)"
-              m={0}
-              sx={{ textWrap: 'pretty' }}
-            >
-              And the tools that do make it through the gate too often return code that works
-              today and collapses tomorrow. AI-generated tech debt is still tech debt. It
-              compounds. It costs. It stops the next engineer — who is usually you, three
-              months later — from building on top of what the AI left behind.
+              Most builders are already paying for AI tools that leave them with code they
+              will have to rewrite. A model subscription here, a dev platform there — and
+              still no guarantee the output is worth maintaining. Blacksmith changes the
+              math. Not by being cheaper, but by being worth it the first time.
             </Text>
             <Text
               fontSize={{ base: '17px', md: '18px' }}
@@ -65,9 +57,9 @@ export function ManifestoStake() {
               m={0}
               sx={{ textWrap: 'pretty' }}
             >
-              Blacksmith is our refusal of both. Free, because price is the first barrier and
-              the first barrier decides who gets to start. Engineered to code like a senior
-              engineer, because the first draft should be the one that ships.
+              Blacksmith is our answer to that. Engineered to code like a senior engineer,
+              because the first draft is the one you live with. Free and open, because a
+              tool that does not reach the people who need it most has already failed.
             </Text>
           </VStack>
         </Grid>

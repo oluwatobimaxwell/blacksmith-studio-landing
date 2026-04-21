@@ -24,10 +24,10 @@ export function ManifestoCall() {
             m={0}
             sx={{ textWrap: 'balance' }}
           >
-            If you are building from home —
+            If you are tired of cleaning up after AI —
             <br />
             <Text as="span" color="var(--fg-3)" fontWeight={300}>
-              we are building for you.
+              we built this for you.
             </Text>
           </Heading>
         </VStack>
@@ -45,10 +45,10 @@ export function ManifestoCall() {
               m={0}
               sx={{ textWrap: 'pretty' }}
             >
-              Whether home is Lagos or Abuja, Nairobi or Kigali, a dorm room in Ibadan or a
-              coworking desk in Accra — if the old tools were not priced for you, come build
-              with us. And if home is farther still — Jakarta, São Paulo, Karachi — you are
-              here too. Same gate. Same answer.
+              If you have spent more time fixing AI code than building your own — this is
+              for you. If the tools that matter have always felt like they were built for
+              someone else — this is for you. Wherever you are building from, whatever
+              you are building — come build with us.
             </Text>
             <Text
               fontSize={{ base: '17px', md: '19px' }}
