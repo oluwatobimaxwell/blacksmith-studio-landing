@@ -7,7 +7,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'Are these real separate agents, or one AI with prompts?',
     answer:
-      'Each agent is a distinct role with its own system prompt, tools, and success criteria. They run in sequence with explicit hand-offs — not a single context pretending to be many.',
+      'Each agent is a distinct role with its own system prompt, tools, and success criteria. They run in sequence with explicit hand-offs, not a single context pretending to be many.',
   },
   {
     question: 'Do I have to use all eleven for every task?',
@@ -27,7 +27,7 @@ export const faqs: FaqItem[] = [
   {
     question: 'Does the team see my whole codebase?',
     answer:
-      'Each agent sees only what it needs — scoped by the Architect. Nothing is sent anywhere unless the task requires it. No telemetry by default.',
+      'Each agent sees only what it needs, scoped by the Architect. Nothing is sent anywhere unless the task requires it. No telemetry by default.',
   },
   {
     question: 'What if an agent gets something wrong?',
@@ -42,6 +42,6 @@ export const faqs: FaqItem[] = [
   {
     question: 'Is this really free?',
     answer:
-      'The IDE and all agents are free forever. You bring your own model access — a Claude API key, Claude Code CLI, or a local model. That also means you are not stacking a separate AI subscription on top of a dev platform. One key covers both.',
+      'The IDE and all agents are free forever. You bring your own model access: a Claude API key, Claude Code CLI, or a local model. That also means you are not stacking a separate AI subscription on top of a dev platform. One key covers both.',
   },
 ]

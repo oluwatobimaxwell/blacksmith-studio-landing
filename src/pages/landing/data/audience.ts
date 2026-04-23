@@ -6,7 +6,7 @@ export interface AudienceRow {
 export const audienceRows: AudienceRow[] = [
   {
     name: 'Developers',
-    body: 'Ship faster without the debt. An AI team that codes the way you\'d want your team to — structured, consistent, testable.',
+    body: 'Ship faster without the debt. An AI team that codes the way you\'d want your team to: structured, consistent, testable.',
   },
   {
     name: 'Non-technical founders',
@@ -18,6 +18,6 @@ export const audienceRows: AudienceRow[] = [
   },
   {
     name: 'Teams & small businesses',
-    body: 'Custom software — dashboards, portals, internal tools — without the overhead of a custom dev agency.',
+    body: 'Custom dashboards, portals, and internal tools. Without the overhead of a custom dev agency.',
   },
 ]

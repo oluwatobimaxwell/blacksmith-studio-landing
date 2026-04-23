@@ -16,7 +16,7 @@ export function ProblemSection() {
       </SectionHeading>
       <SectionSub>
         Developers now spend more time reviewing, fixing, and rewriting AI-generated code than they saved generating
-        it. Inconsistent architecture, missing tests, brittle patterns — shipped at speed. Blacksmith eliminates
+        it. Inconsistent architecture. Missing tests. Brittle patterns. All shipped at speed. Blacksmith eliminates
         that at the source, not after the fact.
       </SectionSub>
 
@@ -65,7 +65,7 @@ export function ProblemSection() {
           </Text>
         </VStack>
         <Text fontSize="17px" lineHeight="26px" color="var(--fg-2)" m={0} sx={{ textWrap: 'pretty' }}>
-          Measured across structure, consistency, and testability — Blacksmith reduces AI coding debt by over 80%
+          Measured across structure, consistency, and testability, Blacksmith reduces AI coding debt by over 80%
           compared to standard AI tools. Code you can maintain, extend, and trust in production.
         </Text>
       </Grid>

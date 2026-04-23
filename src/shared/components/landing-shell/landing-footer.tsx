@@ -1,4 +1,5 @@
 import { Box, Container, Flex, HStack, Image, Link, Text } from '@chakra-ui/react'
+import { Link as RouterLink } from 'react-router-dom'
 import { footerLinks, legalLinks } from './footer-links'
 import type { LandingTheme } from './use-landing-theme'
 
@@ -45,19 +46,36 @@ export function LandingFooter({ theme }: LandingFooterProps) {
           </HStack>
 
           <HStack as="nav" aria-label="Footer" spacing={{ base: '16px', md: '24px' }} flexWrap="wrap">
-            {footerLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                fontSize="13px"
-                lineHeight="18px"
-                color="var(--fg-2)"
-                transition="color 160ms var(--ease)"
-                _hover={{ color: 'var(--fg-1)', textDecoration: 'none' }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {footerLinks.map((link) => {
+              const isExternal = link.href.startsWith('http')
+              return isExternal ? (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  isExternal
+                  fontSize="13px"
+                  lineHeight="18px"
+                  color="var(--fg-2)"
+                  transition="color 160ms var(--ease)"
+                  _hover={{ color: 'var(--fg-1)', textDecoration: 'none' }}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <Link
+                  key={link.label}
+                  as={RouterLink}
+                  to={link.href}
+                  fontSize="13px"
+                  lineHeight="18px"
+                  color="var(--fg-2)"
+                  transition="color 160ms var(--ease)"
+                  _hover={{ color: 'var(--fg-1)', textDecoration: 'none' }}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
           </HStack>
         </Flex>
 
@@ -77,17 +95,32 @@ export function LandingFooter({ theme }: LandingFooterProps) {
         >
           <Text as="span">© 2026 Blacksmith · Free · Open source (Apache-2.0)</Text>
           <HStack spacing="16px" flexWrap="wrap">
-            {legalLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                color="var(--fg-4)"
-                transition="color 160ms var(--ease)"
-                _hover={{ color: 'var(--fg-1)', textDecoration: 'none' }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {legalLinks.map((link) => {
+              const isExternal = link.href.startsWith('http')
+              return isExternal ? (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  isExternal
+                  color="var(--fg-4)"
+                  transition="color 160ms var(--ease)"
+                  _hover={{ color: 'var(--fg-1)', textDecoration: 'none' }}
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <Link
+                  key={link.label}
+                  as={RouterLink}
+                  to={link.href}
+                  color="var(--fg-4)"
+                  transition="color 160ms var(--ease)"
+                  _hover={{ color: 'var(--fg-1)', textDecoration: 'none' }}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
           </HStack>
         </Flex>
       </Container>

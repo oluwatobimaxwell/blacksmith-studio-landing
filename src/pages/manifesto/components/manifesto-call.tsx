@@ -24,7 +24,7 @@ export function ManifestoCall() {
             m={0}
             sx={{ textWrap: 'balance' }}
           >
-            If you are tired of cleaning up after AI —
+            If you are tired of cleaning up after AI,
             <br />
             <Text as="span" color="var(--fg-3)" fontWeight={300}>
               we built this for you.
@@ -45,10 +45,10 @@ export function ManifestoCall() {
               m={0}
               sx={{ textWrap: 'pretty' }}
             >
-              If you have spent more time fixing AI code than building your own — this is
+              If you have spent more time fixing AI code than building your own, this is
               for you. If the tools that matter have always felt like they were built for
-              someone else — this is for you. Wherever you are building from, whatever
-              you are building — come build with us.
+              someone else, this is for you. Wherever you are building from, whatever
+              you are building, come build with us.
             </Text>
             <Text
               fontSize={{ base: '17px', md: '19px' }}

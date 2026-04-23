@@ -10,7 +10,6 @@ export const footerLinks: FooterLink[] = [
   { label: 'Manifesto', href: Path.Manifesto },
   { label: 'Agents', href: Path.Agents },
   { label: 'Community', href: Path.Community },
-  { label: 'Writing', href: Path.Blog },
   { label: 'GitHub', href: GITHUB_URL },
 ]
 

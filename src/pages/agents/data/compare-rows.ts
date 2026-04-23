@@ -7,13 +7,13 @@ export interface CompareRow {
 export const compareRows: CompareRow[] = [
   {
     label: 'Best for',
-    single: 'A focused task — bug fix, refactor, doc tweak, review.',
-    team: 'A whole feature or project — plan through ship.',
+    single: 'A focused task: bug fix, refactor, doc tweak, or review.',
+    team: 'A whole feature or project, from plan through ship.',
   },
   {
     label: 'You drive',
     single: 'Pick the specialist, write the brief.',
-    team: 'Pick the goal — PM scopes and sequences the work.',
+    team: 'Pick the goal. PM scopes and sequences the work.',
   },
   {
     label: 'Scope',
@@ -22,12 +22,12 @@ export const compareRows: CompareRow[] = [
   },
   {
     label: 'Hand-offs',
-    single: 'None — single input, single output.',
+    single: 'None. Single input, single output.',
     team: 'Architect → Engineers → Reviewer → QA → Writer.',
   },
   {
     label: 'Tests',
-    single: 'On request — you decide what to cover.',
+    single: 'On request. You decide what to cover.',
     team: 'QA writes them against the PM’s acceptance criteria.',
   },
   {
@@ -42,7 +42,7 @@ export const compareRows: CompareRow[] = [
   },
   {
     label: 'Time to first output',
-    single: 'Seconds — straight to the answer.',
-    team: 'Minutes — plan first, then build.',
+    single: 'Seconds. Straight to the answer.',
+    team: 'Minutes. Plan first, then build.',
   },
 ]

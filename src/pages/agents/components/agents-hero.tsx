@@ -39,8 +39,8 @@ export function AgentsHero({ onSelectAgent }: AgentsHeroProps) {
         </Text>
       </Heading>
       <Text as="p" className="ag-hero-sub cl-reveal in">
-        Most AI tools give you one model and hope for the best. Blacksmith gives you a coordinated team — each
-        specialist doing their part of the job, in the right order, with explicit hand-offs. That is the difference
+        Most AI tools give you one model and hope for the best. Blacksmith gives you a coordinated team. Each
+        specialist does their part of the job, in the right order, with explicit hand-offs. That is the difference
         between code that ships once and code you rewrite six months later. Tap any agent to see their profile.
       </Text>
 

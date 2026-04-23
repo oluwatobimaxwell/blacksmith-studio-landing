@@ -32,10 +32,10 @@ export function ManifestoStake() {
               m={0}
               sx={{ textWrap: 'pretty' }}
             >
-              AI writes code fast — and most of it becomes someone else's problem.
+              AI writes code fast. Most of it becomes someone else's problem.
               Inconsistent patterns. Missing tests. Architecture that made sense at 2 a.m.
               and collapses at scale. AI-generated tech debt is still tech debt. It
-              compounds. It stops the next engineer — usually you, three months later —
+              compounds. It stops the next engineer (usually you, three months later)
               from building on top of what the AI left behind.
             </Text>
             <Text
@@ -46,7 +46,7 @@ export function ManifestoStake() {
               sx={{ textWrap: 'pretty' }}
             >
               Most builders are already paying for AI tools that leave them with code they
-              will have to rewrite. A model subscription here, a dev platform there — and
+              will have to rewrite. A model subscription here, a dev platform there, and
               still no guarantee the output is worth maintaining. Blacksmith changes the
               math. Not by being cheaper, but by being worth it the first time.
             </Text>

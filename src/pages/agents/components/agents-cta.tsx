@@ -26,7 +26,7 @@ export function AgentsCta() {
             </Heading>
             <Text as="p">
               Share what you&apos;re making, ask for help, and contribute to the agents themselves. The community
-              is how the team gets better — and how yours does too.
+              is how the team gets better, and how yours does too.
             </Text>
             <HStack className="ag-cta-actions" spacing="12px" flexWrap="wrap">
               <Box

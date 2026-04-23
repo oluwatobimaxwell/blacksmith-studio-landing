@@ -18,7 +18,6 @@ import { landingRoutes } from '@/pages/landing'
 import { agentsRoutes } from '@/pages/agents'
 import { manifestoRoutes } from '@/pages/manifesto'
 import { communityRoutes } from '@/pages/community'
-import { blogRoutes } from '@/pages/blog'
 import { dashboardRoutes } from '@/pages/dashboard'
 import { authRoutes } from '@/features/auth'
 import { legalRoutes } from '@/pages/legal'
@@ -43,7 +42,6 @@ export const routes: RouteObject[] = [
       ...agentsRoutes,
       ...manifestoRoutes,
       ...communityRoutes,
-      ...blogRoutes,
     ],
   },
 

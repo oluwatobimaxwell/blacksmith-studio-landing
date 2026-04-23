@@ -58,7 +58,7 @@ export const demoSteps: DemoStep[] = [
     agent: 'cr',
     t: '00:39',
     title: 'Reviews the diff',
-    body: 'Two nits, one real bug — hand-off of the slot ID was stringly-typed. Flagged and fixed.',
+    body: 'Two nits, one real bug: hand-off of the slot ID was stringly-typed. Flagged and fixed.',
   },
   {
     agent: 'qae',

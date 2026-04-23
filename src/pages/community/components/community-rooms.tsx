@@ -33,7 +33,7 @@ export function CommunityRooms() {
             sx={{ textWrap: 'pretty' }}
           >
             The community lives across a handful of places. Come through whichever one fits
-            your day — they all lead to the same people.
+            your day. They all lead to the same people.
           </Text>
         </VStack>
 

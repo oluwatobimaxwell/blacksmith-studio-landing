@@ -24,7 +24,7 @@ export function HowItWorksSection() {
         </Text>
       </SectionHeading>
       <SectionSub>
-        Not a single autocomplete model. A coordinated team of agents, each with a defined role — architecture,
+        Not a single autocomplete model. A coordinated team of agents, each with a defined role: architecture,
         code, review, QA. Each one does what a human specialist would do, in the right order. Tap any agent to
         see their profile.
       </SectionSub>

@@ -36,7 +36,7 @@ export function ManifestoHero() {
           sx={{ textWrap: 'pretty' }}
         >
           The AI era is the largest shift in how software gets made since software got made.
-          We can ride it and ship code that lasts — or move fast and leave a mess for the
+          We can ride it and ship code that lasts, or move fast and leave a mess for the
           next engineer. Which is usually us, three months later. Blacksmith Studio exists
           to make sure it does not have to be.
         </Text>

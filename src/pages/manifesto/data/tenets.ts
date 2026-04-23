@@ -8,17 +8,17 @@ export const tenets: Tenet[] = [
   {
     id: 'senior-code',
     title: 'The AI should code like a senior engineer.',
-    body: 'Structure. Naming. Boundaries. Tests. Types. The discipline a senior brings on day one, engineered into the studio itself. The first draft is the one you ship — not the one you rewrite.',
+    body: 'Structure. Naming. Boundaries. Tests. Types. The discipline a senior brings on day one, engineered into the studio itself. The first draft is the one you ship, not the one you rewrite.',
   },
   {
     id: 'team',
     title: 'A team beats an agent.',
-    body: 'Software was never built by one role. Blacksmith ships the full team — PM, architect, designer, engineers, reviewer, QA, writer — working through a real process, not a single prompt.',
+    body: 'Software was never built by one role. Blacksmith ships the full team: PM, architect, designer, engineers, reviewer, QA, writer. All working through a real process, not a single prompt.',
   },
   {
     id: 'taste',
     title: 'Taste is not optional.',
-    body: 'Fast and thoughtless is still thoughtless. We build for the reader of the code, not only the writer — because the people who inherit what you build deserve it legible.',
+    body: 'Fast and thoughtless is still thoughtless. We build for the reader of the code, not only the writer. The people who inherit what you build deserve it legible.',
   },
   {
     id: 'free',

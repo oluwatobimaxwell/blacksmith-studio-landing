@@ -18,6 +18,6 @@ export const howSteps: HowStep[] = [
   {
     step: '03',
     title: 'You get clean code',
-    body: 'Production-ready. Structured to maintain, extend, and scale — not just to demo.',
+    body: 'Production-ready. Built to maintain, extend, and scale. Not just to demo.',
   },
 ]

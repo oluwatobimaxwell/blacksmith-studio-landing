@@ -53,9 +53,9 @@ export function HeroSection() {
             color="var(--fg-3)"
             sx={{ textWrap: 'pretty' }}
           >
-            Blacksmith Studio runs a team of specialist AI agents — Architect, Engineer, Reviewer, QA — each doing
-            their job the way a senior engineer would. The code you get isn't just fast. It's structured, tested,
-            and clean from line one.
+            Blacksmith Studio runs a coordinated team of specialist AI agents: Architect, Engineer, Reviewer, QA.
+            Each one does the job the way a senior engineer would. The code you get isn't just fast. It's structured,
+            tested, and clean from line one.
           </Text>
 
           <HStack className="cl-reveal" spacing="12px" mt="36px" flexWrap="wrap" justify="center">

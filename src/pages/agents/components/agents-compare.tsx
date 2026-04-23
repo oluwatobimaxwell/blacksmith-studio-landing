@@ -24,14 +24,14 @@ export function AgentsCompare() {
         lineHeight="24px"
         textAlign="left"
       >
-        For a quick fix or a focused task, one specialist is enough. For a feature that has to last — one you
-        will not rewrite at month six — run the full team. Both ship clean.
+        For a quick fix or a focused task, one specialist is enough. For a feature that has to last, the kind you
+        will not rewrite at month six, run the full team. Both ship clean.
       </Text>
 
       <Box
         className="ag-table cl-reveal"
         role="table"
-        aria-label="Single agent and AI team — when to use each"
+        aria-label="Single agent and AI team: when to use each"
       >
         <Box className="ag-table-head" role="row">
           <Box role="columnheader" aria-label="Dimension" />
