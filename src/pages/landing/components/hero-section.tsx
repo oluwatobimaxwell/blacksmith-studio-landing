@@ -2,7 +2,7 @@ import { Box, Container, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 import { Download, Users } from 'lucide-react'
 import { HeroBadge } from './hero-badge'
 import { HeroMeta } from './hero-meta'
-import { HeroIdeFrame } from './hero-ide-frame'
+import { HeroVideoFrame } from './hero-video-frame'
 import { ClButton } from './cl-button'
 import { scrollToSection } from '../utils/scroll-to-section'
 
@@ -76,7 +76,7 @@ export function HeroSection() {
         </VStack>
       </Container>
 
-      <HeroIdeFrame />
+      <HeroVideoFrame />
     </Box>
   )
 }

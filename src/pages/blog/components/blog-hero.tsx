@@ -32,7 +32,7 @@ export function BlogHero() {
           m={0}
           sx={{ textWrap: 'balance' }}
         >
-          Field notes from Helsinki and Lagos.
+          Field notes from the workshop floor.
         </Text>
         <Box w="64px" h="1px" bg="var(--hairline-strong)" mt="8px" aria-hidden />
         <Text

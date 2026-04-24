@@ -6,7 +6,7 @@ export const firstHundredBuilders: BlogPost = {
   date: 'Mar 28',
   read: '4 min',
   title: 'The first hundred builders.',
-  body: "A letter from Helsinki to Lagos. What we're building next, and who's building it with us.",
+  body: "A letter to the community. What we're building next, and who's building it with us.",
   content: [
     {
       type: 'paragraph',
@@ -19,8 +19,8 @@ export const firstHundredBuilders: BlogPost = {
     {
       type: 'list',
       items: [
-        'You are in Lagos, Nairobi, Accra, Cairo, Johannesburg, and thirty-two other countries.',
-        'Forty-one percent of you are based somewhere in Africa. Twenty-nine percent in Europe. The rest spread across the Americas and Asia.',
+        'You are spread across dozens of countries on every continent.',
+        'A significant number of you are in Africa, Europe, and the Americas. The rest spread across Asia and beyond.',
         'Three-quarters of you are building your first real production project inside the studio.',
         'A small but meaningful number of you are senior engineers stress-testing how far Blacksmith can be pushed. Your bug reports are gold.',
       ],
@@ -28,7 +28,7 @@ export const firstHundredBuilders: BlogPost = {
     { type: 'heading', text: 'What you are building' },
     {
       type: 'paragraph',
-      text: 'Fintech tools for informal markets. Student platforms. A church membership app in Ibadan. A fishing-cooperative dashboard on the Kenyan coast. Internal tools. Personal portfolios. A surprising number of Discord bots.',
+      text: 'Fintech tools for informal markets. Student platforms. Church membership apps. Fishing-cooperative dashboards. Internal tools. Personal portfolios. A surprising number of Discord bots.',
     },
     {
       type: 'paragraph',
@@ -37,7 +37,7 @@ export const firstHundredBuilders: BlogPost = {
     { type: 'heading', text: 'What comes next' },
     {
       type: 'paragraph',
-      text: 'The agent graph is going to get two more members this quarter — one for integrations, one for security review. The CLI is getting a proper first release. And we are opening office hours twice a week — one Lagos-friendly, one Helsinki-friendly.',
+      text: 'The agent graph is going to get two more members this quarter — one for integrations, one for security review. The CLI is getting a proper first release. And we are opening office hours twice a week, rotating across timezones so everyone gets a fair seat.',
     },
     {
       type: 'paragraph',

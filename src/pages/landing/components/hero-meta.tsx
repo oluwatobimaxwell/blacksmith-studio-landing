@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import { Flex, Box, Text } from '@chakra-ui/react'
 
-const items = ['Free · forever', 'Open source', 'macOS · Linux · Windows', 'Built in Helsinki / Lagos']
+const items = ['Free · forever', 'Open source', 'macOS · Linux · Windows', 'Built for builders everywhere']
 
 export function HeroMeta() {
   return (

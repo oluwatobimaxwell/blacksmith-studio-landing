@@ -5,16 +5,16 @@ export const firstLagosMeetup: BlogPost = {
   tag: 'Community',
   date: 'Feb 21',
   read: '4 min',
-  title: 'Notes from the first Lagos meet-up.',
-  body: 'Forty builders, one room in Yaba, three laptops short. The questions that surprised me and the ones that did not.',
+  title: 'Notes from the first meet-up.',
+  body: 'Forty builders, one room, three laptops short. The questions that surprised me and the ones that did not.',
   content: [
     {
       type: 'paragraph',
-      text: 'Forty people. One room above a café in Yaba. A projector that did not work until the third attempt.',
+      text: 'Forty people. One room above a café. A projector that did not work until the third attempt.',
     },
     {
       type: 'paragraph',
-      text: 'We were three laptops short. Three builders borrowed, three builders shared. That is, I think, the Lagos version of a fireside chat.',
+      text: 'We were three laptops short. Three builders borrowed, three builders shared. That is the community version of a fireside chat.',
     },
     { type: 'heading', text: 'What people asked' },
     {
@@ -41,7 +41,7 @@ export const firstLagosMeetup: BlogPost = {
     },
     {
       type: 'paragraph',
-      text: 'The next meet-up is in May. Same neighbourhood. A bigger room.',
+      text: 'The next meet-up is in May. A bigger room.',
     },
     {
       type: 'paragraph',

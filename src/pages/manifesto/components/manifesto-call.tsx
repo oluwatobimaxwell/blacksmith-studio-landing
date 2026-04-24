@@ -79,9 +79,9 @@ export function ManifestoCall() {
               m={0}
               textAlign={{ base: 'left', lg: 'right' }}
             >
-              Founder, Blacksmith Studio
+              Founder, The Blacksmith Project
               <br />
-              Helsinki · Lagos · 2026
+              Blacksmith · 2026
             </Text>
           </VStack>
         </Grid>

@@ -32,7 +32,7 @@ export function CommunityHero() {
           m={0}
           sx={{ textWrap: 'balance' }}
         >
-          A global room, with a Lagos pulse.
+          A global room, built for builders.
         </Text>
         <Box w="64px" h="1px" bg="var(--hairline-strong)" mt="8px" aria-hidden />
         <Text

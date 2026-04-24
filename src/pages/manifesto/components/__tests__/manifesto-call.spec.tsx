@@ -23,7 +23,7 @@ describe('ManifestoCall', () => {
   it('renders the founder signature block', () => {
     const { getByText } = renderWithProviders(<ManifestoCall />)
     expect(getByText('Tobi Sholanke')).toBeInTheDocument()
-    expect(getByText(/Founder, Blacksmith Studio/i)).toBeInTheDocument()
+    expect(getByText(/Founder, The Blacksmith Project/i)).toBeInTheDocument()
   })
 
   it('contains no em dash anywhere in its rendered text', () => {

@@ -20,9 +20,9 @@ describe('CommunityHero', () => {
     )
   })
 
-  it('renders the supporting "global room, with a Lagos pulse" tagline', () => {
+  it('renders the supporting tagline', () => {
     const { getByText } = renderWithProviders(<CommunityHero />)
-    expect(getByText(/A global room, with a Lagos pulse\./i)).toBeInTheDocument()
+    expect(getByText(/A global room, built for builders\./i)).toBeInTheDocument()
   })
 
   it('contains no em dash anywhere in its rendered text', () => {

@@ -45,7 +45,7 @@ describe('rooms data', () => {
 
   it('rewrites office-hours body to use a comma instead of em dash', () => {
     const oh = rooms.find((r) => r.id === 'office-hours')
-    expect(oh?.body).toContain('each get a prime-time seat, not just San Francisco.')
+    expect(oh?.body).toContain('every timezone gets a prime-time seat, not just one.')
   })
 
   it('rewrites in-app body so the pricing aside stands as its own sentence', () => {

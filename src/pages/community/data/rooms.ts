@@ -33,7 +33,7 @@ export const rooms: Room[] = [
     id: 'office-hours',
     eyebrow: 'Thursdays, open mic',
     title: 'Weekly working sessions.',
-    body: 'Live demos, critique, and working sessions. Rotating regional slots so Lagos, Jakarta, and Helsinki each get a prime-time seat, not just San Francisco.',
+    body: 'Live demos, critique, and working sessions. Rotating regional slots so every timezone gets a prime-time seat, not just one.',
     ctaLabel: 'See the calendar',
     ctaHref: '#',
     ctaVariant: 'ghost',
