@@ -6,12 +6,8 @@ export function HeroVideoFrame() {
   return (
     <Box
       as="video"
-      className="cl-reveal"
       display="block"
-      mx="auto"
-      mt="64px"
       w="full"
-      maxW="960px"
       borderRadius={{ base: '12px', md: '16px' }}
       autoPlay
       muted
