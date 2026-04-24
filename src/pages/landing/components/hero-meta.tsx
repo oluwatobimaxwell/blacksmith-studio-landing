@@ -7,10 +7,10 @@ export function HeroMeta() {
   return (
     <Flex
       className="cl-reveal"
-      mt="40px"
+      mt="48px"
       align="center"
-      justify="flex-start"
-      gap="20px"
+      justify="center"
+      gap="24px"
       flexWrap="wrap"
       color="var(--fg-3)"
       fontSize="12px"
