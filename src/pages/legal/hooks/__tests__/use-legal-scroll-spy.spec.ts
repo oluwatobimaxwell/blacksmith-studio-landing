@@ -31,7 +31,7 @@ class FakeIntersectionObserver {
   }
 
   trigger(isIntersecting: boolean) {
-    const target = this.observedTargets[0]
+    const target = this.observedTargets[0]!
     this.callback([{ isIntersecting, target }])
   }
 }
@@ -84,7 +84,7 @@ describe('useLegalScrollSpy', () => {
       const { result } = renderHook(() => useLegalScrollSpy(['a', 'b']))
 
       act(() => {
-        FakeIntersectionObserver.instances[1].trigger(true)
+        FakeIntersectionObserver.instances[1]!.trigger(true)
       })
       expect(result.current).toBe('b')
     })
@@ -94,12 +94,12 @@ describe('useLegalScrollSpy', () => {
       const { result } = renderHook(() => useLegalScrollSpy(['a', 'b']))
 
       act(() => {
-        FakeIntersectionObserver.instances[1].trigger(true)
+        FakeIntersectionObserver.instances[1]!.trigger(true)
       })
       expect(result.current).toBe('b')
 
       act(() => {
-        FakeIntersectionObserver.instances[1].trigger(false)
+        FakeIntersectionObserver.instances[1]!.trigger(false)
       })
       expect(result.current).toBe('b')
     })

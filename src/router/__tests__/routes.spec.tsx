@@ -19,8 +19,8 @@ describe('routes', () => {
   it('keeps the marketing layout group with landing, agents, manifesto, and community', () => {
     const layoutGroup = routes[0]
     expect(layoutGroup).toBeDefined()
-    expect(layoutGroup.children?.length).toBeGreaterThanOrEqual(4)
-    const childPaths = flattenPaths(layoutGroup.children ?? [])
+    expect(layoutGroup!.children?.length).toBeGreaterThanOrEqual(4)
+    const childPaths = flattenPaths(layoutGroup!.children ?? [])
     expect(childPaths).toContain(Path.Home)
     expect(childPaths).toContain(Path.Agents)
     expect(childPaths).toContain(Path.Manifesto)
@@ -35,8 +35,9 @@ describe('routes', () => {
 
   it('keeps a catch-all 404 route at the end', () => {
     const catchAll = routes[routes.length - 1]
-    expect(catchAll.path).toBe('*')
-    expect(catchAll.element).toBeDefined()
+    expect(catchAll).toBeDefined()
+    expect(catchAll!.path).toBe('*')
+    expect(catchAll!.element).toBeDefined()
   })
 
   it('still includes the legal routes at the top level', () => {

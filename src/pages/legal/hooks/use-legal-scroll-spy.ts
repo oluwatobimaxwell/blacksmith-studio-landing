@@ -6,9 +6,10 @@ export function useLegalScrollSpy(sectionIds: string[]): string {
 
   useEffect(() => {
     const ids = idsKey.split(',').filter(Boolean)
-    if (ids.length === 0) return
+    const first = ids[0]
+    if (!first) return
 
-    setActiveSection(ids[0])
+    setActiveSection(first)
 
     const observers = ids.flatMap((id) => {
       const el = document.getElementById(id)
@@ -16,7 +17,7 @@ export function useLegalScrollSpy(sectionIds: string[]): string {
 
       const observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
+          if (entry?.isIntersecting) setActiveSection(id)
         },
         { rootMargin: '-80px 0px -50% 0px', threshold: 0 },
       )

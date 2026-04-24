@@ -8,11 +8,11 @@ describe('legalRoutes', () => {
 
   it('has a single route entry for dynamic legal documents', () => {
     expect(legalRoutes).toHaveLength(1)
-    expect(legalRoutes[0].path).toBe('/legal/:document')
+    expect(legalRoutes[0]!.path).toBe('/legal/:document')
   })
 
   it('attaches a non-null element to the route', () => {
-    expect(legalRoutes[0].element).toBeDefined()
+    expect(legalRoutes[0]!.element).toBeDefined()
   })
 
   describe('barrel export', () => {

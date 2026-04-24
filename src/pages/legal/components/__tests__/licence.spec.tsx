@@ -20,7 +20,7 @@ describe('licenceMeta', () => {
 
   it('has a single mit-licence section', () => {
     expect(licenceMeta.sections).toHaveLength(1)
-    expect(licenceMeta.sections[0].id).toBe('mit-licence')
+    expect(licenceMeta.sections[0]!.id).toBe('mit-licence')
   })
 })
 

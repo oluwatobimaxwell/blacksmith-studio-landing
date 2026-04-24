@@ -6,6 +6,9 @@ type ClButtonVariant = 'primary' | 'ghost'
 interface ClButtonProps extends Omit<ButtonProps, 'variant' | 'size'> {
   clVariant?: ClButtonVariant
   clSize?: ClButtonSize
+  href?: string
+  target?: string
+  rel?: string
 }
 
 const SIZE_STYLES: Record<ClButtonSize, { h: string; px: string; fontSize: string; radius: string }> = {

@@ -6,8 +6,9 @@ const css = readFileSync(resolve(__dirname, '../globals.css'), 'utf-8')
 /** Extract all lines within the [data-theme='dark'] block */
 function getDarkThemeBlock(source: string): string {
   const match = source.match(/\[data-theme='dark'\]\s*\{([^}]+)\}/)
-  if (!match) throw new Error('Dark theme block not found in globals.css')
-  return match[1]
+  const captured = match?.[1]
+  if (!captured) throw new Error('Dark theme block not found in globals.css')
+  return captured
 }
 
 const darkBlock = getDarkThemeBlock(css)
@@ -95,14 +96,14 @@ describe('walkthrough glow CSS tokens in globals.css', () => {
     it('--walkthrough-window-glow-shadow has three layers (border, elevation, ambient)', () => {
       const match = darkBlock.match(/--walkthrough-window-glow-shadow:\s*([^;]+);/)
       expect(match).toBeTruthy()
-      const layers = splitShadowLayers(match![1])
+      const layers = splitShadowLayers(match![1]!)
       expect(layers).toHaveLength(3)
     })
 
     it('--walkthrough-window-glow-shadow-hover has three layers', () => {
       const match = darkBlock.match(/--walkthrough-window-glow-shadow-hover:\s*([^;]+);/)
       expect(match).toBeTruthy()
-      const layers = splitShadowLayers(match![1])
+      const layers = splitShadowLayers(match![1]!)
       expect(layers).toHaveLength(3)
     })
 

@@ -10,6 +10,8 @@ export default function BlogPage() {
   const [featured, ...rest] = blogPosts
   const { activeTag, setActiveTag, visible } = useBlogFilter(rest)
 
+  if (!featured) return null
+
   return (
     <LandingShell active="blog" currentPage="blog">
       <BlogHero />
