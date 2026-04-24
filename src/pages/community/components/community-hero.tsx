@@ -46,7 +46,7 @@ export function CommunityHero() {
           sx={{ textWrap: 'pretty' }}
         >
           Blacksmith Studio is the tool. The community is where you learn to use it, and
-          where the people using it learn from each other. Builders from sixty-two countries,
+          where the people using it learn from each other. Builders from around the world,
           shipping, breaking, fixing, and asking the questions that unlock the next person.
           Come be one of them.
         </Text>

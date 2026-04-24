@@ -81,10 +81,9 @@ export function CommunityWho() {
           m={0}
           sx={{ textWrap: 'pretty' }}
         >
-          A teacher in Ibadan prototyping a tool for her classroom. A founder in Nairobi who
-          shipped a booking app over a weekend. A solo engineer in Helsinki debugging at 2 a.m.
-          with someone in Manila. You will find a version of yourself in here, and a version
-          of the person you are about to become.
+          A teacher in Ibadan prototyping a tool for her classroom. A founder in Nairobi building a
+          booking app. A solo engineer in Helsinki debugging a system late at night. You will find
+          a version of yourself in here, and a version of the person you are about to become.
         </Text>
       </Container>
     </Box>
